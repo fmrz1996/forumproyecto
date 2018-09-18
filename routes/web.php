@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('/noticia', 'NoticiaController@index');
+
+Route::get('/usuario', 'UsuarioController@index');
+Route::get('/usuario/{id}', 'UsuarioController@show') -> where('id', '[0-9]+');
+Route::get('/usuario/nuevo', 'UsuarioController@create');
