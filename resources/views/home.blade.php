@@ -170,7 +170,7 @@
         <div class="row align-middle">
           <div class="col-sm-12 col-md-6">
             <figure class="opacity">
-              <a href="#">
+              <a href="/noticia">
                 <img class="img-fluid img-post" src="img/valle-itata.jpg" alt="">
               </a>
             </figure>
@@ -188,8 +188,10 @@
             </div>
             <header class="header-post">
               <h3>
-                <a class="keyword-post" href="#">#viña </a>
-                <a class="titulo-post" href="/noticia">Las 4 nuevas rutas turísticas Valle del Itata</a>
+                <a class="titulo-post" href="/noticia">
+                  <span class="keyword-post">#viña</span>
+                  Las 4 nuevas rutas turísticas Valle del Itata
+                </a>
               </h3>
             </header>
             <div class="contenido-post">
@@ -220,8 +222,10 @@
           </div>
           <header class="header-post">
             <h3>
-              <a class="keyword-post" href="#">#comida </a>
-              <a class="titulo-post" href="#">Tecnología para hacer alimentos más saludables</a>
+              <a class="titulo-post" href="/noticia">
+                <span class="keyword-post">#comida</span>
+                Tecnología para hacer alimentos más saludables
+              </a>
             </h3>
           </header>
           <div class="contenido-post">
@@ -252,8 +256,10 @@
           </div>
           <header class="header-post">
             <h3>
-              <a class="keyword-post" href="#">#ñuble </a>
-              <a class="titulo-post" href="#">La Región de Ñuble en cuenta regresiva</a>
+              <a class="titulo-post" href="/noticia">
+                <span class="keyword-post">#ñuble</span>
+                La Región de Ñuble en cuenta regresiva
+              </a>
             </h3>
           </header>
           <div class="contenido-post">
@@ -284,8 +290,10 @@
           </div>
           <header class="header-post">
             <h3>
-              <a class="keyword-post" href="#">#cyberday </a>
-              <a class="titulo-post" href="#">Tecnologia</a>
+              <a class="titulo-post" href="/noticia">
+                <span class="keyword-post">#cyberday</span>
+                Tecnologia
+              </a>
             </h3>
           </header>
           <div class="contenido-post">

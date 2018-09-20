@@ -123,9 +123,7 @@
     <div id="main">
           <article class="article-container">
             <div class="article-header">
-              <div class="article-bg" style="background-image: url('img/valle-itata.jpg')">
-
-              </div>
+              <div class="article-bg" style="background-image: url('img/valle-itata.jpg')"></div>
               <div class="article-entry-header container-fluid">
                     <div class="article-label">
                       <aside class="article-category">
@@ -145,14 +143,43 @@
               <div class="article-body">
                 <div class="row">
                   <div class="col-sm-12 col-md-9">
-                    <p>“Viñas y Observación de aves”, “Aventura campo y mar”, “Alma del Valle” y “Ruta Agroecológica patrimonial” son los nombres de las nuevas rutas disponibles para los turistas en el Valle del Itata con alto valor identitario y patrimonial.</p>
-                    <p>“El desafío fue realizar rutas turísticas comercializables en la zona considerando la oferta de las nueve comunas que integran el Valle. Para esto, lo primero que realizamos fue un diagnostico desde nuestra mirada comercial integrando visitas en terreno, estudios, valorización. Gracias a este trabajo hoy las rutas están tarificadas, dirigidas a un tipo específico de segmento y ahora disponibles para la venta”, señala Alejandra Arias, gerente comercial Esquerré Tour Operador quien entregó los resultados del proyecto a los empresarios de la zona en el marco de una licitación de la Dirección Regional de Turismo del Biobío y el programa Zona de Oportunidades.</p>
-                    <p>Jonathan Spoerer, director (s) de Sernatur Biobío destacó que uno de los objetivos principales de este proyecto es generar lazos, fortalecer el encadenamiento productivo y potenciar la oferta turística del Valle del Itata de una forma.</p>
-                    <p>“Preparar y evaluar los servicios para paquetizarlos y dejarlos disponibles en el mercado es un beneficio que claramente fortalecerá la zona en el ámbito turístico”, afirma.</p>
-                    <p>Desde la mirada de los empresarios turísticos de la zona, Carlos Huerta, propietario del complejo turístico “Las Dos Antonias” en Ninhue y Director de la Mesa Público Privada del Valle del Itata comenta que este trabajo es clave para convertirlos realmente en un destino y para comercializar de manera asociativa.
-                       “Que una empresa tour operadora nos articule para posteriormente socializar estas rutas es una oportunidad para tener clientes y funcionar como destino de manera profesional”, sostiene.</p>
-                   <p>Actualmente estas rutas están disponibles en la empresa Esquerré Tour Operador.</p>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-1 d-none d-lg-block">
+                          <div class="wrap-azm-cp">
+                            <div id="azm-container" class="azm-container-post">
+                              <nav>
+                                <ul>
+                                  <li>
+                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-facebook" href="#"><i class="fab fa-facebook"></i></a>
+                                  </li>
+                                  <li>
+                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-twitter" href="#"><i class="fab fa-twitter"></i></a>
+                                  </li>
+                                  <li>
+                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-envelope" href="#"><i class="fas fa-envelope"></i></a>
+                                  </li>
+                                  <li>
+                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-comment" href="#"><i class="fas fa-comment"></i></a>
+                                  </li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-11">
+                          <p>“Viñas y Observación de aves”, “Aventura campo y mar”, “Alma del Valle” y “Ruta Agroecológica patrimonial” son los nombres de las nuevas rutas disponibles para los turistas en el Valle del Itata con alto valor identitario y patrimonial.</p>
+                          <p>“El desafío fue realizar rutas turísticas comercializables en la zona considerando la oferta de las nueve comunas que integran el Valle. Para esto, lo primero que realizamos fue un diagnostico desde nuestra mirada comercial integrando visitas en terreno, estudios, valorización. Gracias a este trabajo hoy las rutas están tarificadas, dirigidas a un tipo específico de segmento y ahora disponibles para la venta”, señala Alejandra Arias, gerente comercial Esquerré Tour Operador quien entregó los resultados del proyecto a los empresarios de la zona en el marco de una licitación de la Dirección Regional de Turismo del Biobío y el programa Zona de Oportunidades.</p>
+                          <p>Jonathan Spoerer, director (s) de Sernatur Biobío destacó que uno de los objetivos principales de este proyecto es generar lazos, fortalecer el encadenamiento productivo y potenciar la oferta turística del Valle del Itata de una forma.</p>
+                          <p>“Preparar y evaluar los servicios para paquetizarlos y dejarlos disponibles en el mercado es un beneficio que claramente fortalecerá la zona en el ámbito turístico”, afirma.</p>
+                          <p>Desde la mirada de los empresarios turísticos de la zona, Carlos Huerta, propietario del complejo turístico “Las Dos Antonias” en Ninhue y Director de la Mesa Público Privada del Valle del Itata comenta que este trabajo es clave para convertirlos realmente en un destino y para comercializar de manera asociativa.
+                             “Que una empresa tour operadora nos articule para posteriormente socializar estas rutas es una oportunidad para tener clientes y funcionar como destino de manera profesional”, sostiene.</p>
+                         <p>Actualmente estas rutas están disponibles en la empresa Esquerré Tour Operador.</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  {{-- <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="800" data-numposts="5"></div> --}}
                   <!-- Sidebar -->
                         <div id="sidebar" class="col-sm-12 col-md-3 sidebar">
                           <div class="sb-div">
@@ -166,10 +193,42 @@
                           </div>
                             <div class="sb-div">
                               <div class="article-tags">
-                                <strong>Tags:</strong>
+                                <h3>Tags</h3>
                                 <a class="mb-1" href="#">ñuble</a>
                                 <a class="mb-1" href="#">viña</a>
                                 <a class="mb-1" href="#">turismo</a>
+                                <a class="mb-1" href="#">naturaleza</a>
+                              </div>
+                            </div>
+                            <div class="sb-div">
+                              <div class="related-posts">
+                                <h3>Artículos relacionados</h3>
+                                  <article class="container-rp">
+                                        <h5>
+                                          <a href="#">
+                                            <span class="keyword-post">#comida</span>
+                                            Tecnología para hacer alimentos más saludables
+                                          </a>
+                                        </h5>
+                                        <figure class="opacity">
+                                          <a href="#">
+                                            <img class="img-rp img-fluid" src="img/saludable.jpg">
+                                          </a>
+                                        </figure>
+                                  </article>
+                                  <article class="container-rp">
+                                        <h5>
+                                          <a href="#">
+                                            <span class="keyword-post">#ñuble</span>
+                                            La Región de Ñuble en cuenta regresiva
+                                          </a>
+                                        </h5>
+                                        <figure class="opacity">
+                                          <a href="#">
+                                            <img class="img-rp img-fluid" src="img/plaza-armas.jpg">
+                                          </a>
+                                        </figure>
+                                  </article>
                               </div>
                             </div>
                         </div>
@@ -178,7 +237,7 @@
             </div>
           </article>
   </div>
-    <footer class="footer">
+    <footer id="footer" class="footer">
       <div class="container">
               <ul class="nav justify-content-center">
                 <li class="nav-item">
@@ -212,42 +271,6 @@
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script type="text/javascript">
-      $('#carousel').slick({
-        autoplay: true,
-        autoplaySpeed: 5000,
-        infinite: true,
-        slidesToShow: 3,
-        speed: 500,
-        prevArrow: '<div class="slick-nav slick-prev"><i class="fas fa-chevron-circle-left"></i></div>',
-        nextArrow: '<div class="slick-nav slick-next"><i class="fas fa-chevron-circle-right"></i></div>',
-        responsive: [
-          {
-            breakpoint: 768,
-            settings: {
-              arrows: false,
-              slidesToShow: 1
-            }
-          }
-        ]
-      });
-    </script>
-
-    <script type="text/javascript">
-        $("#header-fixed").hide();
-        var headerSlide = document.getElementById("header-fixed");
-        var topCarousel = $(".gap").offset().top - 100;
-
-        $(window).scroll(function() {
-            if($(window).scrollTop() > topCarousel) {
-                $("#header-fixed").show();
-                headerSlide.classList.add("slide");
-            } else {
-              headerSlide.classList.remove("slide");
-            }
-        });
-    </script>
-
-    <script type="text/javascript">
       $(document).ready(function () {
           $("#side-menu").mCustomScrollbar({
               theme: "minimal"
@@ -266,5 +289,41 @@
           });
       });
     </script>
+
+    <script type="text/javascript">
+    var azmContainer = document.getElementById("azm-container");
+    var offset = $("#azm-container").offset().top - 36;
+
+    $(window).scroll(function() {
+        if($(window).scrollTop() > offset) {
+            azmContainer.classList.add("azm-fixed");
+        } else {
+            azmContainer.classList.remove("azm-fixed");
+        }
+    });
+    </script>
+
+    <script type="text/javascript">
+      $(document).scroll(function() {
+        var $self = $(".azm-container-post");
+        $self.css('margin-top', 0);
+        var fixedDivOffset = $self.offset().top + $self.outerHeight(true);
+        // if reaches footer
+        if (fixedDivOffset > ($("#footer").offset().top - 30)) {
+          $self.css('margin-top', -(fixedDivOffset - $("#footer").offset().top));
+        } else {
+          $self.css('margin-top', '0px');
+        }
+      });
+    </script>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>
