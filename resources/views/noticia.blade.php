@@ -160,14 +160,14 @@
                                     <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-envelope" href="#"><i class="fas fa-envelope"></i></a>
                                   </li>
                                   <li>
-                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-comment" href="#"><i class="fas fa-comment"></i></a>
+                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-comment" href="#commentsLine"><i class="fas fa-comment"></i></a>
                                   </li>
                                 </ul>
                               </nav>
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-11">
+                        <div class="article-text col-lg-11">
                           <p>“Viñas y Observación de aves”, “Aventura campo y mar”, “Alma del Valle” y “Ruta Agroecológica patrimonial” son los nombres de las nuevas rutas disponibles para los turistas en el Valle del Itata con alto valor identitario y patrimonial.</p>
                           <p>“El desafío fue realizar rutas turísticas comercializables en la zona considerando la oferta de las nueve comunas que integran el Valle. Para esto, lo primero que realizamos fue un diagnostico desde nuestra mirada comercial integrando visitas en terreno, estudios, valorización. Gracias a este trabajo hoy las rutas están tarificadas, dirigidas a un tipo específico de segmento y ahora disponibles para la venta”, señala Alejandra Arias, gerente comercial Esquerré Tour Operador quien entregó los resultados del proyecto a los empresarios de la zona en el marco de una licitación de la Dirección Regional de Turismo del Biobío y el programa Zona de Oportunidades.</p>
                           <p>Jonathan Spoerer, director (s) de Sernatur Biobío destacó que uno de los objetivos principales de este proyecto es generar lazos, fortalecer el encadenamiento productivo y potenciar la oferta turística del Valle del Itata de una forma.</p>
@@ -175,16 +175,28 @@
                           <p>Desde la mirada de los empresarios turísticos de la zona, Carlos Huerta, propietario del complejo turístico “Las Dos Antonias” en Ninhue y Director de la Mesa Público Privada del Valle del Itata comenta que este trabajo es clave para convertirlos realmente en un destino y para comercializar de manera asociativa.
                              “Que una empresa tour operadora nos articule para posteriormente socializar estas rutas es una oportunidad para tener clientes y funcionar como destino de manera profesional”, sostiene.</p>
                          <p>Actualmente estas rutas están disponibles en la empresa Esquerré Tour Operador.</p>
+
+                         {{-- Comentarios Facebook --}}
+                         <div id="fb-box">
+                           <a id="commentsLine" class="fb-box-reveal bg-container-gray" href="#commentsCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="commentsCollapse">
+                             <h3>Comentarios<i class="far fa-comment"></i></h3>
+                             <div class="fb-btn-toggle">
+                               <i class="fas fa-angle-down fb-arrow text-center"></i>
+                             </div>
+                           </a>
+                           <div id="commentsCollapse" class="collapse">
+                             <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="3" data-colorscheme="light"></div>
+                           </div>
+                         </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  {{-- <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="800" data-numposts="5"></div> --}}
                   <!-- Sidebar -->
                         <div id="sidebar" class="col-sm-12 col-md-3 sidebar">
                           <div class="sb-div">
                             <div class="sb-author">
-                              <div class="author-information">
+                              <div class="author-information bg-container-gray">
                                 <img src="img/sergio.jpg" class="author-avatar">
                                 <h5>Sergio Romero</h5>
                                 <p class="author-description">Periodista y locutor de radio Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
@@ -304,13 +316,19 @@
     </script>
 
     <script type="text/javascript">
+      $('a[href*=\\#commentsLine]').on('click', function(event){
+          event.preventDefault();
+          $('html,body').animate({scrollTop:$(this.hash).offset().top - 10}, 700);
+      });
+    </script>
+
+    <script type="text/javascript">
       $(document).scroll(function() {
         var $self = $(".azm-container-post");
         $self.css('margin-top', 0);
         var fixedDivOffset = $self.offset().top + $self.outerHeight(true);
-        // if reaches footer
-        if (fixedDivOffset > ($("#footer").offset().top - 30)) {
-          $self.css('margin-top', -(fixedDivOffset - $("#footer").offset().top));
+        if (fixedDivOffset > ($("#fb-box").offset().top)) {
+          $self.css('margin-top', -(fixedDivOffset - $("#fb-box").offset().top));
         } else {
           $self.css('margin-top', '0px');
         }

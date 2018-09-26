@@ -13,6 +13,13 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/actualidad', 'HomeController@index');
+Route::get('/sociedad', 'HomeController@index');
+Route::get('/cultura', 'HomeController@index');
+Route::get('/tecnologia', 'HomeController@index');
+
+Route::get('/contacto', 'HomeController@contact');
+
 Route::get('/noticia', 'NoticiaController@index');
 
 Route::get('/usuario', 'UsuarioController@index');

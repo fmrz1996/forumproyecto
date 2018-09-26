@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/slick.css">
     <title>Forum Comunidad</title>
   </head>
   <body>
@@ -23,16 +23,16 @@
           <a href="#seccions-menu" data-toggle="collapse" aria-expanded="false">Secciones</a>
           <ul class="collapse show list-unstyled" id="seccions-menu">
               <li>
-                  <a href="#">Actualidad</a>
+                  <a href="/actualidad">Actualidad</a>
               </li>
               <li>
-                  <a href="#">Sociedad</a>
+                  <a href="/sociedad">Sociedad</a>
               </li>
               <li>
-                  <a href="#">Cultura</a>
+                  <a href="/cultura">Cultura</a>
               </li>
               <li>
-                  <a href="#">Tecnología</a>
+                  <a href="/tecnologia">Tecnología</a>
               </li>
           </ul>
         </li>
@@ -43,7 +43,7 @@
           <a href="#">Ediciones anteriores</a>
         </li>
         <li>
-          <a href="#">Radio Forum</a>
+          <a target="_blank" rel="noopener noreferrer" href="http://forumradio.cl/">Radio Forum</a>
         </li>
       </ul>
       <div class="search-menu">
@@ -71,7 +71,7 @@
             </button>
           </div>
           <div class="col-6 text-center col-header div-logo">
-            <a href="#">
+            <a href="/">
               <img src="img/forum_logo.png" class="img-fluid logo" alt="Revista Forum">
             </a>
           </div>
@@ -86,16 +86,16 @@
         <nav class="navbar navbar-expand-md justify-content-center d-none d-md-flex">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link font-weight-bold color-link" href="#">ACTUALIDAD</a>
+              <a class="nav-link font-weight-bold color-link" href="/actualidad">ACTUALIDAD</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link font-weight-bold color-link" href="#">SOCIEDAD</a>
+              <a class="nav-link font-weight-bold color-link" href="/sociedad">SOCIEDAD</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link font-weight-bold color-link" href="#">CULTURA</a>
+              <a class="nav-link font-weight-bold color-link" href="/cultura">CULTURA</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link font-weight-bold color-link" href="#">TECNOLOGIA</a>
+              <a class="nav-link font-weight-bold color-link" href="/tecnologia">TECNOLOGIA</a>
             </li>
           </ul>
         </nav>
@@ -123,9 +123,9 @@
     <div class="container-fluid text-center">
       <div class="row">
         <div class="full-width-row">
-          <div id="carousel">
+          <div id="carousel" class="slick-frame">
             <div style="position: relative;">
-              <img class="img-fluid img-slider" src="img/img1.jpg" alt="">
+              <img class="img-fluid img-slider" src="img/img1.jpg">
               <div class="slider-post">
                 <h3>
                   <a href="#">El primer vestido hecho con telarañas silvestres</a>
@@ -133,7 +133,7 @@
               </div>
             </div>
             <div style="position: relative;">
-                <img class="img-fluid img-slider" src="img/img2.jpg" alt="">
+                <img class="img-fluid img-slider" src="img/img2.jpg">
                 <div class="slider-post">
                   <h3>
                     <a href="#">Mirar a los ojos reduciría notablemente el estrés</a>
@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div style="position: relative;">
-                <img class="img-fluid img-slider" src="img/img3.jpg" alt="">
+                <img class="img-fluid img-slider" src="img/img3.jpg">
                 <div class="slider-post">
                   <h3>
                     <a href="#">Como vestirse con clase sin ser rico</a>
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div style="position: relative;">
-              <img class="img-fluid img-slider" src="img/img4.jpg" alt="">
+              <img class="img-fluid img-slider" src="img/img4.jpg">
               <div class="slider-post">
                 <h3>
                   <a href="#">No te pierdas lo último de la semana dieciochera</a>
@@ -165,7 +165,7 @@
   <!-- Cuerpo de Página -->
   <div id="main" class="container">
     <div class="row">
-    <div id="posts" class="col-sm-12 col-md-8 posts">
+    <div id="posts" class="col-sm-12 col-md-9 posts">
       <article>
         <div class="row align-middle">
           <div class="col-sm-12 col-md-6">
@@ -196,6 +196,10 @@
             </header>
             <div class="contenido-post">
               <p>"Viñas y Observación de aves", "Aventura campo y mar", "Alma del Valle" y "Ruta Agroecológica patrimonial" son los nombres de las nuevas rutas disponibles para los turistas en el Valle del Itata con alto valor identitario y patrimonial.</p>
+              <footer class="links-post">
+                <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+                <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
+              </footer>
             </div>
           </div>
         </div>
@@ -204,7 +208,7 @@
         <div class="row align-middle">
           <div class="col-sm-12 col-md-6">
             <figure class="opacity">
-              <a href="#">
+              <a href="/noticia">
                 <img class="img-fluid img-post" src="img/saludable.jpg" alt="">
               </a>
             </figure>
@@ -230,6 +234,10 @@
           </header>
           <div class="contenido-post">
             <p>En la actualidad se procesan 3,2 millones de toneladas de aceite al año en el mundo, de las cuales 15 mil toneladas corresponde a  almazaras chilenas.</p>
+            <footer class="links-post">
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
+            </footer>
           </div>
         </div>
       </div>
@@ -238,7 +246,7 @@
       <div class="row align-middle">
         <div class="col-sm-12 col-md-6">
           <figure class="opacity">
-            <a href="#">
+            <a href="/noticia">
               <img class="img-fluid img-post" src="img/plaza-armas.jpg" alt="">
             </a>
           </figure>
@@ -264,6 +272,10 @@
           </header>
           <div class="contenido-post">
             <p>El anhelo surgió hace dos décadas, el primer estudio formal para sustentar su creación se gestó a comienzos de siglo y la idea de legislar a inicios de la actual década.</p>
+            <footer class="links-post">
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
+            </footer>
           </div>
         </div>
       </div>
@@ -272,7 +284,7 @@
       <div class="row align-middle">
         <div class="col-sm-12 col-md-6">
           <figure class="opacity">
-            <a href="#">
+            <a href="/noticia">
               <img class="img-fluid img-post" src="img/post2.jpeg" alt="">
             </a>
           </figure>
@@ -298,48 +310,52 @@
           </header>
           <div class="contenido-post">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <footer class="links-post">
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
+            </footer>
           </div>
         </div>
       </div>
     </article>
   </div>
-        <div id="sidebar" class="col-sm-12 col-md-4 sidebar">
-          <div class="container">
+        {{-- Sidebar --}}
+        <div id="sidebar" class="col-sm-12 col-md-3 sidebar">
             <div class="sb-div">
-              <strong>
-                <span>Columnistas</span>
-              </strong>
-              <ul class="sb-columnistas">
-                <li>
-                  <h3 class="sb-subtitulo">Benito Pérez</h3>
-                  <p class="sb-cuerpo">Quien más agita la denuncia del peligro de invasión que representan los desvalidos del sur, son los ricos del norte, que claman por más fronteras y más identidad...</p>
-                </li>
-                <li>
-                  <h3 class="sb-subtitulo">Enzo Monje</h3>
-                  <p class="sb-cuerpo">No es el momento de hacerlo, porque andamos discutiendo cuestiones de género, pero es tan bueno que sería procedente incorporar al castellano...</p>
-                </li>
-                <li>
-                  <h3 class="sb-subtitulo">Sergio Romero</h3>
-                  <p class="sb-cuerpo">Su afán está en consonancia con la urgencia del nombre: es tan movilizador que exige la ausencia de otros eslóganes...</p>
-                </li>
-              </ul>
-            </div>
-            <div class="sb-div">
-              <div class="sb-rrss">
-                <h3>Siguenos</h3>
-                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-facebook" href="#"><i class="fab fa-facebook"></i></a>
-                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-twitter" href="#"><i class="fab fa-twitter"></i></a>
-                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-instagram" href="#"><i class="fab fa-instagram"></i></a>
-                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-youtube-play" href="#"><i class="fab fa-youtube"></i></a>
+              <div class="sb-columnistas">
+                <h3>Columnistas</h3>
+                <ul class="text-center bg-container-gray">
+                  <li>
+                    <h5>Benito Pérez</h5>
+                    <p>Quien más agita la denuncia del peligro de invasión que representan los desvalidos del sur, son los ricos del norte, que claman por más fronteras y más identidad...</p>
+                  </li>
+                  <li>
+                    <h5>Enzo Monje</h5>
+                    <p>No es el momento de hacerlo, porque andamos discutiendo cuestiones de género, pero es tan bueno que sería procedente incorporar al castellano...</p>
+                  </li>
+                  <li>
+                    <h5>Sergio Romero</h5>
+                    <p>Su afán está en consonancia con la urgencia del nombre: es tan movilizador que exige la ausencia de otros eslóganes...</p>
+                  </li>
+                </ul>
               </div>
             </div>
             <div class="sb-div">
-              <a href="http://forumradio.cl/">
+              <h3>Siguenos</h3>
+              <div class="sb-rrss bg-container-gray text-center">
+                  <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-facebook" href="#"><i class="fab fa-facebook"></i></a>
+                  <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-twitter" href="#"><i class="fab fa-twitter"></i></a>
+                  <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-instagram" href="#"><i class="fab fa-instagram"></i></a>
+                  <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-youtube-play" href="#"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+            <div class="sb-div">
+              <h3>Visita</h3>
+              <a target="_blank" rel="noopener noreferrer" href="http://forumradio.cl/">
                 <img class="img-fluid" src="img/logo-radio.png" alt="Ingresa a Radio Forum">
               </a>
             </div>
           </div>
-        </div>
       </div>
     </div>
     <footer class="footer">
@@ -355,7 +371,7 @@
                   <a class="nav-link" href="#">Terminos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Contactanos</a>
+                  <a class="nav-link" href="/contacto">Contactanos</a>
                 </li>
               </ul>
           <div class="copy">
@@ -372,13 +388,14 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/slick.min.js"></script>
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/slick.min.js"></script>
 
     <script type="text/javascript">
+    setTimeout(function (){
       $('#carousel').slick({
         autoplay: true,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 4000,
         infinite: true,
         slidesToShow: 3,
         speed: 500,
@@ -394,12 +411,13 @@
           }
         ]
       });
+    }, 100);
     </script>
 
     <script type="text/javascript">
         $("#header-fixed").hide();
         var headerSlide = document.getElementById("header-fixed");
-        var topCarousel = $(".gap").offset().top - 100;
+        var topCarousel = $(".gap").offset().top + 200;
 
         $(window).scroll(function() {
             if($(window).scrollTop() > topCarousel) {
