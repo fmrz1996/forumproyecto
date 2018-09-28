@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/slick.css">
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Forum Comunidad</title>
   </head>
   <body>
@@ -128,7 +128,7 @@
               <img class="img-fluid img-slider" src="img/img1.jpg">
               <div class="slider-post">
                 <h3>
-                  <a href="#">El primer vestido hecho con telarañas silvestres</a>
+                  <a href="/noticia">El primer vestido hecho con telarañas silvestres</a>
                 </h3>
               </div>
             </div>
@@ -136,7 +136,7 @@
                 <img class="img-fluid img-slider" src="img/img2.jpg">
                 <div class="slider-post">
                   <h3>
-                    <a href="#">Mirar a los ojos reduciría notablemente el estrés</a>
+                    <a href="/noticia">Mirar a los ojos reduciría notablemente el estrés</a>
                   </h3>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                 <img class="img-fluid img-slider" src="img/img3.jpg">
                 <div class="slider-post">
                   <h3>
-                    <a href="#">Como vestirse con clase sin ser rico</a>
+                    <a href="/noticia">Como vestirse con clase sin ser rico</a>
                   </h3>
                 </div>
             </div>
@@ -152,7 +152,7 @@
               <img class="img-fluid img-slider" src="img/img4.jpg">
               <div class="slider-post">
                 <h3>
-                  <a href="#">No te pierdas lo último de la semana dieciochera</a>
+                  <a href="/noticia">No te pierdas lo último de la semana dieciochera</a>
                 </h3>
               </div>
             </div>
@@ -197,7 +197,7 @@
             <div class="contenido-post">
               <p>"Viñas y Observación de aves", "Aventura campo y mar", "Alma del Valle" y "Ruta Agroecológica patrimonial" son los nombres de las nuevas rutas disponibles para los turistas en el Valle del Itata con alto valor identitario y patrimonial.</p>
               <footer class="links-post">
-                <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+                <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="/noticia#commentsLine"><i class="far fa-comment"></i></a>
                 <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
               </footer>
             </div>
@@ -235,7 +235,7 @@
           <div class="contenido-post">
             <p>En la actualidad se procesan 3,2 millones de toneladas de aceite al año en el mundo, de las cuales 15 mil toneladas corresponde a  almazaras chilenas.</p>
             <footer class="links-post">
-              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="/noticia#commentsLine"><i class="far fa-comment"></i></a>
               <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
             </footer>
           </div>
@@ -273,7 +273,7 @@
           <div class="contenido-post">
             <p>El anhelo surgió hace dos décadas, el primer estudio formal para sustentar su creación se gestó a comienzos de siglo y la idea de legislar a inicios de la actual década.</p>
             <footer class="links-post">
-              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="/noticia#commentsLine"><i class="far fa-comment"></i></a>
               <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
             </footer>
           </div>
@@ -311,7 +311,7 @@
           <div class="contenido-post">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <footer class="links-post">
-              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="#"><i class="far fa-comment"></i></a>
+              <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-comment" href="/noticia#commentsLine"><i class="far fa-comment"></i></a>
               <a class="btn azm-social azm-outpost azm-size-36 azm-r-square azm-share" href="#"><i class="fas fa-share-square"></i></a>
             </footer>
           </div>

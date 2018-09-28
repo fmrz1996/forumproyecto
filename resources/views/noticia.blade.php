@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/slick.css">
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Forum Comunidad</title>
   </head>
   <body>
@@ -72,7 +72,7 @@
           </div>
           <div class="col-6 text-center col-header div-logo">
             <a href="/">
-              <img src="img/forum_logo.png" class="img-fluid logo" alt="Revista Forum">
+              <img src="../img/forum_logo.png" class="img-fluid logo" alt="Revista Forum">
             </a>
           </div>
           <div class="col-3 col-header">
@@ -110,7 +110,7 @@
           </div>
           <div class="col-6 text-center col-header div-logo">
             <a href="#">
-              <img src="img/forum_logo_fixed.png" class="img-fluid logo" alt="Revista Forum">
+              <img src="../img/forum_logo_fixed.png" class="img-fluid logo" alt="Revista Forum">
             </a>
           </div>
           <div class="col-3 col-header">
@@ -123,7 +123,7 @@
     <div id="main">
           <article class="article-container">
             <div class="article-header">
-              <div class="article-bg" style="background-image: url('img/valle-itata.jpg')"></div>
+              <div class="article-bg" style="background-image: url('../img/valle-itata.jpg')"></div>
               <div class="article-entry-header container-fluid">
                     <div class="article-label">
                       <aside class="article-category">
@@ -197,7 +197,7 @@
                           <div class="sb-div">
                             <div class="sb-author">
                               <div class="author-information bg-container-gray">
-                                <img src="img/sergio.jpg" class="author-avatar">
+                                <img src="../img/sergio.jpg" class="author-avatar">
                                 <h5>Sergio Romero</h5>
                                 <p class="author-description">Periodista y locutor de radio Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
                               </div>
@@ -224,7 +224,7 @@
                                         </h5>
                                         <figure class="opacity">
                                           <a href="#">
-                                            <img class="img-rp img-fluid" src="img/saludable.jpg">
+                                            <img class="img-rp img-fluid" src="../img/saludable.jpg">
                                           </a>
                                         </figure>
                                   </article>
@@ -237,7 +237,7 @@
                                         </h5>
                                         <figure class="opacity">
                                           <a href="#">
-                                            <img class="img-rp img-fluid" src="img/plaza-armas.jpg">
+                                            <img class="img-rp img-fluid" src="../img/plaza-armas.jpg">
                                           </a>
                                         </figure>
                                   </article>
@@ -283,6 +283,21 @@
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script type="text/javascript">
+        $("#header-fixed").hide();
+        var headerSlide = document.getElementById("header-fixed");
+        var topCarousel = $(".article-header").offset().top + 300;
+
+        $(window).scroll(function() {
+            if($(window).scrollTop() > topCarousel) {
+                $("#header-fixed").show();
+                headerSlide.classList.add("slide");
+            } else {
+              headerSlide.classList.remove("slide");
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
       $(document).ready(function () {
           $("#side-menu").mCustomScrollbar({
               theme: "minimal"
@@ -304,7 +319,7 @@
 
     <script type="text/javascript">
     var azmContainer = document.getElementById("azm-container");
-    var offset = $("#azm-container").offset().top - 36;
+    var offset = $("#azm-container").offset().top - 80;
 
     $(window).scroll(function() {
         if($(window).scrollTop() > offset) {

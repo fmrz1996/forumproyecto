@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/slick.css">
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Forum Comunidad</title>
   </head>
   <body>
@@ -102,28 +102,29 @@
       </div>
     <!-- Cuerpo de Página -->
     <div id="main" class="container contact-form">
-      <form method="post">
-        <h1>Contacto</h1>
-        <div class="row">
-          <div class="col-sm-12 col-md-6 contact-form-container">
-            <h3>¿Cómo te podemos ayudar?</h3>
-            <div class="form-group">
-              <input class="form-control" type="text" name="txtName" placeholder="Nombre" value="">
-            </div>
-            <div class="form-group">
-              <input class="form-control" type="text" name="txtEmail" placeholder="Correo electrónico" value="">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" name="txtMessage" rows="8" cols="80" placeholder="Tu mensaje..."></textarea>
-            </div>
-            <div class="form-group">
-              <input class="contact-btn" type="submit" name="btnSubmit" value="Enviar Mensaje">
-            </div>
+        <h3>Contacto</h3>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 contact-form-container">
+              <form method="post">
+              <h5>¿Cómo te podemos ayudar?</h5>
+              <div class="form-group">
+                <input class="form-control" type="text" name="txtName" placeholder="Nombre" value="">
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="txtEmail" placeholder="Correo electrónico" value="">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="txtMessage" rows="8" cols="80" placeholder="Tu mensaje..."></textarea>
+              </div>
+              <div class="form-group">
+                <input class="contact-btn" type="submit" name="btnSubmit" value="Enviar Mensaje">
+              </div>
+            </form>
           </div>
           <div class="col-sm-12 col-md-6">
             <div class="contact-social">
               <div class="social-div">
-                <h3>Se parte de la comunidad Forum</h3>
+                <h5>Se parte de la comunidad Forum</h5>
                 <div class="sb-rrss">
                   <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-facebook" href="#"><i class="fab fa-facebook"></i></a>
                   <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-twitter" href="#"><i class="fab fa-twitter"></i></a>
@@ -134,7 +135,6 @@
             </div>
           </div>
         </div>
-      </form>
     </div>
     {{-- Footer --}}
     <footer class="footer">
@@ -191,21 +191,6 @@
         ]
       });
     }, 100);
-    </script>
-
-    <script type="text/javascript">
-        $("#header-fixed").hide();
-        var headerSlide = document.getElementById("header-fixed");
-        var topCarousel = $(".gap").offset().top - 100;
-
-        $(window).scroll(function() {
-            if($(window).scrollTop() > topCarousel) {
-                $("#header-fixed").show();
-                headerSlide.classList.add("slide");
-            } else {
-              headerSlide.classList.remove("slide");
-            }
-        });
     </script>
 
     <script type="text/javascript">
