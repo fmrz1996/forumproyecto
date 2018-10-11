@@ -19,7 +19,7 @@ a:focus {
   height: 100%;
 }
 
-.btn-toggle:focus,.btn:active {
+.btn-toggle:focus,.btn:active{
    outline: none !important;
    box-shadow: none;
 }
@@ -86,14 +86,9 @@ a:focus {
     display: block;
 }
 
-#side-menu ul li a:hover {
+#side-menu ul li a:active {
     color: #1e1e1e;
     background: #eaeaea;
-}
-
-#side-menu ul li.active>a {
-    color: #eaeaea;
-    background: #2a2a2a;
 }
 
 ul ul a {
@@ -117,21 +112,15 @@ a[data-toggle="collapse"] {
 
 .search-menu{
   width: 100%;
-  position: relative;
   padding: 0 18px 10px 18px;
   margin-bottom: 1rem;
 }
 
 .search-menu i{
+  padding: 10px;
   position: absolute;
   color: #eaeaea;
-  left: 30px;
-  top: 20%;
   font-size: 20px;
-}
-
-.search-form{
-  z-index: -1;
 }
 
 .search-input{
@@ -147,7 +136,7 @@ a[data-toggle="collapse"] {
 }
 
 .rrss-menu{
-  padding-left: 18px;
+  padding: 0 18px 0 18px;
 }
 
 .rrss-menu > a{
@@ -222,10 +211,6 @@ a[data-toggle="collapse"] {
 .logo{
   max-height: 50px;
   max-width: 100%;
-}
-
-.div-logo a{
-  display: block;
 }
 
 @media (min-width: 768px){
@@ -307,7 +292,7 @@ div .img-slider{
 
 .titulo-post:hover{
   color: inherit;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .contenido-post p{
@@ -368,7 +353,7 @@ div .img-slider{
 }
 
 .opacity a img:hover{
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 /*Articulo - Cuerpo de página*/
@@ -610,7 +595,7 @@ div .img-slider{
 }
 
 .related-posts a:hover{
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .related-posts a > span{
@@ -627,6 +612,49 @@ div .img-slider{
   background-position: 0 center;
   overflow: hidden;
   transform: scale(1.8);
+}
+
+/*Nosotros- Cuerpo de Página*/
+.aboutus,
+.aboutus-header{
+  margin: 40px auto 40px auto;
+}
+
+.aboutus-header{
+  background: #222;
+  position: relative;
+}
+
+.aboutus-bg{
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+.aboutus-bg-text{
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.aboutus-bg-text h1{
+  font-size: 50px;
+}
+
+@media (max-width: 767px){
+  .aboutus-bg-text h1{
+    font-size: 30px;
+  }
+}
+
+.aboutus-container {
+  line-height: 1.7;
+  padding-right: 40px;
+}
+
+.aboutus-info-div ul{
+  text-align: left!important;
 }
 
 /*Contacto - Cuerpo de Página*/
@@ -655,6 +683,8 @@ div .img-slider{
   margin-bottom: 40px;
 }
 
+.aboutus-form h3,
+.aboutus-form h5,
 .contact-form h5{
   margin-bottom: 20px;
 }
@@ -690,6 +720,7 @@ div .img-slider{
     cursor: pointer;
 }
 
+.aboutus-info,
 .contact-social{
   background-image: url('bg-footer.png');
   padding: 5px;
@@ -697,6 +728,7 @@ div .img-slider{
   text-align: center;
 }
 
+.aboutus-info-div,
 .social-div{
   background-color: #eff1f4;
   padding: 20px;
@@ -738,9 +770,12 @@ div .img-slider{
   box-shadow: none;
 }
 
-.fb-box-reveal,
-.fb-box-reveal:hover{
+.fb-box-reveal{
   color: #212529;
+}
+
+.fb-box-reveal:hover{
+  color: inherit;
 }
 
 .fb-box-reveal h3{
@@ -776,6 +811,11 @@ div .img-slider{
   width: 100%;
 }
 
+.fb-btn-toggle i:hover{
+  opacity: 0.8;
+  transition: all .3s ease;
+}
+
 #commentsCollapse{
   background-color: #f5f5f5;
 }
@@ -785,6 +825,16 @@ div .img-slider{
   background-image: url('bg-footer.png');
   background-color: #2e2e2e;
   color: #c0c0c0;
+}
+
+.footer .container{
+  padding: 20px 0 20px 0;
+}
+
+@media (max-width: 767px){
+  .footer .container{
+    padding: 0;
+  }
 }
 
 @media (max-width: 767px){
@@ -856,6 +906,11 @@ div .img-slider{
 .slick-frame.slick-initialized{
     visibility: visible;
     opacity: 1;
+}
+
+.slick-frame a{
+  display: flex;
+  outline: none;
 }
 
 .slider-post{
