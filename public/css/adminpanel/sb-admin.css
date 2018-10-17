@@ -280,7 +280,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 }
 
 .card-login {
-  max-width: 25rem;
+  max-width: 50rem;
 }
 
 .card-register {
@@ -381,5 +381,5 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .show-img{
-  max-width: 780px;
+  max-width: 760px;
 }

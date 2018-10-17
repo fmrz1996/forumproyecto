@@ -28,69 +28,104 @@ Route::get('/contacto', 'FooterController@contact');
 
 Route::get('/noticia', 'NoticiaController@index');
 
-//Panel de administración
-Route::get('/admin', 'AdminController@index')
- -> name('admin');
 
-//Posts
-Route::get('/admin/posts', 'PostController@index')
- -> name('posts');
+// ** Panel de administración ** //
+Route::group(['middleware' => ['auth']], function() {
 
-Route::get('/admin/posts/nuevo', 'PostController@create')
- -> name('posts.nuevo');
+    //Dashboard
+    Route::get('/admin', 'AdminController@index')
+     -> name('admin');
 
-Route::post('/admin/posts/crear', 'PostController@store');
+    //Posts
+    Route::get('/admin/posts', 'PostController@index')
+     -> name('posts');
 
-Route::get('/admin/posts/editar/{post}', 'PostController@edit')
--> where('post', '[0-9]+')
--> name('posts.editar');
+    Route::get('/admin/posts/nuevo', 'PostController@create')
+     -> name('posts.nuevo');
 
-Route::delete('/admin/posts/{post}', 'PostController@destroy')
--> name('posts.eliminar');
+    Route::post('/admin/posts/crear', 'PostController@store');
 
-Route::put('/admin/posts/detalles/{post}', 'PostController@update');
+    Route::get('/admin/posts/editar/{post}', 'PostController@edit')
+    -> where('post', '[0-9]+')
+    -> name('posts.editar');
 
-Route::get('/admin/posts/detalles/{post}', 'PostController@details')
--> where('post', '[0-9]+')
--> name('posts.mostrar');
+    Route::delete('/admin/posts/{post}', 'PostController@destroy')
+    -> name('posts.eliminar');
 
-//Categorías
-Route::get('/admin/categorias', 'CategoriaController@index')
- -> name('categorias');
+    Route::put('/admin/posts/detalles/{post}', 'PostController@update');
 
-Route::get('/admin/categorias/nuevo', 'CategoriaController@create')
- -> name('categorias.nuevo');
+    Route::get('/admin/posts/detalles/{post}', 'PostController@details')
+    -> where('post', '[0-9]+')
+    -> name('posts.mostrar');
 
-Route::post('/admin/categorias/crear', 'CategoriaController@store');
+    //Categorías
+    Route::get('/admin/categorias', 'CategoriaController@index')
+     -> name('categorias');
 
-Route::get('/admin/categorias/editar/{category}', 'CategoriaController@edit')
- -> where('category', '[0-9]+')
- -> name('categorias.editar');
+    Route::get('/admin/categorias/nuevo', 'CategoriaController@create')
+     -> name('categorias.nuevo');
 
- Route::put('/admin/categorias/detalles/{category}', 'CategoriaController@update');
+    Route::post('/admin/categorias/crear', 'CategoriaController@store');
 
- Route::get('/admin/categorias/detalles/{category}', 'CategoriaController@details')
- -> where('category', '[0-9]+')
- -> name('categorias.mostrar');
+    Route::get('/admin/categorias/editar/{category}', 'CategoriaController@edit')
+     -> where('category', '[0-9]+')
+     -> name('categorias.editar');
 
-//Usuarios
-Route::get('/admin/usuarios', 'UsuarioController@index')
- -> name('usuarios');
+     Route::put('/admin/categorias/detalles/{category}', 'CategoriaController@update');
 
-Route::get('/admin/usuarios/nuevo', 'UsuarioController@create')
- -> name('usuarios.nuevo');
+     Route::get('/admin/categorias/detalles/{category}', 'CategoriaController@details')
+     -> where('category', '[0-9]+')
+     -> name('categorias.mostrar');
 
-Route::post('/admin/usuarios/crear', 'UsuarioController@store');
+    //Usuarios
+    Route::get('/admin/usuarios', 'UsuarioController@index')
+     -> name('usuarios');
 
-Route::get('/admin/usuarios/editar/{user}', 'UsuarioController@edit')
--> where('user', '[0-9]+')
--> name('usuarios.editar');
+    Route::get('/admin/usuarios/nuevo', 'UsuarioController@create')
+     -> name('usuarios.nuevo');
 
-Route::delete('/admin/usuarios/{user}', 'UsuarioController@destroy')
--> name('usuarios.eliminar');
+    Route::post('/admin/usuarios/crear', 'UsuarioController@store');
 
-Route::put('/admin/usuarios/detalles/{user}', 'UsuarioController@update');
+    Route::get('/admin/usuarios/editar/{user}', 'UsuarioController@edit')
+    -> where('user', '[0-9]+')
+    -> name('usuarios.editar');
 
-Route::get('/admin/usuarios/detalles/{user}', 'UsuarioController@details')
--> where('user', '[0-9]+')
--> name('usuarios.mostrar');
+    Route::delete('/admin/usuarios/{user}', 'UsuarioController@destroy')
+    -> name('usuarios.eliminar');
+
+    Route::put('/admin/usuarios/detalles/{user}', 'UsuarioController@update');
+
+    Route::get('/admin/usuarios/detalles/{user}', 'UsuarioController@details')
+    -> where('user', '[0-9]+')
+    -> name('usuarios.mostrar');
+
+    //Rutas alternativas de usuarios
+
+    Route::get('/admin/perfil/editar/{user}', 'UsuarioController@edit')
+    -> where('user', '[0-9]+')
+    -> name('perfil.editar');
+
+    Route::put('/admin/perfil/editar/{user}', 'UsuarioController@update')
+    -> where('user', '[0-9]+');
+
+    Route::get('/admin/perfil/{user}', 'UsuarioController@details')
+    -> where('user', '[0-9]+')
+    -> name('perfil.detalles');
+
+});
+
+// ** Autentificación ** //
+Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/admin/login', 'Auth\LoginController@login');
+Route::post('/admin/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Reseteo de contraseña
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+// Email Verification Routes...
+if ($options['verify'] ?? false) {
+    Route::emailVerification();
+}

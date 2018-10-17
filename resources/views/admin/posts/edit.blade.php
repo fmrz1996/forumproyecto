@@ -11,16 +11,7 @@
         <li class="breadcrumb-item active">Editar</li>
       </ol>
 
-      @if($errors->any())
-        <div class="alert alert-danger">
-          <h5>Porfavor corrige los siguientes erorres:</h5>
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
+      @include('admin.common.errors')
 
       <div class="card card-register mx-auto mt-5">
         <div class="card-header">Post #{{ $post->id }}</div>
@@ -69,18 +60,4 @@
           </form>
         </div>
       </div>
-    {{-- <form class="" action="{{ url("usuario/detalles/{$user->id}") }}" method="post">
-      {{ method_field('put') }}
-      {{ csrf_field() }}
-
-      <input type="text" name="username" placeholder="Usuario" value="{{ old('username', $user->username) }}">
-      <input type="email" name="email" placeholder="Correo electrónico" value="{{ old('email', $user->email) }}">
-      <input type="text" name="first_name" placeholder="Nombre" value="{{ old('first_name', $user->first_name) }}">
-      <input type="text" name="last_name" placeholder="Apellido" value="{{ old('last_name', $user->last_name) }}">
-      <input type="text" name="description" placeholder="Descripción personal" value="{{ old('description', $user->description) }}">
-      <input type="password" name="password" placeholder="Contraseña">
-
-      <button type="submit" name="button">Actualizar usuario</button>
-
-    </form> --}}
   @endsection

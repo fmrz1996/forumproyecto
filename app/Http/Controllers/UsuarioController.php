@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Auth;
 
 class UsuarioController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
+      $request->user()->authorizeRoles(['Administrador', 'Desarrollador', 'Periodista']);
       $usuarios = User::all();
 
       return view('admin.users/index', compact('usuarios'));
     }
 
-    public function create(){
+    public function create(Request $request){
+
+      $request->user()->authorizeRoles(['Administrador', 'Desarrollador']);
 
       return view('admin.users.create');
 
@@ -61,10 +65,15 @@ class UsuarioController extends Controller
         'password' => bcrypt($data['password']),
       ]);
 
-      return redirect()->route('usuarios');
+      return redirect()->route('usuarios')->with('status', 'Usuario creado correctamente.');
     }
 
-    public function edit(User $user){
+    public function edit(User $user, Request $request){
+
+      if($user->id != Auth::user()->id){
+        $request->user()->authorizeRoles(['Administrador', 'Desarrollador']);
+      }
+
       return view ('admin.users.edit', ['user' => $user]);
     }
 
@@ -75,7 +84,8 @@ class UsuarioController extends Controller
         'email' => ['required', 'email', 'unique:users,email,' .$user->id],
         'first_name' => 'required',
         'last_name' => 'required',
-        'description' => 'nullable',
+        'description' => ['nullable', 'max:200'],
+        'is_active' => 'nullable',
         'avatar' => 'nullable',
         'password' => ['nullable', 'confirmed', 'min:6'],
       ], [
@@ -85,14 +95,17 @@ class UsuarioController extends Controller
         'email.unique' => 'El correo electrónico ingresado ya está registrado.',
         'first_name.required' => 'El campo de Nombre es obligatorio.',
         'last_name.required' => 'El campo de Apellido es obligatorio.',
+        'description.max' => 'La descripción no puede tener más de 200 caracteres.',
         'password.confirmed' => 'Las contraseñas no coinciden.',
         'password.min' => 'La contraseña debe tener por lo menos 6 caracteres.',
       ]);
 
-      if($data['password'] != null){
-        $data['password'] = bcrypt($data['password']);
-      } else {
-        unset($data['password']);
+      if($user->id == Auth::user()->id){
+        if($data['password'] != null){
+          $data['password'] = bcrypt($data['password']);
+        } else {
+          unset($data['password']);
+        }
       }
 
       if($request->hasFile('avatar')){
@@ -110,7 +123,7 @@ class UsuarioController extends Controller
 
       $user->update($data);
 
-      return redirect()->route('usuarios.mostrar', ['user' => $user]);
+      return redirect()->route('usuarios.mostrar', ['user' => $user])->with('status', 'Usuario actualizado correctamente.');
     }
 
     public function destroy(User $user){
@@ -119,7 +132,11 @@ class UsuarioController extends Controller
       return redirect()->route('usuarios');
     }
 
-    public function details(User $user){
+    public function details(User $user, Request $request){
+
+      if($user->id != Auth::user()->id){
+        $request->user()->authorizeRoles(['Administrador', 'Desarrollador']);
+      }
 
       return view('admin.users.show', compact('user'));
 

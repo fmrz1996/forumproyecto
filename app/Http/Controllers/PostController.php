@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Category;
 use App\Post;
 use App\User;
-
-
+use Auth;
 
 class PostController extends Controller
 {
@@ -54,10 +53,15 @@ class PostController extends Controller
       'background' => $name,
     ]);
 
-    return redirect()->route('posts');
+    return redirect()->route('posts')->with('status', 'Post creado correctamente.');
   }
 
-  public function edit(Post $post){
+  public function edit(Post $post, Request $request){
+
+    if($post->user->id != Auth::user()->id){
+      $request->user()->authorizeRoles('Administrador');
+    }
+
     $categorias = Category::where('is_active', '=', 1)->get();
     return view ('admin.posts.edit', ['post' => $post], compact('categorias'));
   }
@@ -87,13 +91,13 @@ class PostController extends Controller
 
     $post->update($data);
 
-    return redirect()->route('posts.mostrar', ['post' => $post]);
+    return redirect()->route('posts.mostrar', ['post' => $post])->with('status', 'Post actualizado correctamente.');
   }
 
     public function destroy(Post $post){
       $post->delete();
 
-      return redirect()->route('posts');
+      return redirect()->route('posts')->with('status', 'Post eliminado correctamente.');
     }
 
   public function details(Post $post){

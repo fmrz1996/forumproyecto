@@ -11,6 +11,8 @@
       <li class="breadcrumb-item active">Detalles</li>
     </ol>
 
+    @include('admin.common.success')
+
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Usuario #{{ $user->id }}</div>
         <div class="card-body">
@@ -32,6 +34,14 @@
                 <tr>
                   <th>Descripción:</th>
                   <td>{{ $user->description }}</td>
+                </tr>
+                <tr>
+                  <th>Estado:</th>
+                  @if($user->is_active == 1)
+                    <td>Activo</td>
+                  @else
+                    <td>Inactivo</td>
+                  @endif
                 </tr>
                 <tr>
                   <th>Fecha de creación:</th>

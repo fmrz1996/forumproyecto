@@ -11,16 +11,7 @@
         <li class="breadcrumb-item active">Editar</li>
       </ol>
 
-      @if($errors->any())
-        <div class="alert alert-danger">
-          <h5>Porfavor corrige los siguientes erorres:</h5>
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
+      @include('admin.common.errors')
 
       <div class="card card-register mx-auto mt-5">
         <div class="card-header">Categoría #{{ $category->id }}</div>

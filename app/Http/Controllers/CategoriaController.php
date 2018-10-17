@@ -7,14 +7,16 @@ use App\Category;
 
 class CategoriaController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
       $categorias = Category::all();
 
-      return view('admin.categories/index', compact('categorias', 'status'));
+      return view('admin.categories/index', compact('categorias'));
     }
 
-    public function create(){
+    public function create(Request $request){
+
+      $request->user()->authorizeRoles('Administrador');
 
       return view('admin.categories.create');
 
@@ -31,10 +33,13 @@ class CategoriaController extends Controller
         'name' => $data['name'],
       ]);
 
-      return redirect()->route('categorias');
+      return redirect()->route('categorias')->with('status', 'Categoría creada correctamente.');
     }
 
-    public function edit(Category $category){
+    public function edit(Category $category, Request $request){
+
+      $request->user()->authorizeRoles('Administrador');
+
       return view ('admin.categories.edit', ['category' => $category]);
     }
 
@@ -49,10 +54,13 @@ class CategoriaController extends Controller
 
       $category->update($data);
 
-      return redirect()->route('categorias.mostrar', ['category' => $category]);
+      return redirect()->route('categorias.mostrar', ['category' => $category])->with('status', 'Categoría actualizada correctamente.');
     }
 
-    public function details(Category $category){
+    public function details(Category $category, Request $request){
+
+      $request->user()->authorizeRoles('Administrador');
+
       return view('admin.categories.show', compact('category'));
     }
 

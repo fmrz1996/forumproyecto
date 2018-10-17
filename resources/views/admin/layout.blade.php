@@ -38,43 +38,25 @@
         </div>
       </form>
 
-      <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
-            <span class="badge badge-danger">9+</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-envelope fa-fw"></i>
-            <span class="badge badge-danger">7</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-circle fa-fw"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Activity Log</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-          </div>
-        </li>
+          <!-- Authentication Links -->
+              <li class="nav-item dropdown">
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      {{ Auth::user()->username }} <span class="caret"></span>
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ route('logout') }}"
+                         onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                          {{ __('Cerrar sesión') }}
+                      </a>
+
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </div>
+              </li>
       </ul>
 
     </nav>
@@ -109,28 +91,46 @@
             <span>Categorías</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown_cat">
+            @if(Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Desarrollador'))
             <a class="dropdown-item" href="{{ route('categorias.nuevo') }}">
               <i class="fas fa-plus"></i> Crear categoría
             </a>
+            @endif
             <a class="dropdown-item" href="{{ route('categorias') }}">
               <i class="fas fa-list"></i> Listar categorías
             </a>
           </div>
         </li>
-        <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/usuarios')) active @endif">
-          <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="/admin/usuarios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-users"></i>
-            <span>Usuarios</span></a>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown_user">
-            <a class="dropdown-item" href="{{ route('usuarios.nuevo') }}">
-              <i class="fas fa-user-plus"></i> Crear usuario
+          <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/usuarios')) active @endif">
+            <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="/admin/usuarios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-users"></i>
+              <span>Usuarios</span></a>
             </a>
-            <a class="dropdown-item" href="{{ route('usuarios') }}">
-              <i class="fas fa-address-book"></i> Listar usuarios
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown_user">
+            @if(Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Desarrollador'))
+              <a class="dropdown-item" href="{{ route('usuarios.nuevo') }}">
+                <i class="fas fa-user-plus"></i> Crear usuario
+              </a>
+            @endif
+              <a class="dropdown-item" href="{{ route('usuarios') }}">
+                <i class="fas fa-address-book"></i> Listar usuarios
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/perfil')) active @endif">
+            <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i>
+              <span>Perfil</span></a>
             </a>
-          </div>
-        </li>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown_user">
+              <a class="dropdown-item" href="{{ route('perfil.editar', ['id' => Auth::user()->id]) }}">
+                <i class="far fa-edit"></i> Editar perfil
+              </a>
+              <a class="dropdown-item" href="{{ route('perfil.detalles', ['id' => Auth::user()->id]) }}">
+                <i class="fas fa-info-circle"></i> Ver perfil
+              </a>
+            </div>
+          </li>
       </ul>
 
       <div id="content-wrapper">

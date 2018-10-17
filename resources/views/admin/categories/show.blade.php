@@ -11,6 +11,8 @@
       <li class="breadcrumb-item active">Detalles</li>
     </ol>
 
+    @include('admin.common.success')
+
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Categoría #{{ $category->id }}</div>
         <div class="card-body">

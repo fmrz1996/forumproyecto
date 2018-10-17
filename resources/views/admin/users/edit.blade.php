@@ -11,16 +11,7 @@
         <li class="breadcrumb-item active">Editar</li>
       </ol>
 
-      @if($errors->any())
-        <div class="alert alert-danger">
-          <h5>Porfavor corrige los siguientes erorres:</h5>
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
+      @include('admin.common.errors')
 
       <div class="card card-register mx-auto mt-5">
         <div class="card-header">Usuario #{{ $user->id }}</div>
@@ -61,6 +52,19 @@
                 <textarea name="description" id="inputDescription" class="form-control" placeholder="Descripción">{{ old('description', $user->description)}}</textarea>
               </div>
             </div>
+            @if($user->id != 1)
+              @if(Auth::user()->hasRole('Administrador'))
+              <div class="form-group">
+                <div class="form-label-group">
+                  <select class="form-control" name="is_active">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                  </select>
+                </div>
+              </div>
+              @endif
+            @endif
+            @if($user->id == Auth::user()->id)
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
@@ -71,12 +75,13 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar contraseña">
+                    <input name="password_confirmation" type="password" id="confirmPassword" class="form-control" placeholder="Confirmar contraseña">
                     <label for="confirmPassword">Confirmar contraseña</label>
                   </div>
                 </div>
               </div>
             </div>
+            @endif
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">

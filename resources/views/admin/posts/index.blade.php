@@ -8,6 +8,8 @@
         <li class="breadcrumb-item active">Posts</li>
       </ol>
 
+      @include('admin.common.success')
+
       <div class="card mb-3">
         <div class="card-header">
           <i class="fas fa-table"></i>
@@ -45,7 +47,8 @@
                     <td>{{ $post->user->first_name }} {{ $post->user->last_name }}</td>
                     <td>{{ $post->updated_at }}</td>
                     <td class="text-center">
-                      <form action="{{ route('posts.eliminar', $post->id ) }}" method="post">
+                      @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Administrador')))
+                      <form class="delete" action="{{ route('posts.eliminar', $post->id ) }}" method="post">
                         <a class="btn btn-link" href="{{ route('posts.editar', ['id' => $post->id]) }}" title="Editar">
                           <i class="far fa-edit"></i>
                         </a>
@@ -58,6 +61,11 @@
                           <i class="fas fa-info-circle"></i>
                         </a>
                       </form>
+                      @else
+                        <a class="btn btn-link" href="{{ route('posts.mostrar', ['id' => $post->id]) }}" title="Ver detalles">
+                          <i class="fas fa-info-circle"></i>
+                        </a>
+                      @endif
                     </td>
                   </tr>
                 @empty
@@ -85,5 +93,10 @@
             "order": [[4, "desc"]]
           });
         });
+      </script>
+      <script>
+          $(".delete").on("submit", function(){
+              return confirm("¿Realmente deseas eliminar el post?");
+          });
       </script>
     @endsection
