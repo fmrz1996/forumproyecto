@@ -1,6 +1,6 @@
     @extends('layout')
 
-    @section('title', "Quienes somos - Forum")
+    @section('title', "Quienes somos - Revista Forum")
 
     @section('content')
     <!-- Cuerpo de Página -->

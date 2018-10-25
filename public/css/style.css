@@ -126,6 +126,7 @@ a[data-toggle="collapse"] {
 .search-input{
   color: #eaeaea;
   height: 40px;
+  width: 260px;
   font-size: 17px;
   background: #2e2e2e;
   padding-left: 45px;
@@ -136,7 +137,8 @@ a[data-toggle="collapse"] {
 }
 
 .rrss-menu{
-  padding: 0 18px 0 18px;
+  padding: 0 18px 18px 18px;
+  margin-bottom: 20px;
 }
 
 .rrss-menu > a{
@@ -617,7 +619,7 @@ div .img-slider{
 /*Nosotros- Cuerpo de Página*/
 .aboutus,
 .aboutus-header{
-  margin: 40px auto 40px auto;
+  margin: 20px auto 40px auto;
 }
 
 .aboutus-header{
@@ -827,9 +829,6 @@ div .img-slider{
   color: #c0c0c0;
 }
 
-.footer .container{
-  padding: 20px 0 20px 0;
-}
 
 @media (max-width: 767px){
   .footer .container{

@@ -20,7 +20,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Autor</th>
@@ -30,7 +30,7 @@
               </thead>
               <tfoot>
                 <tr>
-                  <th>ID</th>
+                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Autor</th>
@@ -45,7 +45,7 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->category->name }}</td>
                     <td>{{ $post->user->first_name }} {{ $post->user->last_name }}</td>
-                    <td>{{ $post->updated_at }}</td>
+                    <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
                     <td class="text-center">
                       @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Administrador')))
                       <form class="delete" action="{{ route('posts.eliminar', $post->id ) }}" method="post">

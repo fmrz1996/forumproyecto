@@ -24,6 +24,10 @@
                   <td>{{ $post->title }}</td>
                 </tr>
                 <tr>
+                  <th>URL:</th>
+                  <td><a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}</a></td>
+                </tr>
+                <tr>
                   <th>Categoría:</th>
                   <td>{{ $post->category->name }}</td>
                 </tr>
@@ -40,16 +44,28 @@
                   @endif
                 </tr>
                 <tr>
+                  <th>Encabezado:</th>
+                  <td>{{ $post->header }}</td>
+                </tr>
+                <tr>
                   <th>Texto:</th>
-                  <td>{{ $post->body }}</td>
+                  <td>{!! $post->body !!}</td>
+                </tr>
+                <tr>
+                  <th>Tags:</th>
+                  <td>
+                    @foreach ($post->tags as $tag)
+                      <span>{{ $tag->name }}</span>
+                    @endforeach
+                  </td>
                 </tr>
                 <tr>
                   <th>Fecha de creación:</th>
-                  <td>{{ $post->created_at }}</td>
+                  <td>{{ $post->created_at->format('d-m-Y H:i') }}</td>
                 </tr>
                 <tr>
                   <th>Ultima modificación:</th>
-                  <td>{{ $post->updated_at }}</td>
+                  <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
                 </tr>
               </tbody>
             </table>

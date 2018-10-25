@@ -32,6 +32,10 @@
                   <td>{{ $user->email }}</td>
                 </tr>
                 <tr>
+                  <th>Rol:</th>
+                  <td>{{ $user->role->name }}</td>
+                </tr>
+                <tr>
                   <th>Descripción:</th>
                   <td>{{ $user->description }}</td>
                 </tr>
@@ -45,12 +49,12 @@
                 </tr>
                 <tr>
                   <th>Fecha de creación:</th>
-                  <td>{{ $user->created_at}}</td>
+                  <td>{{ $user->created_at->format('d-m-Y H:i')}}</td>
                 </tr>
                 <tr>
                   <th>Avatar:</th>
                   @if($user->avatar != null)
-                  <td align="center"><img class="show-img" src="../../../img/{{ $user->avatar }}"></td>
+                  <td><img class="show-img" src="../../../img/{{ $user->avatar }}"></td>
                   @else
                   <td>No registrado</td>
                   @endif

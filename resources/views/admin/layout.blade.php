@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../../../css/all.css">
     <link rel="stylesheet" href="../../../css/adminpanel/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="../../../css/adminpanel/sb-admin.css">
+    @yield('stylesheet')
 
   </head>
 
@@ -91,7 +92,7 @@
             <span>Categorías</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown_cat">
-            @if(Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Desarrollador'))
+            @if(Auth::user()->hasRole('Administrador'))
             <a class="dropdown-item" href="{{ route('categorias.nuevo') }}">
               <i class="fas fa-plus"></i> Crear categoría
             </a>
@@ -101,13 +102,27 @@
             </a>
           </div>
         </li>
+        <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/tags')) active @endif">
+          <a id="pagesDropdown_cat"class="nav-link dropdown-toggle" href="/admin/tags" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-tags"></i></i>
+            <span>Tags</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown_cat">
+            <a class="dropdown-item" href="{{ route('tags.nuevo') }}">
+              <i class="fas fa-plus"></i> Crear tag(s)
+            </a>
+            <a class="dropdown-item" href="{{ route('tags') }}">
+              <i class="fas fa-list"></i> Listar tags
+            </a>
+          </div>
+        </li>
           <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/usuarios')) active @endif">
             <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="/admin/usuarios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-users"></i>
               <span>Usuarios</span></a>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown_user">
-            @if(Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Desarrollador'))
+            @if(Auth::user()->hasRole('Administrador'))
               <a class="dropdown-item" href="{{ route('usuarios.nuevo') }}">
                 <i class="fas fa-user-plus"></i> Crear usuario
               </a>

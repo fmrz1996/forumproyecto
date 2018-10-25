@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Role;
 use Auth;
 
 class UsuarioController extends Controller
 {
     public function index(Request $request){
 
-      $request->user()->authorizeRoles(['Administrador', 'Desarrollador', 'Periodista']);
+      $request->user()->authorizeRoles(['Administrador', 'Periodista']);
       $usuarios = User::all();
 
       return view('admin.users/index', compact('usuarios'));
@@ -19,10 +20,9 @@ class UsuarioController extends Controller
 
     public function create(Request $request){
 
-      $request->user()->authorizeRoles(['Administrador', 'Desarrollador']);
+      $request->user()->authorizeRoles(['Administrador']);
 
       return view('admin.users.create');
-
     }
 
     public function store(Request $request){
@@ -60,6 +60,7 @@ class UsuarioController extends Controller
         'email' => $data['email'],
         'first_name' => $data['first_name'],
         'last_name' => $data['last_name'],
+        'role_id' => 2,
         'description' => $data['description'],
         'avatar' => $name,
         'password' => bcrypt($data['password']),
@@ -71,10 +72,12 @@ class UsuarioController extends Controller
     public function edit(User $user, Request $request){
 
       if($user->id != Auth::user()->id){
-        $request->user()->authorizeRoles(['Administrador', 'Desarrollador']);
+        $request->user()->authorizeRoles(['Administrador']);
       }
 
-      return view ('admin.users.edit', ['user' => $user]);
+      $roles = Role::all();
+
+      return view ('admin.users.edit', ['user' => $user], compact('roles'));
     }
 
     public function update(User $user, Request $request){
@@ -84,8 +87,9 @@ class UsuarioController extends Controller
         'email' => ['required', 'email', 'unique:users,email,' .$user->id],
         'first_name' => 'required',
         'last_name' => 'required',
+        'role_id' => 'nullable',
         'description' => ['nullable', 'max:200'],
-        'is_active' => 'nullable',
+        'is_active' => ['nullable', 'in:0,1'],
         'avatar' => 'nullable',
         'password' => ['nullable', 'confirmed', 'min:6'],
       ], [
@@ -95,7 +99,9 @@ class UsuarioController extends Controller
         'email.unique' => 'El correo electrónico ingresado ya está registrado.',
         'first_name.required' => 'El campo de Nombre es obligatorio.',
         'last_name.required' => 'El campo de Apellido es obligatorio.',
+        'role_id.required' => 'Debe seleccionar un rol valido.',
         'description.max' => 'La descripción no puede tener más de 200 caracteres.',
+        'is_active.in' => 'Debe seleccionar un estado de usuario valido.',
         'password.confirmed' => 'Las contraseñas no coinciden.',
         'password.min' => 'La contraseña debe tener por lo menos 6 caracteres.',
       ]);
@@ -106,6 +112,10 @@ class UsuarioController extends Controller
         } else {
           unset($data['password']);
         }
+      }
+
+      if($data['is_active'] == null){
+        unset($data['is_active']);
       }
 
       if($request->hasFile('avatar')){
@@ -135,7 +145,7 @@ class UsuarioController extends Controller
     public function details(User $user, Request $request){
 
       if($user->id != Auth::user()->id){
-        $request->user()->authorizeRoles(['Administrador', 'Desarrollador']);
+        $request->user()->authorizeRoles(['Administrador']);
       }
 
       return view('admin.users.show', compact('user'));

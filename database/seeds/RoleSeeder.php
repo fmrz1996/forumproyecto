@@ -18,10 +18,6 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-          'name' => 'Desarrollador',
-        ]);
-
-        Role::create([
           'name' => 'Periodista',
         ]);
     }

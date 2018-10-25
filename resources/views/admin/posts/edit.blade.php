@@ -1,5 +1,9 @@
     @extends('admin.layout')
 
+    @section('stylesheet')
+    <link rel="stylesheet" href="../../../css/adminpanel/select2.min.css">
+    @endsection
+
     @section('content')
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -41,7 +45,8 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <label>Autor: {{ $post->user->first_name }} {{ $post->user->last_name }}</label>
+                    <input name="slug" type="text" id="inputSlug" class="form-control" placeholder="URL" value="{{ old('slug', $post->slug) }}" required="required" minlegth="5" maxlegth="255">
+                    <label for="inputSlug">URL</label>
                   </div>
                 </div>
               </div>
@@ -53,11 +58,54 @@
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <textarea name="body" id="inputBody" class="form-control" placeholder="Escriba su contenido..." rows="10" required="required">{{ old('body', $post->body) }}</textarea>
+                <textarea name="header" type="text" class="form-control" placeholder="Encabezado" value="{{ old('header') }}" rows="4" maxlength="300"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <textarea name="body" id="textBody" class="form-control" required="required">{{ old('body', $post->body) }}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+                  @foreach ($tags as $tag)
+                    <option value="{{ $tag->name }}"
+                      @foreach ($post->tags as $tagofpost)
+                          {{ $tagofpost->name == $tag->name ? "selected=selected" : '' }}
+                        @endforeach
+                        >
+                      {{ $tag->name }}
+                    </option>
+                  @endforeach
+                </select>
               </div>
             </div>
             <button class="btn btn-primary btn-block" type="submit">Actualizar</button>
           </form>
         </div>
       </div>
+  @endsection
+
+  @section('script')
+    <script src="../../../js/adminpanel/select2.min.js"></script>
+    <script src="../../../js/adminpanel/select2-es.js"></script>
+    <script src="../../../js/adminpanel/ckeditor.js"></script>
+    <script src="../../../js/adminpanel/ckeditor-es.js"></script>
+    <script type="text/javascript">
+      $('.select2-multi').select2({
+        tags: true,
+        language: "es",
+        maximumInputLength: 30
+      });
+    </script>
+    <script type="text/javascript">
+      ClassicEditor
+          .create(document.querySelector('#textBody'), {
+            language: 'es'
+          })
+          .catch(error => {
+              console.error(error);
+          });
+    </script>
   @endsection

@@ -1,24 +1,26 @@
   @extends('layout')
 
+  @section('title', "$post->title")
+
   @section('content')
   <!-- Cuerpo de Página -->
     <div id="main">
           <article class="article-container">
             <div class="article-header">
-              <div class="article-bg" style="background-image: url('../img/valle-itata.jpg')"></div>
+              <div class="article-bg" style="background-image: url('../../img/{{ $post->background }}')"></div>
               <div class="article-entry-header container-fluid">
                     <div class="article-label">
                       <aside class="article-category">
                         <i class="far fa-file-alt"></i>
-                        <a href="#">Actualidad</a>
+                        <a href="{{ $post->category->name }}">{{ $post->category->name }}</a>
                       </aside>
                       <aside class="article-date">
                         <i class="far fa-calendar-alt"></i>
-                        12 Julio 2018
+                        {{ $post->created_at->format('d-m-Y') }}
                       </aside>
                     </div>
-                    <h1 class="article-title">Las 4 nuevas rutas turísticas Valle del Itata</h1>
-                    <aside class="article-author">por Sergio Romero</aside>
+                    <h1 class="article-title">{{ $post->title }}</h1>
+                    <aside class="article-author">por {{ $post->user->first_name }} {{ $post->user->last_name }}</aside>
               </div>
             </div>
             <div class="container">
@@ -50,13 +52,7 @@
                           </div>
                         </div>
                         <div class="article-text col-lg-11">
-                          <p>“Viñas y Observación de aves”, “Aventura campo y mar”, “Alma del Valle” y “Ruta Agroecológica patrimonial” son los nombres de las nuevas rutas disponibles para los turistas en el Valle del Itata con alto valor identitario y patrimonial.</p>
-                          <p>“El desafío fue realizar rutas turísticas comercializables en la zona considerando la oferta de las nueve comunas que integran el Valle. Para esto, lo primero que realizamos fue un diagnostico desde nuestra mirada comercial integrando visitas en terreno, estudios, valorización. Gracias a este trabajo hoy las rutas están tarificadas, dirigidas a un tipo específico de segmento y ahora disponibles para la venta”, señala Alejandra Arias, gerente comercial Esquerré Tour Operador quien entregó los resultados del proyecto a los empresarios de la zona en el marco de una licitación de la Dirección Regional de Turismo del Biobío y el programa Zona de Oportunidades.</p>
-                          <p>Jonathan Spoerer, director (s) de Sernatur Biobío destacó que uno de los objetivos principales de este proyecto es generar lazos, fortalecer el encadenamiento productivo y potenciar la oferta turística del Valle del Itata de una forma.</p>
-                          <p>“Preparar y evaluar los servicios para paquetizarlos y dejarlos disponibles en el mercado es un beneficio que claramente fortalecerá la zona en el ámbito turístico”, afirma.</p>
-                          <p>Desde la mirada de los empresarios turísticos de la zona, Carlos Huerta, propietario del complejo turístico “Las Dos Antonias” en Ninhue y Director de la Mesa Público Privada del Valle del Itata comenta que este trabajo es clave para convertirlos realmente en un destino y para comercializar de manera asociativa.
-                             “Que una empresa tour operadora nos articule para posteriormente socializar estas rutas es una oportunidad para tener clientes y funcionar como destino de manera profesional”, sostiene.</p>
-                         <p>Actualmente estas rutas están disponibles en la empresa Esquerré Tour Operador.</p>
+                          {!! $post->body !!}
 
                          {{-- Comentarios Facebook --}}
                          <div id="fb-box">
@@ -79,19 +75,18 @@
                           <div class="sb-div">
                             <div class="sb-author">
                               <div class="author-information bg-container-gray">
-                                <img src="../img/sergio.jpg" class="author-avatar">
-                                <h5>Sergio Romero</h5>
-                                <p class="author-description">Periodista y locutor de radio Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                <img src="../../img/{{ $post->user->avatar != null ? $post->user->avatar : 'avatar_placeholder.jpg' }}" class="author-avatar">
+                                <h5>{{ $post->user->first_name }} {{ $post->user->last_name }}</h5>
+                                <p class="author-description">{{ $post->user->description == null ? 'No cuenta con descripción disponible.' : $post->user->description }}</p>
                               </div>
                             </div>
                           </div>
                             <div class="sb-div">
                               <div class="article-tags">
                                 <h3>Tags</h3>
-                                <a class="mb-1" href="#">ñuble</a>
-                                <a class="mb-1" href="#">viña</a>
-                                <a class="mb-1" href="#">turismo</a>
-                                <a class="mb-1" href="#">naturaleza</a>
+                                @foreach ($post->tags as $tag)
+                                  <a class="mb-1" href="#">{{ $tag->name }}</a>
+                                @endforeach
                               </div>
                             </div>
                             <div class="sb-div">
@@ -106,7 +101,7 @@
                                         </h5>
                                         <figure class="opacity">
                                           <a href="#">
-                                            <img class="img-rp img-fluid" src="../img/saludable.jpg">
+                                            <img class="img-rp img-fluid" src="../../img/saludable.jpg">
                                           </a>
                                         </figure>
                                   </article>
@@ -119,7 +114,7 @@
                                         </h5>
                                         <figure class="opacity">
                                           <a href="#">
-                                            <img class="img-rp img-fluid" src="../img/plaza-armas.jpg">
+                                            <img class="img-rp img-fluid" src="../../img/plaza-armas.jpg">
                                           </a>
                                         </figure>
                                   </article>
@@ -147,7 +142,20 @@
         });
         </script>
 
+        <script type="text/javascript">
+            $("#header-fixed").hide();
+            var headerSlide = document.getElementById("header-fixed");
+            var topItem = $(".article-container").offset().top + 400;
 
+            $(window).scroll(function() {
+                if($(window).scrollTop() > topItem) {
+                    $("#header-fixed").show();
+                    headerSlide.classList.add("slide");
+                } else {
+                  headerSlide.classList.remove("slide");
+                }
+            });
+        </script>
 
         <script type="text/javascript">
           $(document).scroll(function() {
@@ -165,10 +173,10 @@
         <script type="text/javascript">
           $('a[href*=\\#commentsLine]').on('click', function(event){
               event.preventDefault();
-              $('html,body').animate({scrollTop:$(this.hash).offset().top - 10}, 700);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top - 80}, 700);
           });
         </script>
-        
+
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];

@@ -52,18 +52,29 @@
                 <textarea name="description" id="inputDescription" class="form-control" placeholder="Descripción">{{ old('description', $user->description)}}</textarea>
               </div>
             </div>
-            @if($user->id != 1)
-              @if(Auth::user()->hasRole('Administrador'))
-              <div class="form-group">
-                <div class="form-label-group">
-                  <select class="form-control" name="is_active">
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                  </select>
+              @if($user->id == 1)
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-label-group">
+                        <select class="form-control" name="is_active">
+                          <option value="1" {{ 1 == $user->is_active ? 'selected=selected' : '' }}>Activo</option>
+                          <option value="0" {{ 0 == $user->is_active ? 'selected=selected' : '' }}>Inactivo</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-label-group">
+                        <select class="form-control" name="role_id">
+                          @foreach ($roles as $role)
+                            <option value="{{ $role->id }}" {{ $role->id == $user->role->id ? 'selected=selected' : '' }}>{{ $role->name }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
               @endif
-            @endif
             @if($user->id == Auth::user()->id)
             <div class="form-group">
               <div class="form-row">

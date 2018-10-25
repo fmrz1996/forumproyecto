@@ -383,3 +383,7 @@ body.sidebar-toggled footer.sticky-footer {
 .show-img{
   max-width: 760px;
 }
+
+.ck-editor__editable {
+    min-height: 250px;
+}

@@ -19,7 +19,7 @@
             {{ csrf_field() }}
               <div class="form-group">
                 <div class="form-label-group">
-                  <input name="name" type="text" id="inputName" class="form-control" placeholder="Usuario" value="{{ old('name') }}" required="required">
+                  <input name="name" type="text" id="inputName" class="form-control" placeholder="Nombre" value="{{ old('name') }}" required="required">
                   <label for="inputName">Nombre</label>
                 </div>
               </div>

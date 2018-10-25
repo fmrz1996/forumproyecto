@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/all.css">
-    <link rel="stylesheet" href="../css/slick.css">
-    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/all.css">
+    <link rel="stylesheet" href="../../css/slick.css">
+    <link rel="stylesheet" href="../../css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <title>@yield('title')</title>
   </head>
   <body>
@@ -22,18 +22,11 @@
         <li class="active">
           <a href="#seccions-menu" data-toggle="collapse" aria-expanded="false">Secciones</a>
           <ul class="collapse show list-unstyled" id="seccions-menu">
+            @foreach ($categorias as $category)
               <li>
-                  <a href="/actualidad">Actualidad</a>
+                <a href="{{ str_slug($category) }}">{{ $category }}</a>
               </li>
-              <li>
-                  <a href="/sociedad">Sociedad</a>
-              </li>
-              <li>
-                  <a href="/cultura">Cultura</a>
-              </li>
-              <li>
-                  <a href="/tecnologia">Tecnología</a>
-              </li>
+            @endforeach
           </ul>
         </li>
         <li>
@@ -72,7 +65,7 @@
           </div>
           <div class="col-6 text-center col-header div-logo">
             <a href="/">
-              <img src="../img/forum_logo.png" class="img-fluid logo" alt="Revista Forum">
+              <img src="../../img/forum_logo.png" class="img-fluid logo" alt="Revista Forum">
             </a>
           </div>
           <div class="col-3 col-header">
@@ -110,7 +103,7 @@
           </div>
           <div class="col-6 text-center col-header div-logo">
             <a href="/">
-              <img src="../img/forum_logo_fixed.png" class="img-fluid logo" alt="Revista Forum">
+              <img src="../../img/forum_logo_fixed.png" class="img-fluid logo" alt="Revista Forum">
             </a>
           </div>
           <div class="col-3 col-header">
@@ -151,31 +144,16 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="../js/slick.min.js"></script>
-
-    <script type="text/javascript">
-        $("#header-fixed").hide();
-        var headerSlide = document.getElementById("header-fixed");
-        var topCarousel = $(".gap").offset().top + 200;
-
-        $(window).scroll(function() {
-            if($(window).scrollTop() > topCarousel) {
-                $("#header-fixed").show();
-                headerSlide.classList.add("slide");
-            } else {
-              headerSlide.classList.remove("slide");
-            }
-        });
-    </script>
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../js/slick.min.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function () {
           $("#side-menu").mCustomScrollbar({
-              theme: "minimal"
+              theme: "minimal",
           });
 
           $('#btn-dismiss, .overlay').on('click', function () {

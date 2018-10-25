@@ -1,7 +1,7 @@
 
   @extends('layout')
 
-  @section('title', "Contacto - Forum")
+  @section('title', "Contacto - Revista Forum")
 
   @section('content')
     <!-- Cuerpo de Página -->
