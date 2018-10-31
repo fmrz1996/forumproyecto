@@ -12,7 +12,7 @@
                     <div class="article-label">
                       <aside class="article-category">
                         <i class="far fa-file-alt"></i>
-                        <a href="{{ $post->category->name }}">{{ $post->category->name }}</a>
+                        <a href="{{ route('categoria', str_slug($post->category->name)) }}">{{ $post->category->name }}</a>
                       </aside>
                       <aside class="article-date">
                         <i class="far fa-calendar-alt"></i>
@@ -35,16 +35,21 @@
                               <nav>
                                 <ul>
                                   <li>
-                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-facebook" href="#"><i class="fab fa-facebook"></i></a>
+                                    {{-- Compartir en Facebook --}}
+                                    <div class="fb-share-button" data-href="{{ Request::url() }}" data-mobile-iframe="false">
+                                      <a class="share-link btn azm-social azm-inpost azm-size-48 azm-circle azm-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&amp;src=sdkpreparse">
+                                        <i class="fab fa-facebook"></i>
+                                      </a>
+                                    </div>
                                   </li>
                                   <li>
-                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-twitter" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="share-link btn azm-social azm-inpost azm-size-48 azm-circle azm-twitter" target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etf&text={{ $post->title }}&via=revistaforum"><i class="fab fa-twitter"></i></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                                   </li>
                                   <li>
                                     <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-envelope" href="#"><i class="fas fa-envelope"></i></a>
                                   </li>
                                   <li>
-                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-comment" href="#commentsLine"><i class="fas fa-comment"></i></a>
+                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-comment" href="#comentarios"><i class="fas fa-comment"></i></a>
                                   </li>
                                 </ul>
                               </nav>
@@ -56,14 +61,14 @@
 
                          {{-- Comentarios Facebook --}}
                          <div id="fb-box">
-                           <a id="commentsLine" class="fb-box-reveal bg-container-gray" href="#commentsCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="commentsCollapse">
+                           <a id="comentarios" class="fb-box-reveal bg-container-gray" href="#commentsCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="commentsCollapse">
                              <h3>Comentarios<i class="far fa-comment"></i></h3>
                              <div class="fb-btn-toggle">
                                <i class="fas fa-angle-down fb-arrow text-center"></i>
                              </div>
                            </a>
                            <div id="commentsCollapse" class="collapse">
-                             <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="3" data-colorscheme="light"></div>
+                             <div class="fb-comments" data-href="{{ Request::url() }}" data-width="100%" data-numposts="3" data-colorscheme="light"></div>
                            </div>
                          </div>
                         </div>
@@ -85,7 +90,7 @@
                               <div class="article-tags">
                                 <h3>Tags</h3>
                                 @foreach ($post->tags as $tag)
-                                  <a class="mb-1" href="#">{{ $tag->name }}</a>
+                                  <a class="mb-1" href="{{ route('tag', str_slug($tag->name)) }}">{{ $tag->name }}</a>
                                 @endforeach
                               </div>
                             </div>
@@ -171,7 +176,7 @@
         </script>
 
         <script type="text/javascript">
-          $('a[href*=\\#commentsLine]').on('click', function(event){
+          $('a[href*=\\#comentarios]').on('click', function(event){
               event.preventDefault();
               $('html,body').animate({scrollTop:$(this.hash).offset().top - 80}, 700);
           });
@@ -182,7 +187,17 @@
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
-          js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.1';
+          js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.2';
           fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        }(document, 'script', 'facebook-jssdk'));
+      </script>
+      <script>
+      $(document).ready(function() {
+          $('.share-link').click(function(e) {
+              e.preventDefault();
+              window.open($(this).attr('href'), 'fbShareWindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225) + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+              return false;
+          });
+      });
+      </script>
       @endsection

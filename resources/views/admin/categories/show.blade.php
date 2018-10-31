@@ -49,8 +49,8 @@
         </div>
       </div>
 
-      @if(!$posts->isEmpty())
-      <div class="card card-register mx-auto mt-5">
+      @if(!$category->posts->isEmpty())
+      <div class="card card-register mx-auto mt-5 mb-5">
         <div class="card-header">
           <i class="fas fa-table"></i>
           Posts de {{ $category->name }}
@@ -77,7 +77,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                @forelse($posts as $post)
+                @forelse($category->posts as $post)
                   <tr>
                     <td>{{ $post->id}}</td>
                     <td>{{ $post->title }}</td>
@@ -115,4 +115,25 @@
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
       @endif
+  @endsection
+
+  @section('script')
+    <script src="../../../js/adminpanel/datatables/jquery.dataTables.js"></script>
+    <script src="../../../js/adminpanel/datatables/dataTables.bootstrap4.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#dataTable').DataTable({
+          language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
+          "columnDefs": [
+            { "orderable": false, "targets": 4}
+          ],
+          "order": [[3, "desc"]]
+        });
+      });
+    </script>
+    <script>
+        $(".delete").on("submit", function(){
+            return confirm("¿Realmente deseas eliminar el post?");
+        });
+    </script>
   @endsection

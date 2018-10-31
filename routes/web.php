@@ -145,6 +145,11 @@ if ($options['verify'] ?? false) {
 
 // ** Slugs ** //
 
+// Tags
+Route::get('/tag/{tag}', 'HomeController@tag')
+-> where('tag', '[\w\d\-\_]+')
+-> name('tag');
+
 // Noticias
 Route::get('/{category}/{slug}/{id}', 'NoticiaController@index')
 -> where('slug', '[\w\d\-\_]+')
@@ -152,5 +157,5 @@ Route::get('/{category}/{slug}/{id}', 'NoticiaController@index')
 -> name('noticia');
 
 // Categorías
-Route::get('/{category}', 'HomeController@show')
+Route::get('/{category}', 'HomeController@category')
 -> name('categoria');

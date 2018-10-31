@@ -54,7 +54,7 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <textarea name="header" type="text" class="form-control" placeholder="Encabezado" value="{{ old('header') }}" rows="4" maxlength="300"></textarea>
+              <textarea name="header" type="text" class="form-control" placeholder="Encabezado" rows="4" maxlength="300">{{ old('header') }}</textarea>
             </div>
           </div>
           <div class="form-group">
@@ -83,10 +83,17 @@
     <script src="../../../js/adminpanel/ckeditor.js"></script>
     <script src="../../../js/adminpanel/ckeditor-es.js"></script>
     <script type="text/javascript">
+      $('.select2-simple').select2({
+
+      });
       $('.select2-multi').select2({
         tags: true,
         language: "es",
         maximumInputLength: 30
+      });
+      $('.select2-multi').on('change', function() {
+        var data = $(".select2 option:selected").text();
+        $("#test").val(data);
       });
     </script>
     <script type="text/javascript">

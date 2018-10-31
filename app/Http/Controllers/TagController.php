@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tag;
+use App\Post;
 
 class TagController extends Controller
 {
@@ -76,8 +77,8 @@ class TagController extends Controller
       return redirect()->route('tags')->with('status', 'Tag eliminado correctamente.');
     }
 
-    public function details($id){
-      $tag = Tag::find($id);
+    public function details(Tag $tag){
+      
       return view('admin.tags.show', compact('tag'));
     }
 }

@@ -62,9 +62,7 @@ class CategoriaController extends Controller
 
     public function details(Category $category, Request $request){
 
-      $posts = Post::where('category_id', '=', $category->id)->get();
-
-      return view('admin.categories.show', compact('category', 'posts'));
+      return view('admin.categories.show', compact('category'));
     }
 
 }

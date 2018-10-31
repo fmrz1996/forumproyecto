@@ -1,9 +1,3 @@
-/*!
- * Start Bootstrap - SB Admin v5.0.2 (https://startbootstrap.com/template-overviews/sb-admin)
- * Copyright 2013-2018 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
- */
-
 html {
   position: relative;
   min-height: 100%;
@@ -11,6 +5,10 @@ html {
 
 body {
   height: 100%;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 #wrapper {
@@ -386,4 +384,21 @@ body.sidebar-toggled footer.sticky-footer {
 
 .ck-editor__editable {
     min-height: 250px;
+}
+
+.article-tags a{
+  display: inline-block;
+  font-size: 12px!important;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #000;
+  background-color: #eff1f4;
+  border-color: #eff1f4;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border-radius: .2rem;
+  text-transform: uppercase;
+}
+
+.article-tags a:hover{
+  background-color: #D9DEE4;
 }

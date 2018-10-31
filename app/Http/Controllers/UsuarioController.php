@@ -144,11 +144,6 @@ class UsuarioController extends Controller
 
     public function details(User $user, Request $request){
 
-      if($user->id != Auth::user()->id){
-        $request->user()->authorizeRoles(['Administrador']);
-      }
-
       return view('admin.users.show', compact('user'));
-
     }
 }

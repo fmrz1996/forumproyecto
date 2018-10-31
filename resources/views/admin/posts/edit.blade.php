@@ -93,6 +93,9 @@
     <script src="../../../js/adminpanel/ckeditor.js"></script>
     <script src="../../../js/adminpanel/ckeditor-es.js"></script>
     <script type="text/javascript">
+      $('.select2-simple').select2({
+
+      });
       $('.select2-multi').select2({
         tags: true,
         language: "es",

@@ -25,9 +25,7 @@
                   <th>Nombre</th>
                   <th>Correo electrónico</th>
                   <th>Rol</th>
-                  @if(Auth::user()->hasRole('Administrador'))
                   <th class="text-center">Acciones</th>
-                  @endif
                 </tr>
               </thead>
               <tfoot>
@@ -37,33 +35,27 @@
                   <th>Nombre</th>
                   <th>Correo electrónico</th>
                   <th>Rol</th>
-                  @if(Auth::user()->hasRole('Administrador'))
                   <th class="text-center">Acciones</th>
-                  @endif
                 </tr>
               </tfoot>
               <tbody>
                 @forelse( $usuarios as $user)
                   <tr>
                     <td> {{ $user->id }}</td>
-                    @if(Auth::user()->hasRole('Administrador'))
                     <td><a href="{{ route('usuarios.mostrar', ['id' => $user->id]) }}">{{ $user->username }}</a></td>
-                    @else
-                      <td>{{ $user->username }}</td>
-                    @endif
                     <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role->name }}</td>
-                    @if(Auth::user()->hasRole('Administrador'))
                     <td class="text-center">
+                      @if($user->id == Auth::user()->id || Auth::user()->hasRole('Administrador'))
                         <a class="btn btn-link" href="{{ route('usuarios.editar', ['id' => $user->id]) }}" title="Editar">
                           <i class="far fa-edit"></i>
                         </a>
+                      @endif
                         <a class="btn btn-link" href="{{ route('usuarios.mostrar', ['id' => $user->id]) }}" title="Ver detalles">
                           <i class="fas fa-info-circle"></i>
                         </a>
                     </td>
-                    @endif
                   </tr>
                 @empty
                   <tr>No hay usuarios registrados.</tr>

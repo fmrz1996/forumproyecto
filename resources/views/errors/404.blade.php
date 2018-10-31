@@ -2,9 +2,9 @@
 <html lang="es" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Listado de Usuarios</title>
+    <title>Página no encontrada - Revista Forum</title>
   </head>
   <body>
-    <h1>Pagina no encontrada</h1>
+    <h1>Página no encontrada</h1>
   </body>
 </html>

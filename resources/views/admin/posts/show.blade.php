@@ -53,9 +53,9 @@
                 </tr>
                 <tr>
                   <th>Tags:</th>
-                  <td>
+                  <td class="article-tags">
                     @foreach ($post->tags as $tag)
-                      <span>{{ $tag->name }}</span>
+                      <a href="{{ route('tags.mostrar', $tag->id) }}">{{ $tag->name }}</a>
                     @endforeach
                   </td>
                 </tr>

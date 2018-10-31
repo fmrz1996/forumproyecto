@@ -47,10 +47,10 @@
       </div>
     </form>
       <div class="rrss-menu">
-        <a href="#" class="btn azm-social azm-size-36 azm-r-square azm-facebook"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="btn azm-social azm-size-36 azm-r-square azm-twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="btn azm-social azm-size-36 azm-r-square azm-instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="btn azm-social azm-size-36 azm-r-square azm-youtube-play"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/RevistaForum/" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-youtube-play"><i class="fab fa-youtube"></i></a>
       </div>
     </nav>
     <!-- Header -->

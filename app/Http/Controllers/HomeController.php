@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
+use App\Tag;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,7 @@ class HomeController extends Controller
         return view('home', compact('categorias', 'posts'));
     }
 
-    public function show($category)
+    public function category($category)
     {
       $categorias = Category::has('posts', '>', 0)->pluck('name');
 
@@ -42,6 +43,20 @@ class HomeController extends Controller
 
       $posts = Post::where('category_id', '=', $cat_info->id)->get()->sortByDesc("id");
 
-      return view('home', compact('categorias', 'posts'));
+      return view('home', compact('categorias', 'posts', 'category'));
+    }
+
+    public function tag($tag)
+    {
+      $categorias = Category::has('posts', '>', 0)->pluck('name');
+      $tags = Tag::all();
+
+      foreach ($tags as $tag_info) {
+        $post_array = Tag::where('name', '=', str_replace("-", " ", $tag))->firstOrFail();
+      }
+
+      $posts = $post_array->posts;
+
+      return view('home', compact('categorias', 'posts', 'tag'));
     }
 }
