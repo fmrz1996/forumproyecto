@@ -28,9 +28,18 @@ class UserSeeder extends Seeder
                 'email' => 'fmrz1996@gmail.com',
                 'first_name' => 'Felipe',
                 'last_name' => 'Rosales',
-                'role_id' => 1,
+                'role_id' => 2,
                 'description' => 'Estudiante de Ingeniería en Informática y desarrollador web de Forum Comunicaciones, amante de los videojuegos y el sur de Chile',
                 'password' => bcrypt('1q2w3e4r'),
+              ]);
+
+      $user = User::create([
+                'username' => 'matias.fucru',
+                'email' => 'matias.fucru@gmail.com',
+                'first_name' => 'Matías',
+                'last_name' => 'Fuentes',
+                'role_id' => 2,
+                'password' => bcrypt('matias'),
               ]);
 
       $user = User::create([
@@ -38,7 +47,7 @@ class UserSeeder extends Seeder
                 'email' => 'pepito@gmail.com',
                 'first_name' => 'Pepe',
                 'last_name' => 'Pera',
-                'role_id' => 2,
+                'role_id' => 3,
                 'password' => bcrypt('pepito'),
               ]);
 

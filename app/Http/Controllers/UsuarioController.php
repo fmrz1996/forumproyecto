@@ -114,7 +114,7 @@ class UsuarioController extends Controller
         }
       }
 
-      if($data['is_active'] == null){
+      if(isset($data['is_active'])){
         unset($data['is_active']);
       }
 

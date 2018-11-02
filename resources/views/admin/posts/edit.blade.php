@@ -20,7 +20,7 @@
       <div class="card card-register mx-auto mt-5">
         <div class="card-header">Post #{{ $post->id }}</div>
         <div class="card-body">
-          <form class="" action="{{ url("admin/posts/detalles/{$post->id}") }}" method="post" enctype="multipart/form-data">
+          <form id="form" action="{{ url("admin/posts/detalles/{$post->id}") }}" method="post" enctype="multipart/form-data">
             {{ method_field('put') }}
             {{ csrf_field() }}
             <div class="form-group">
@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <textarea name="header" type="text" class="form-control" placeholder="Encabezado" value="{{ old('header') }}" rows="4" maxlength="300"></textarea>
+                <textarea name="header" type="text" class="form-control" placeholder="Encabezado" rows="4" maxlength="300">{{ old('header', $post->header) }}</textarea>
               </div>
             </div>
             <div class="form-group">
@@ -90,8 +90,9 @@
   @section('script')
     <script src="../../../js/adminpanel/select2.min.js"></script>
     <script src="../../../js/adminpanel/select2-es.js"></script>
-    <script src="../../../js/adminpanel/ckeditor.js"></script>
-    <script src="../../../js/adminpanel/ckeditor-es.js"></script>
+    <script src="../../../js/adminpanel/ckeditor/ckeditor.js"></script>
+    <script src="../../../js/adminpanel/ckeditor/ckeditor-es.js"></script>
+
     <script type="text/javascript">
       $('.select2-simple').select2({
 
@@ -102,13 +103,29 @@
         maximumInputLength: 30
       });
     </script>
+
     <script type="text/javascript">
-      ClassicEditor
-          .create(document.querySelector('#textBody'), {
-            language: 'es'
-          })
-          .catch(error => {
-              console.error(error);
-          });
+      CKEDITOR.replace('textBody');
     </script>
+
+    <script>
+      var formChanged = false;
+
+      $("#form :input").change(function() {
+          formChanged = true;
+      });
+
+      $(window).on("beforeunload", function() {
+        if(formChanged == true){
+          return "Es posible que los cambios no se guarden.";
+        }
+      });
+      $(document).ready(function() {
+        $("#form").on("submit", function(e) {
+          $(window).off("beforeunload");
+          return true;
+        });
+      });
+    </script>
+
   @endsection

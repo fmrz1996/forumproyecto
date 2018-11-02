@@ -15,7 +15,7 @@
 
     <div class="card card-register mx-auto mt-5">
       <div class="card-body">
-        <form class="" action="{{ url('admin/usuarios/crear') }}" method="post" enctype="multipart/form-data">
+        <form id="form" action="{{ url('admin/usuarios/crear') }}" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
           <div class="form-group">
             <div class="form-group">
@@ -76,19 +76,26 @@
         </form>
       </div>
     </div>
+  @endsection
 
-    {{-- <form class="" action="{{ url('usuario/crear') }}" method="post">
-      {{ csrf_field() }}
+  @section('script')
+    <script>
+      var formChanged = false;
 
-      <input type="text" name="username" placeholder="Usuario" value="{{ old('username') }}">
-      <input type="email" name="email" placeholder="Correo electrónico" value="{{ old('email') }}">
-      <input type="text" name="first_name" placeholder="Nombre" value="{{ old('first_name') }}">
-      <input type="text" name="last_name" placeholder="Apellido" value="{{ old('last_name') }}">
-      <input type="text" name="description" placeholder="Descripción personal" value="{{ old('description') }}">
-      <input type="password" name="password" placeholder="Contraseña">
+      $("#form :input").change(function() {
+          formChanged = true;
+      });
 
-      <button type="submit" name="button">Crear usuario</button>
-
-    </form> --}}
-
+      $(window).on("beforeunload", function() {
+        if(formChanged == true){
+          return "Es posible que los cambios no se guarden.";
+        }
+      });
+      $(document).ready(function() {
+        $("#form").on("submit", function(e) {
+          $(window).off("beforeunload");
+          return true;
+        });
+      });
+    </script>
   @endsection

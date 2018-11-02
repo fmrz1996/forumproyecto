@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../css/slick.css">
     <link rel="stylesheet" href="../../css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    @yield('head')
     <title>@yield('title')</title>
   </head>
   <body>
@@ -24,7 +25,7 @@
           <ul class="collapse show list-unstyled" id="seccions-menu">
             @foreach ($categorias as $category)
               <li>
-                <a href="{{ str_slug($category) }}">{{ $category }}</a>
+                <a href="../{{ str_slug($category) }}">{{ $category }}</a>
               </li>
             @endforeach
           </ul>

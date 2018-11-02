@@ -145,8 +145,8 @@ class PostController extends Controller
       $file = $request->file('background');
       $name = time().'-'.$file->getClientOriginalName();
       $file->move(public_path(). '/img/', $name);
-      $data['background'] = $name;
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
+      $data['background'] = $name;
     } else {
       unset($data['background']);
     }

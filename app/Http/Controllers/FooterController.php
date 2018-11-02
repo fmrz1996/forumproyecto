@@ -3,22 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 
 class FooterController extends Controller
 {
   public function aboutus(){
-    return view('nosotros');
+
+    $categorias = Category::has('posts', '>', 0)->pluck('name');
+
+    return view('nosotros', compact('categorias'));
   }
 
   public function adversting(){
-    return view('nosotros');
+
+    $categorias = Category::has('posts', '>', 0)->pluck('name');
+
+    return view('nosotros', compact('categorias'));
   }
 
   public function termsandcond(){
-    return view('nosotros');
+
+    $categorias = Category::has('posts', '>', 0)->pluck('name');
+
+    return view('nosotros', compact('categorias'));
   }
 
   public function contact(){
-    return view('contacto');
+
+    $categorias = Category::has('posts', '>', 0)->pluck('name');
+
+    return view('contacto', compact('categorias'));
   }
 }
