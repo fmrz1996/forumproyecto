@@ -1,5 +1,11 @@
   @extends('layout')
 
+  @section('header')
+    <meta property="og:image" content="http://forumcomunicaciones.cl/img/{{ $post->background }}"/>
+    <meta property="og:title" content="{{ $post->title }}" />
+    <meta property="og:description" content="{{ $post->header != null ? $post->header : strip_tags(html_entity_decode(str_limit($post->body, 300, '...'))) }}" />
+  @endsection
+
   @section('title', "$post->title")
 
   @section('content')
@@ -56,7 +62,14 @@
                             </div>
                           </div>
                         </div>
+                        {{-- Cuerpo de Post --}}
                         <div class="article-text col-lg-11">
+                          @if($post->header != null)
+                            <div class="article-text-header bg-container-gray">
+                              <blockquote>{{ $post->header }}</blockquote>
+                            </div>
+                            <hr>
+                          @endif
                           {!! $post->body !!}
 
                          {{-- Comentarios Facebook --}}
@@ -191,6 +204,7 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
       </script>
+
       <script>
       $(document).ready(function() {
           $('.share-link').click(function(e) {

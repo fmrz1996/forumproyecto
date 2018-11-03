@@ -16,7 +16,7 @@
       <div class="card card-register mx-auto mt-5">
         <div class="card-header">Usuario #{{ $user->id }}</div>
         <div class="card-body">
-          <form class="" action="{{ url("admin/usuarios/detalles/{$user->id}") }}" method="post" enctype="multipart/form-data">
+          <form id="form" action="{{ url("admin/usuarios/detalles/{$user->id}") }}" method="post" enctype="multipart/form-data">
             {{ method_field('put') }}
             {{ csrf_field() }}
             <div class="form-group">
@@ -117,4 +117,26 @@
           </form>
         </div>
       </div>
+  @endsection
+
+  @section('script')
+    <script>
+      var formChanged = false;
+
+      $("#form :input").change(function() {
+          formChanged = true;
+      });
+
+      $(window).on("beforeunload", function() {
+        if(formChanged == true){
+          return "Es posible que los cambios no se guarden.";
+        }
+      });
+      $(document).ready(function() {
+        $("#form").on("submit", function(e) {
+          $(window).off("beforeunload");
+          return true;
+        });
+      });
+    </script>
   @endsection

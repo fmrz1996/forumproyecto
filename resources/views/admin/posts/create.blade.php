@@ -2,6 +2,7 @@
 
     @section('stylesheet')
     <link rel="stylesheet" href="../../../css/adminpanel/select2.min.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     @endsection
 
     @section('content')
@@ -19,7 +20,7 @@
 
     <div class="card card-register mx-auto mt-5">
       <div class="card-body">
-        <form class="" action="{{ url('admin/posts/crear') }}" method="post" enctype="multipart/form-data">
+        <form id="form" action="{{ url('admin/posts/crear') }}" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
           <div class="form-group">
             <div class="form-group">
@@ -59,7 +60,7 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <textarea name="body" id="textBody" class="form-control">{{ old('body') }}</textarea>
+              <textarea id="textBody" name="body" class="form-control">{{ old('body') }}</textarea>
             </div>
           </div>
           <div class="form-group">
@@ -80,8 +81,9 @@
   @section('script')
     <script src="../../../js/adminpanel/select2.min.js"></script>
     <script src="../../../js/adminpanel/select2-es.js"></script>
-    <script src="../../../js/adminpanel/ckeditor.js"></script>
-    <script src="../../../js/adminpanel/ckeditor-es.js"></script>
+    <script src="../../../js/adminpanel/ckeditor/ckeditor.js"></script>
+    <script src="../../../js/adminpanel/ckeditor/ckeditor-es.js"></script>
+
     <script type="text/javascript">
       $('.select2-simple').select2({
 
@@ -96,13 +98,28 @@
         $("#test").val(data);
       });
     </script>
+
     <script type="text/javascript">
-      ClassicEditor
-          .create(document.querySelector('#textBody'), {
-            language: 'es'
-          })
-          .catch(error => {
-              console.error(error);
-          });
+      CKEDITOR.replace('textBody');
+    </script>
+
+    <script>
+      var formChanged = false;
+
+      $("#form :input").change(function() {
+          formChanged = true;
+      });
+
+      $(window).on("beforeunload", function() {
+        if(formChanged == true){
+          return "Es posible que los cambios no se guarden.";
+        }
+      });
+      $(document).ready(function() {
+        $("#form").on("submit", function(e) {
+          $(window).off("beforeunload");
+          return true;
+        });
+      });
     </script>
   @endsection
