@@ -94,8 +94,8 @@
                     <a class="btn azm-outpost azm-size-36 azm-r-square azm-comment" href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}#comentarios"><i class="far fa-comment"></i></a>
                     <aside class="btn links-post-loop azm-outpost azm-size-36 azm-r-square azm-share">
                       <i class="fas fa-share-square"></i>
-                        <a class="btn azm-size-36 m-0 azm-social azm-share-social azm-facebook share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&amp;src=sdkpreparse"><i class="fab fa-facebook"></i></a>
-                        <a class="btn azm-size-36 m-0 azm-social azm-share-social azm-twitter share-link" href="https://twitter.com/share?ref_src=twsrc%5Etf&text={{ $post->title }}&via=revistaforum"><i class="fab fa-twitter"></i></a>
+                        <a class="btn azm-size-36 m-0 azm-social azm-share-social azm-facebook share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}&amp;src=sdkpreparse"><i class="fab fa-facebook"></i></a>
+                        <a class="btn azm-size-36 m-0 azm-social azm-share-social azm-twitter share-link" href="https://twitter.com/share?ref_src=twsrc%5Etf&url={{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}&text={{ $post->title }}&via=revistaforum"><i class="fab fa-twitter"></i></a>
                     </aside>
                   </footer>
                 </div>

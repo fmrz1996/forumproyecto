@@ -1,9 +1,9 @@
   @extends('layout')
 
   @section('header')
-    <meta property="og:image" content="../../img/{{ $post->background }}"/>
+    <meta property="og:image" content="http://forumcomunicaciones.cl/img/{{ $post->background }}"/>
     <meta property="og:title" content="{{ $post->title }}" />
-    <meta property="og:description" content="{{ $post->header != null ? $post->header : str_limit($post->body, 200, '...') }}" />
+    <meta property="og:description" content="{{ $post->header != null ? $post->header : strip_tags(html_entity_decode(str_limit($post->body, 300, '...'))) }}" />
   @endsection
 
   @section('title', "$post->title")
