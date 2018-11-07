@@ -100,12 +100,18 @@
       $('.select2-multi').select2({
         tags: true,
         language: "es",
-        maximumInputLength: 30
+        maximumInputLength: 30,
+        maximumSelectionLength: 7
       });
     </script>
 
     <script type="text/javascript">
-      CKEDITOR.replace('textBody');
+      CKEDITOR.replace('textBody', {
+        contentsCss: [CKEDITOR.basePath + 'contents.css', '../../../css/bootstrap.min.css'],
+        allowedContent: true,
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files'
+      });
     </script>
 
     <script>

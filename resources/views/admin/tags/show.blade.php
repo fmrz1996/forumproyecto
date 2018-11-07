@@ -14,7 +14,12 @@
     @include('admin.common.success')
 
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Tag #{{ $tag->id }}</div>
+      <div class="card-header">
+        Tag #{{ $tag->id }}
+        <a class="float-right" href="{{ route('tags.editar', $tag->id) }}">
+          <i class="far fa-edit"></i> Editar
+        </a>
+      </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -22,6 +27,10 @@
                 <tr>
                   <th>Nombre:</th>
                   <td>{{ $tag->name }}</td>
+                </tr>
+                <tr>
+                  <th>URL:</th>
+                  <td><a href="{{ route('tag', str_slug($tag->name)) }}">{{ route('tag', str_slug($tag->name)) }}</a></td>
                 </tr>
                 <tr>
                   <th>Usado en:</th>
@@ -41,10 +50,9 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Título</th>
                   <th>Autor</th>
                   <th>Ultima modificación</th>
@@ -53,7 +61,6 @@
               </thead>
               <tfoot>
                 <tr>
-                  <th>#</th>
                   <th>Título</th>
                   <th>Autor</th>
                   <th>Ultima modificación</th>
@@ -63,8 +70,7 @@
               <tbody>
                 @forelse($tag->posts as $post)
                   <tr>
-                    <td>{{ $post->id}}</td>
-                    <td>{{ $post->title }}</td>
+                    <td>{{ str_limit($post->title, 60, '...') }}</td>
                     <td>{{ $post->user->first_name }} {{ $post->user->last_name }}</td>
                     <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
                     <td class="text-center">
@@ -109,9 +115,9 @@
         $('#dataTable').DataTable({
           language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
           "columnDefs": [
-            { "orderable": false, "targets": 4}
+            { "orderable": false, "targets": 3}
           ],
-          "order": [[3, "desc"]]
+          "order": [[2, "desc"]]
         });
       });
     </script>

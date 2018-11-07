@@ -17,7 +17,7 @@ class CategoriaController extends Controller
 
     public function create(Request $request){
 
-      $request->user()->authorizeRoles('Administrador');
+      $request->user()->authorizeRoles(['Director ejecutivo', 'Administrador']);
 
       return view('admin.categories.create');
 
@@ -39,7 +39,7 @@ class CategoriaController extends Controller
 
     public function edit(Category $category, Request $request){
 
-      $request->user()->authorizeRoles('Administrador');
+      $request->user()->authorizeRoles(['Director ejecutivo', 'Administrador']);
 
       return view ('admin.categories.edit', ['category' => $category]);
     }

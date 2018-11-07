@@ -382,10 +382,6 @@ body.sidebar-toggled footer.sticky-footer {
   max-width: 760px;
 }
 
-.ck-editor__editable {
-    min-height: 250px;
-}
-
 .article-tags a{
   display: inline-block;
   font-size: 12px!important;

@@ -36,5 +36,13 @@ class CategorySeeder extends Seeder
         Category::create([
           'name' => 'Deportes',
         ]);
+
+        Category::create([
+          'name' => 'Política',
+        ]);
+
+        Category::create([
+          'name' => 'Salud',
+        ]);
     }
 }

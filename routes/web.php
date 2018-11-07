@@ -111,20 +111,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/usuarios/detalles/{user}', 'UsuarioController@details')
     -> where('user', '[0-9]+')
     -> name('usuarios.mostrar');
-
-    //Rutas alternativas de usuarios
-
-    Route::get('/admin/perfil/editar/{user}', 'UsuarioController@edit')
-    -> where('user', '[0-9]+')
-    -> name('perfil.editar');
-
-    Route::put('/admin/perfil/editar/{user}', 'UsuarioController@update')
-    -> where('user', '[0-9]+');
-
-    Route::get('/admin/perfil/{user}', 'UsuarioController@details')
-    -> where('user', '[0-9]+')
-    -> name('perfil.detalles');
-
+    
 });
 
 // ** Autentificación ** //

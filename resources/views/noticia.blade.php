@@ -102,9 +102,11 @@
                             <div class="sb-div">
                               <div class="article-tags">
                                 <h3>Tags</h3>
-                                @foreach ($post->tags as $tag)
+                                @forelse ($post->tags as $tag)
                                   <a class="mb-1" href="{{ route('tag', str_slug($tag->name)) }}">{{ $tag->name }}</a>
-                                @endforeach
+                                @empty
+                                  No hay tags registrados.
+                                @endforelse
                               </div>
                             </div>
                             <div class="sb-div">

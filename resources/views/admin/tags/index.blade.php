@@ -43,7 +43,7 @@
                     </td>
                     <td class="text-center">
                       <form class="delete" action="{{ route('tags.eliminar', $tag->id ) }}" method="post">
-                        @if(Auth::user()->hasRole('Administrador'))
+                        @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
                           <a class="btn btn-link" href="{{ route('tags.editar', ['id' => $tag->id]) }}" title="Editar">
                             <i class="far fa-edit"></i>
                           </a>

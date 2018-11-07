@@ -45,7 +45,7 @@
                     <td>Inactivo</td>
                   @endif
                     <td class="text-center">
-                      @if(Auth::user()->hasRole('Administrador'))
+                      @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
                         <a class="btn btn-link" href="{{ route('categorias.editar', ['id' => $category->id]) }}" title="Editar">
                           <i class="far fa-edit"></i>
                         </a>

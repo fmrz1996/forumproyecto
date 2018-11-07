@@ -23,7 +23,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript,SpecialChar,Cut,Copy,Paste,PasteText,PasteFromWord,Styles,Anchor';
+	config.removeButtons = 'Underline,Subscript,Superscript,Strike,SpecialChar,Cut,Copy,Paste,PasteText,PasteFromWord,Styles,Anchor';
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
@@ -31,5 +31,9 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.extraPlugins = 'justify,youtube';
+	config.extraPlugins = 'autogrow,justify,youtube';
+
+	config.autoGrow_onStartup = true;
+	config.autoGrow_minHeight = 200;
+	config.autoGrow_maxHeight = 1000;
 };

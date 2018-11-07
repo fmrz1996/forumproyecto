@@ -14,7 +14,12 @@
     @include('admin.common.success')
 
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Usuario #{{ $user->id }}</div>
+      <div class="card-header">
+        Usuario #{{ $user->id }}
+        <a class="float-right" href="{{ route('usuarios.editar', $user->id) }}">
+          <i class="far fa-edit"></i> Editar
+        </a>
+      </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -37,7 +42,11 @@
                 </tr>
                 <tr>
                   <th>Descripción:</th>
-                  <td>{{ $user->description }}</td>
+                  @if ($user->description != null)
+                    <td>{{ $user->description }}</td>
+                  @else
+                    <td><span class="font-italic">No registrado</span></td>
+                  @endif
                 </tr>
                 <tr>
                   <th>Estado:</th>
@@ -56,7 +65,7 @@
                   @if($user->avatar != null)
                   <td><img class="show-img" src="../../../img/{{ $user->avatar }}"></td>
                   @else
-                  <td>No registrado</td>
+                  <td><span class="font-italic">No registrado</span></td>
                   @endif
                 </tr>
               </tbody>
@@ -73,10 +82,9 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Ultima modificación</th>
@@ -85,7 +93,6 @@
               </thead>
               <tfoot>
                 <tr>
-                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Ultima modificación</th>
@@ -95,12 +102,11 @@
               <tbody>
                 @forelse($user->posts as $post)
                   <tr>
-                    <td>{{ $post->id}}</td>
-                    <td>{{ $post->title }}</td>
+                    <td>{{ str_limit($post->title, 60, '...') }}</td>
                     <td>{{ $post->category->name }}</td>
                     <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
                     <td class="text-center">
-                      @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Administrador')))
+                      @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole(['Director ejecutivo' ,'Administrador'])))
                       <form class="delete" action="{{ route('posts.eliminar', $post->id ) }}" method="post">
                         <a class="btn btn-link" href="{{ route('posts.editar', ['id' => $post->id]) }}" title="Editar">
                           <i class="far fa-edit"></i>
@@ -142,9 +148,9 @@
         $('#dataTable').DataTable({
           language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
           "columnDefs": [
-            { "orderable": false, "targets": 4}
+            { "orderable": false, "targets": 3}
           ],
-          "order": [[3, "desc"]]
+          "order": [[2, "desc"]]
         });
       });
     </script>

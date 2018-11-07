@@ -52,7 +52,7 @@
                 <textarea name="description" id="inputDescription" class="form-control" placeholder="Descripción">{{ old('description', $user->description)}}</textarea>
               </div>
             </div>
-              @if($user->id == 1)
+              @if(Auth::user()->hasRole('Director ejecutivo') && $user->role->name != 'Director ejecutivo')
                 <div class="form-group">
                   <div class="form-row">
                     <div class="col-md-6">

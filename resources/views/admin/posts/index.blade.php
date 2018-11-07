@@ -17,10 +17,9 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Autor</th>
@@ -30,7 +29,6 @@
               </thead>
               <tfoot>
                 <tr>
-                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Autor</th>
@@ -41,31 +39,32 @@
               <tbody>
                 @forelse( $posts as $post)
                   <tr>
-                    <td>{{ $post->id}}</td>
-                    <td>{{ $post->title }}</td>
+                    <td>{{ str_limit($post->title, 90, '...') }}</td>
                     <td>{{ $post->category->name }}</td>
                     <td>{{ $post->user->first_name }} {{ $post->user->last_name }}</td>
                     <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
                     <td class="text-center">
-                      @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Administrador')))
                       <form class="delete" action="{{ route('posts.eliminar', $post->id ) }}" method="post">
-                        <a class="btn btn-link" href="{{ route('posts.editar', ['id' => $post->id]) }}" title="Editar">
-                          <i class="far fa-edit"></i>
-                        </a>
+                        @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Director ejecutivo')))
+                          <a class="btn btn-link" href="{{ route('posts.editar', ['id' => $post->id]) }}" title="Editar">
+                            <i class="far fa-edit"></i>
+                          </a>
+                        @elseif($post->user->role->name == ('Periodista') && (Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador'])))
+                          <a class="btn btn-link" href="{{ route('posts.editar', ['id' => $post->id]) }}" title="Editar">
+                            <i class="far fa-edit"></i>
+                          </a>
+                        @endif
+                        @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Director ejecutivo')))
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
-                        <button class="btn btn-link" type="submit" name="button" title="Eliminar">
-                          <i class="far fa-trash-alt"></i>
-                        </button>
+                          <button class="btn btn-link" type="submit" name="button" title="Eliminar">
+                            <i class="far fa-trash-alt"></i>
+                          </button>
+                        @endif
                         <a class="btn btn-link" href="{{ route('posts.mostrar', ['id' => $post->id]) }}" title="Ver detalles">
                           <i class="fas fa-info-circle"></i>
                         </a>
                       </form>
-                      @else
-                        <a class="btn btn-link" href="{{ route('posts.mostrar', ['id' => $post->id]) }}" title="Ver detalles">
-                          <i class="fas fa-info-circle"></i>
-                        </a>
-                      @endif
                     </td>
                   </tr>
                 @empty
@@ -88,9 +87,12 @@
           $('#dataTable').DataTable({
             language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
             "columnDefs": [
-              { "orderable": false, "targets": 5}
+              {
+                "orderable": false,
+                "targets": 4,
+              }
             ],
-            "order": [[4, "desc"]]
+            "order": [[3, "desc"]]
           });
         });
       </script>

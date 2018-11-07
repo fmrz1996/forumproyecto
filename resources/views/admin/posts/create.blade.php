@@ -93,10 +93,6 @@
         language: "es",
         maximumInputLength: 30
       });
-      $('.select2-multi').on('change', function() {
-        var data = $(".select2 option:selected").text();
-        $("#test").val(data);
-      });
     </script>
 
     <script type="text/javascript">

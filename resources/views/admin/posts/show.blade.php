@@ -14,7 +14,12 @@
     @include('admin.common.success')
 
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Post #{{ $post->id }}</div>
+      <div class="card-header">
+        Post #{{ $post->id }}
+        <a class="float-right" href="{{ route('posts.editar', $post->id) }}">
+          <i class="far fa-edit"></i> Editar
+        </a>
+      </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -38,14 +43,22 @@
                 <tr>
                   <th>Imágen principal:</th>
                   @if($post->background != null)
-                  <td><img class="show-img text-center" src="../../../img/{{ $post->background }}"></td>
+                    <td><img class="show-img text-center" src="../../../img/{{ $post->background }}"></td>
                   @else
-                  <td>No registrado</td>
+                    <span class="font-italic">No registrado</span>
                   @endif
                 </tr>
                 <tr>
                   <th>Encabezado:</th>
-                  <td>{{ $post->header }}</td>
+                    @if($post->header != null)
+                      <td>
+                        {{ $post->header }}
+                      </td>
+                    @else
+                      <td class="font-italic">
+                        <span class="font-italic">No registrado</span>
+                      </td>
+                    @endif
                 </tr>
                 <tr>
                   <th>Texto:</th>
@@ -54,9 +67,11 @@
                 <tr>
                   <th>Tags:</th>
                   <td class="article-tags">
-                    @foreach ($post->tags as $tag)
+                    @forelse ($post->tags as $tag)
                       <a href="{{ route('tags.mostrar', $tag->id) }}">{{ $tag->name }}</a>
-                    @endforeach
+                    @empty
+                      <span class="font-italic">No registrado</span>
+                    @endforelse
                   </td>
                 </tr>
                 <tr>

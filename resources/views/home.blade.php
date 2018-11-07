@@ -14,38 +14,16 @@
         <div class="row">
           <div class="full-width-row">
             <div id="carousel" class="slick-frame">
-              <div style="position: relative;">
-                <a href="/noticia">
-                  <img class="img-fluid img-slider" src="../img/img1.jpg">
-                  <div class="slider-post">
-                    <h3>El primer vestido hecho con telarañas silvestres</h3>
-                  </div>
-                </a>
-              </div>
-              <div style="position: relative;">
-                <a href="/noticia">
-                  <img class="img-fluid img-slider" src="../img/img2.jpg">
-                  <div class="slider-post">
-                    <h3>Mirar a los ojos reduciría notablemente el estrés</h3>
-                  </div>
-                </a>
-              </div>
-              <div style="position: relative;">
-                <a href="/noticia">
-                  <img class="img-fluid img-slider" src="../img/img3.jpg">
-                  <div class="slider-post">
-                    <h3>Como vestirse con clase sin ser rico</h3>
-                  </div>
-                </a>
-              </div>
-              <div style="position: relative;">
-                <a href="/noticia">
-                  <img class="img-fluid img-slider" src="../img/img4.jpg">
-                  <div class="slider-post">
-                    <h3>No te pierdas lo último de la semana dieciochera</h3>
-                  </div>
-                </a>
-              </div>
+              @foreach ($posts->slice(0, 5) as $post)
+                <div style="position: relative;">
+                  <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
+                    <img class="img-fluid img-slider" src="../img/{{ $post->background }}">
+                    <div class="slider-post">
+                      <h3>{{ $post->title }}</h3>
+                    </div>
+                  </a>
+                </div>
+              @endforeach
             </div>
               <aside class="gap">
               </aside>
@@ -83,7 +61,9 @@
                 <header class="header-post">
                   <h3>
                     <a class="titulo-post" href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
-                      <span class="keyword-post">#{{ mb_strtolower($post->tags->pluck('name')->random()) }}</span>
+                      @if(!$post->tags->isEmpty())
+                        <span class="keyword-post">#{{ mb_strtolower($post->tags->pluck('name')->random()) }}</span>
+                      @endif
                       {{ $post->title }}
                     </a>
                   </h3>

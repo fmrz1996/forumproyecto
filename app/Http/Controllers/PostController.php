@@ -106,7 +106,9 @@ class PostController extends Controller
   public function edit(Post $post, Request $request){
 
     if($post->user->id != Auth::user()->id){
-      $request->user()->authorizeRoles('Administrador');
+      if($post->user->role->name != "Periodista"){
+        $request->user()->authorizeRoles('Director ejecutivo');
+      }
     }
 
     $categorias = Category::where('is_active', '=', 1)->get();
@@ -154,7 +156,6 @@ class PostController extends Controller
     $post->update($data);
 
     $tags = $request->tags;
-
     $id_tags = [];
 
     if($tags != null){
@@ -173,7 +174,15 @@ class PostController extends Controller
         Tag::insert($data_tags);
       }
 
+      $name_tags = [];
+
       foreach ($tags as $tag) {
+        if(!in_array($tag, $name_tags, true)){
+          $name_tags[] = $tag;
+        }
+      }
+
+      foreach($name_tags as $tag){
         $tag_info = Tag::where('name', '=', $tag)->first();
         $id_tags[] = [
           'tag_id' => $tag_info->id,

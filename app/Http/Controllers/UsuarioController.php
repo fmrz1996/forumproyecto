@@ -12,7 +12,6 @@ class UsuarioController extends Controller
 {
     public function index(Request $request){
 
-      $request->user()->authorizeRoles(['Administrador', 'Periodista']);
       $usuarios = User::all();
 
       return view('admin.users/index', compact('usuarios'));
@@ -20,7 +19,7 @@ class UsuarioController extends Controller
 
     public function create(Request $request){
 
-      $request->user()->authorizeRoles(['Administrador']);
+      $request->user()->authorizeRoles(['Director ejecutivo', 'Administrador']);
 
       return view('admin.users.create');
     }
@@ -72,10 +71,12 @@ class UsuarioController extends Controller
     public function edit(User $user, Request $request){
 
       if($user->id != Auth::user()->id){
-        $request->user()->authorizeRoles(['Administrador']);
+        if($user->role->name != "Periodista"){
+          $request->user()->authorizeRoles('Director ejecutivo');
+        }
       }
 
-      $roles = Role::all();
+      $roles = Role::all()->except(1);
 
       return view ('admin.users.edit', ['user' => $user], compact('roles'));
     }

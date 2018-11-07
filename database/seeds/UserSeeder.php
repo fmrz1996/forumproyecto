@@ -52,6 +52,6 @@ class UserSeeder extends Seeder
               ]);
 
         //Usuarios creados con datos aleatorios
-        factory(User::class, 17)->create();
+        factory(User::class, 16)->create();
     }
 }

@@ -47,7 +47,11 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role->name }}</td>
                     <td class="text-center">
-                      @if($user->id == Auth::user()->id || Auth::user()->hasRole('Administrador'))
+                      @if($user->id == Auth::user()->id || (Auth::user()->hasRole('Director ejecutivo')))
+                        <a class="btn btn-link" href="{{ route('usuarios.editar', ['id' => $user->id]) }}" title="Editar">
+                          <i class="far fa-edit"></i>
+                        </a>
+                      @elseif ($user->role->name == 'Periodista' && (Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador'])))
                         <a class="btn btn-link" href="{{ route('usuarios.editar', ['id' => $user->id]) }}" title="Editar">
                           <i class="far fa-edit"></i>
                         </a>

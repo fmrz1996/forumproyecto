@@ -10,7 +10,6 @@ class TagController extends Controller
 {
     public function index(Request $request){
 
-      $request->user()->authorizeRoles(['Administrador', 'Periodista']);
       $tags = Tag::all();
 
       return view('admin.tags/index', compact('tags'));
@@ -18,7 +17,6 @@ class TagController extends Controller
 
     public function create(Request $request){
 
-      $request->user()->authorizeRoles(['Administrador', 'Periodista']);
       $tags = Tag::all();
 
       return view('admin.tags.create', compact('tags'));
@@ -49,7 +47,7 @@ class TagController extends Controller
 
     public function edit(Request $request, $id){
 
-      $request->user()->authorizeRoles('Administrador');
+      $request->user()->authorizeRoles(['Director ejecutivo', 'Administrador']);
 
       $tag = Tag::find($id);
 
@@ -78,7 +76,7 @@ class TagController extends Controller
     }
 
     public function details(Tag $tag){
-      
+
       return view('admin.tags.show', compact('tag'));
     }
 }

@@ -25,14 +25,16 @@
                 <label for="inputName">Nombre</label>
               </div>
             </div>
-            <div class="form-group">
-              <div class="form-label-group">
-                <select class="form-control" name="is_active">
-                  <option value="1">Activo</option>
-                  <option value="0">Inactivo</option>
-                </select>
-              </div>
-            </div>
+              @if(Auth::user()->hasRole('Director ejecutivo'))
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <select class="form-control" name="is_active">
+                      <option value="1">Activo</option>
+                      <option value="0">Inactivo</option>
+                    </select>
+                  </div>
+                </div>
+              @endif
             <button class="btn btn-primary btn-block" type="submit">Actualizar</button>
           </form>
             </div>
