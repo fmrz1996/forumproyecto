@@ -94,15 +94,18 @@
     <script src="../../../js/adminpanel/ckeditor/ckeditor-es.js"></script>
 
     <script type="text/javascript">
-      $('.select2-simple').select2({
-
-      });
       $('.select2-multi').select2({
         tags: true,
         language: "es",
         maximumInputLength: 30,
         maximumSelectionLength: 7
       });
+      $('select').on(
+        'select2:close',
+            function(){
+                $(this).focus();
+            }
+      );
     </script>
 
     <script type="text/javascript">

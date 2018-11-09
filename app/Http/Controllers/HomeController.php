@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CarouselAlgorithms;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
 use App\Tag;
 
+
 class HomeController extends Controller
 {
+    use CarouselAlgorithms;
+
     /**
      * Create a new controller instance.
      *
@@ -24,13 +28,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $categorias = Category::has('posts', '>', 0)->pluck('name');
 
+        $categorias = Category::has('posts', '>', 0)->pluck('name');
+        $carousel = $this->randomDefault();
         $posts = Post::all()->sortByDesc("id");
 
-        return view('home', compact('categorias', 'posts'));
+        return view('home', compact('categorias', 'carousel', 'posts'));
     }
 
     public function category($category)
@@ -41,9 +47,11 @@ class HomeController extends Controller
         $cat_info = Category::where('name', '=', $category)->firstOrFail();
       }
 
+      $carousel = $this->randomDefault();
+
       $posts = Post::where('category_id', '=', $cat_info->id)->get()->sortByDesc("id");
 
-      return view('home', compact('categorias', 'posts', 'category'));
+      return view('home', compact('categorias', 'carousel', 'posts', 'category'));
     }
 
     public function tag($tag)
@@ -55,8 +63,10 @@ class HomeController extends Controller
         $post_array = Tag::where('name', '=', str_replace("-", " ", $tag))->firstOrFail();
       }
 
+      $carousel = $this->randomDefault();
+
       $posts = $post_array->posts;
 
-      return view('home', compact('categorias', 'posts', 'tag'));
+      return view('home', compact('categorias', 'carousel', 'posts', 'tag'));
     }
 }

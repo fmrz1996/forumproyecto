@@ -71,3 +71,18 @@
     </div>
 </div>
 @endsection
+
+@section('script')
+  <script type="text/javascript">
+    (function($){
+        $.fn.focusTextToEnd = function(){
+            this.focus();
+            var $thisVal = this.val();
+            this.val('').val($thisVal);
+            return this;
+        }
+    }(jQuery));
+
+    $('#username').focusTextToEnd();
+  </script>
+@endsection
