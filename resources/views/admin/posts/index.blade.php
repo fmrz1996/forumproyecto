@@ -20,6 +20,7 @@
             <table class="table table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Autor</th>
@@ -29,6 +30,7 @@
               </thead>
               <tfoot>
                 <tr>
+                  <th>#</th>
                   <th>Título</th>
                   <th>Categoría</th>
                   <th>Autor</th>
@@ -39,7 +41,8 @@
               <tbody>
                 @forelse( $posts as $post)
                   <tr>
-                    <td>{{ str_limit($post->title, 90, '...') }}</td>
+                    <td>{{ $post->id }}</td>
+                    <td>{{ str_limit($post->title, 80, '...') }}</td>
                     <td>{{ $post->category->name }}</td>
                     <td>{{ $post->user->first_name }} {{ $post->user->last_name }}</td>
                     <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
@@ -89,10 +92,10 @@
             "columnDefs": [
               {
                 "orderable": false,
-                "targets": 4,
+                "targets": 5,
               }
             ],
-            "order": [[3, "desc"]]
+            "order": [[4, "desc"]]
           });
         });
       </script>

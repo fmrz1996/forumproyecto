@@ -11,8 +11,13 @@
 |
 */
 
+use App\Post;
+use Illuminate\Http\Request;
+
 // Index
 Route::get('/', 'HomeController@index');
+
+Route::get('/pagination', 'HomeController@pagination');
 
 // Footer
 Route::get('/quienes-somos', 'FooterController@aboutus');
@@ -111,7 +116,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/usuarios/detalles/{user}', 'UsuarioController@details')
     -> where('user', '[0-9]+')
     -> name('usuarios.mostrar');
-    
+
 });
 
 // ** Autentificación ** //

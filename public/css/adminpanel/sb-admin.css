@@ -290,7 +290,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 }
 
 
-.form-label-group > label {
+.form-label-group label{
   font-size: 14px;
   font-weight: 700;
   display: inline-block;

@@ -74,11 +74,9 @@
         $(document).ready(function() {
           $('#dataTable').DataTable({
             language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
-            @if(Auth::user()->hasRole('Administrador'))
             "columnDefs": [
-              { "orderable": false, "targets": 2}
+              { "orderable": false, "targets": 3}
             ]
-            @endif
           });
         });
       </script>

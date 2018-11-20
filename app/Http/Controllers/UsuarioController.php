@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Role;
 use Auth;
+use Image;
 
 class UsuarioController extends Controller
 {
@@ -49,7 +50,10 @@ class UsuarioController extends Controller
       if($request->hasFile('avatar')){
         $file = $request->file('avatar');
         $name = time().'-'.$file->getClientOriginalName();
-        $file->move(public_path(). '/img/', $name);
+        if(strlen($name) > 60){
+          $name = str_limit($name, 60, '.'.$request->avatar->getClientOriginalExtension());
+        }
+        $img = Image::make($file->getRealPath())->fit(200)->save(public_path(). '/img/'. $name);
       } else {
         $name = null;
       }
@@ -59,7 +63,7 @@ class UsuarioController extends Controller
         'email' => $data['email'],
         'first_name' => $data['first_name'],
         'last_name' => $data['last_name'],
-        'role_id' => 2,
+        'role_id' => 3,
         'description' => $data['description'],
         'avatar' => $name,
         'password' => bcrypt($data['password']),
@@ -122,7 +126,10 @@ class UsuarioController extends Controller
       if($request->hasFile('avatar')){
         $file = $request->file('avatar');
         $name = time().'-'.$file->getClientOriginalName();
-        $file->move(public_path(). '/img/', $name);
+        if(strlen($name) > 60){
+          $name = str_limit($name, 60, '.'.$request->avatar->getClientOriginalExtension());
+        }
+        $img = Image::make($file->getRealPath())->fit(200)->save(public_path(). '/img/'. $name);
         $data['avatar'] = $name;
       } else {
         unset($data['avatar']);

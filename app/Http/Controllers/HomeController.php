@@ -8,7 +8,6 @@ use App\Category;
 use App\Post;
 use App\Tag;
 
-
 class HomeController extends Controller
 {
     use CarouselAlgorithms;
@@ -34,7 +33,7 @@ class HomeController extends Controller
 
         $categorias = Category::has('posts', '>', 0)->pluck('name');
         $carousel = $this->randomDefault();
-        $posts = Post::all()->sortByDesc("id");
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
 
         return view('home', compact('categorias', 'carousel', 'posts'));
     }
@@ -68,5 +67,11 @@ class HomeController extends Controller
       $posts = $post_array->posts;
 
       return view('home', compact('categorias', 'carousel', 'posts', 'tag'));
+    }
+
+    public function pagination()
+    {
+      $posts = Post::orderBy('id', 'desc')->paginate(10);
+      return view('home.pagination', compact('posts'));
     }
 }

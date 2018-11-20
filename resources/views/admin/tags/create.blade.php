@@ -18,11 +18,15 @@
       @include('admin.common.errors')
 
       <div class="card card-register mx-auto mt-5">
+        <div class="card-header">
+          Crear tags
+        </div>
         <div class="card-body">
           <form class="" action="{{ url('admin/tags/crear') }}" method="post">
             {{ csrf_field() }}
               <div class="form-group">
                 <div class="form-label-group">
+                  <label for="tags[]">Tags</label>
                   <select class="form-control select2-multi" name="tags[]" multiple="multiple">
                     @foreach ($tags as $tag)
                       <option value="{{ $tag->name }}">{{ $tag->name }}</option>

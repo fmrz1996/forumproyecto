@@ -9,6 +9,8 @@ use App\Post;
 use App\Tag;
 use App\User;
 use Auth;
+use Image;
+use File;
 
 class PostController extends Controller
 {
@@ -32,7 +34,7 @@ class PostController extends Controller
 
     $data = request()->validate([
       'title' => ['required', 'max:150'],
-      'slug' => ['required', 'alpha_dash', 'min:5', 'max:255'],
+      'slug' => ['required', 'alpha_dash', 'max:191'],
       'header' => ['nullable', 'max:300'],
       'body' => 'required',
       'category_id' => ['required', 'not_in:0'],
@@ -44,7 +46,7 @@ class PostController extends Controller
       'slug.min' => 'La URL debe tener como minímo 5 caracteres.',
       'slug.max' => 'La URL no puede tener más de 255 caracteres.',
       'header.max' => 'El encabezado no puede tener más de 300 caracteres.',
-      'body.required' => 'El campo de Texto es obligatorio.',
+      'body.required' => 'El campo de Contenido es obligatorio.',
       'category_id.required' => 'Debe seleccionar una categoría valida.',
       'category_id.not_in' => 'Debe seleccionar una categoría valida.',
       'background.required' => 'El post debe contener una imágen principal.',
@@ -53,7 +55,10 @@ class PostController extends Controller
     if($request->hasFile('background')){
       $file = $request->file('background');
       $name = time().'-'.$file->getClientOriginalName();
-      $file->move(public_path(). '/img/', $name);
+      if(strlen($name) > 60){
+        $name = str_limit($name, 60, '.'.$request->background->getClientOriginalExtension());
+      }
+      $img = Image::make($file->getRealPath())->save(public_path(). '/img/'. $name);
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
     }
 
@@ -114,10 +119,6 @@ class PostController extends Controller
     $categorias = Category::where('is_active', '=', 1)->get();
 
     $tags = Tag::all();
-    $tags_array = array();
-    foreach ($tags as $tag) {
-      $tags_array[$tag->id] = $tag->name;
-    }
 
     return view ('admin.posts.edit', ['post' => $post], compact('categorias', 'tags'));
   }
@@ -126,7 +127,7 @@ class PostController extends Controller
     $data = request()->validate([
       'title' => ['required', 'max:150'],
       'body' => 'required',
-      'slug' => ['required', 'alpha_dash', 'min:5', 'max:255', 'unique:posts,slug,' .$post->id],
+      'slug' => ['required', 'alpha_dash', 'max:191', 'unique:posts,slug,' .$post->id],
       'header' => ['nullable', 'max:300'],
       'category_id' => ['required', 'not_in:0'],
       'background' => 'nullable',
@@ -146,7 +147,10 @@ class PostController extends Controller
     if($request->hasFile('background')){
       $file = $request->file('background');
       $name = time().'-'.$file->getClientOriginalName();
-      $file->move(public_path(). '/img/', $name);
+      if(strlen($name) > 80){
+        $name = str_limit($name, 80, '.'.$request->background->getClientOriginalExtension());
+      }
+      $img = Image::make($file->getRealPath())->save(public_path(). '/img/'. $name);
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
       $data['background'] = $name;
     } else {
@@ -202,6 +206,9 @@ class PostController extends Controller
 
     public function destroy(Post $post){
       $post->tags()->detach();
+      if(File::exists(public_path(). '/img/'. $post->background)){
+          File::delete(public_path(). '/img/'. $post->background);
+      }
       $post->delete();
 
       return redirect()->route('posts')->with('status', 'Post eliminado correctamente.');

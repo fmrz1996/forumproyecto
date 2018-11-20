@@ -65,7 +65,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    /*Se utiliza zona horaria que concuerde con la actualidad chilena.*/
+    'timezone' => 'America/La_Paz',
 
     /*
     |--------------------------------------------------------------------------

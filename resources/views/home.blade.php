@@ -152,6 +152,26 @@
       }, 100);
       </script>
 
+      <script>
+        let page = 2;
+        window.onscroll = function() {
+          if((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight){
+            const section = document.getElementById('posts');
+
+            fetch('/pagination?page=' + page,{
+              method: 'get'
+            }).then(function(response){
+              return response.text();
+            }).then(function(htmlContent){
+              section.innerHTML += htmlContent;
+              page += 1;
+            }).catch(function(err){
+              console.log(err);
+            });
+          }
+        };
+      </script>
+
       <script type="text/javascript">
           $("#header-fixed").hide();
           var headerSlide = document.getElementById("header-fixed");

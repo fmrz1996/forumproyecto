@@ -38,34 +38,6 @@
 							expand : true,
 							elements :
 								[{
-									id : 'txtEmbed',
-									type : 'textarea',
-									label : editor.lang.youtube.txtEmbed,
-									onChange : function (api) {
-										handleEmbedChange(this, api);
-									},
-									onKeyUp : function (api) {
-										handleEmbedChange(this, api);
-									},
-									validate : function () {
-										if (this.isEnabled()) {
-											if (!this.getValue()) {
-												alert(editor.lang.youtube.noCode);
-												return false;
-											}
-											else
-											if (this.getValue().length === 0 || this.getValue().indexOf('//') === -1) {
-												alert(editor.lang.youtube.invalidEmbed);
-												return false;
-											}
-										}
-									}
-								},
-								{
-									type : 'html',
-									html : editor.lang.youtube.or + '<hr>'
-								},
-								{
 									type : 'hbox',
 									widths : [ '70%', '15%', '15%' ],
 									children :
@@ -144,26 +116,20 @@
 								},
 								{
 									type : 'hbox',
-									widths : [ '55%', '45%' ],
+									widths : [ '100%' ],
 									children :
 										[
 											{
 												id : 'chkResponsive',
 												type : 'checkbox',
 												label : editor.lang.youtube.txtResponsive,
-												'default' : editor.config.youtube_responsive != null ? editor.config.youtube_responsive : false
-											},
-											{
-												id : 'chkNoEmbed',
-												type : 'checkbox',
-												label : editor.lang.youtube.txtNoEmbed,
-												'default' : editor.config.youtube_noembed != null ? editor.config.youtube_noembed : false
+												'default' : editor.config.youtube_responsive != null ? editor.config.youtube_responsive : true
 											}
 										]
 								},
 								{
 									type : 'hbox',
-									widths : [ '55%', '45%' ],
+									widths : [ '100%' ],
 									children :
 									[
 										{
@@ -171,26 +137,14 @@
 											type : 'checkbox',
 											'default' : editor.config.youtube_related != null ? editor.config.youtube_related : true,
 											label : editor.lang.youtube.chkRelated
-										},
-										{
-											id : 'chkOlderCode',
-											type : 'checkbox',
-											'default' : editor.config.youtube_older != null ? editor.config.youtube_older : false,
-											label : editor.lang.youtube.chkOlderCode
 										}
 									]
 								},
 								{
 									type : 'hbox',
-									widths : [ '55%', '45%' ],
+									widths : [ '100%' ],
 									children :
 									[
-										{
-											id : 'chkPrivacy',
-											type : 'checkbox',
-											label : editor.lang.youtube.chkPrivacy,
-											'default' : editor.config.youtube_privacy != null ? editor.config.youtube_privacy : false
-										},
 										{
 											id : 'chkAutoplay',
 											type : 'checkbox',
@@ -201,7 +155,7 @@
 								},
 								{
 									type : 'hbox',
-									widths : [ '55%', '45%'],
+									widths : [ '50%' ],
 									children :
 									[
 										{
@@ -218,12 +172,6 @@
 													}
 												}
 											}
-										},
-										{
-											id : 'chkControls',
-											type : 'checkbox',
-											'default' : editor.config.youtube_controls != null ? editor.config.youtube_controls : true,
-											label : editor.lang.youtube.chkControls
 										}
 									]
 								}
@@ -235,20 +183,11 @@
 						var content = '';
 						var responsiveStyle = '';
 
-						if (this.getContentElement('youtubePlugin', 'txtEmbed').isEnabled()) {
-							content = this.getValueOf('youtubePlugin', 'txtEmbed');
-						}
-						else {
 							var url = 'https://', params = [], startSecs, paramAutoplay='';
 							var width = this.getValueOf('youtubePlugin', 'txtWidth');
 							var height = this.getValueOf('youtubePlugin', 'txtHeight');
 
-							if (this.getContentElement('youtubePlugin', 'chkPrivacy').getValue() === true) {
-								url += 'www.youtube-nocookie.com/';
-							}
-							else {
-								url += 'www.youtube.com/';
-							}
+							url += 'www.youtube.com/';
 
 							url += 'embed/' + video;
 
@@ -259,10 +198,6 @@
 							if (this.getContentElement('youtubePlugin', 'chkAutoplay').getValue() === true) {
 								params.push('autoplay=1');
 								paramAutoplay='autoplay';
-							}
-
-							if (this.getContentElement('youtubePlugin', 'chkControls').getValue() === false) {
-								params.push('controls=0');
 							}
 
 							startSecs = this.getValueOf('youtubePlugin', 'txtStartAt');
@@ -282,41 +217,12 @@
 								responsiveStyle = 'style="position:absolute;top:0;left:0;width:100%;height:100%"';
 							}
 
-							if (this.getContentElement('youtubePlugin', 'chkOlderCode').getValue() === true) {
-								url = url.replace('embed/', 'v/');
-								url = url.replace(/&/g, '&amp;');
-
-								if (url.indexOf('?') === -1) {
-									url += '?';
-								}
-								else {
-									url += '&amp;';
-								}
-								url += 'hl=' + (this.getParentEditor().config.language ? this.getParentEditor().config.language : 'en') + '&amp;version=3';
-
-								content += '<object width="' + width + '" height="' + height + '" ' + responsiveStyle + '>';
-								content += '<param name="movie" value="' + url + '"></param>';
-								content += '<param name="allowFullScreen" value="true"></param>';
-								content += '<param name="allowscriptaccess" value="always"></param>';
-								content += '<embed src="' + url + '" type="application/x-shockwave-flash" ';
-								content += 'width="' + width + '" height="' + height + '" '+ responsiveStyle + ' allowscriptaccess="always" ';
-								content += 'allowfullscreen="true"></embed>';
-								content += '</object>';
-							}
-							else
-							if (this.getContentElement('youtubePlugin', 'chkNoEmbed').getValue() === true) {
-								var imgSrc = '//img.youtube.com/vi/' + video + '/sddefault.jpg';
-								content += '<a href="' + url + '" ><img width="' + width + '" height="' + height + '" src="' + imgSrc + '" '  + responsiveStyle + '/></a>';
-							}
-							else {
 								content += '<iframe allow="' + paramAutoplay + ';" width="' + width + '" height="' + height + '" src="' + url + '" ' + responsiveStyle;
 								content += 'frameborder="0" allowfullscreen></iframe>';
-							}
 
 							if (this.getContentElement('youtubePlugin', 'chkResponsive').getValue() === true) {
 								content += '</div>';
 							}
-						}
 
 						var element = CKEDITOR.dom.element.createFromHtml(content);
 						var instance = this.getParentEditor();
@@ -331,13 +237,6 @@
 function handleLinkChange(el, api) {
 	var video = ytVidId(el.getValue());
 	var time = ytVidTime(el.getValue());
-
-	if (el.getValue().length > 0) {
-		el.getDialog().getContentElement('youtubePlugin', 'txtEmbed').disable();
-	}
-	else {
-		el.getDialog().getContentElement('youtubePlugin', 'txtEmbed').enable();
-	}
 
 	if (video && time) {
 		var seconds = timeParamToSeconds(time);

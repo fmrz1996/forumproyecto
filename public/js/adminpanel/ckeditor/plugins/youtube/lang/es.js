@@ -11,7 +11,7 @@ CKEDITOR.plugins.setLang('youtube', 'es', {
     chkOlderCode : 'Usar código viejo',
     chkAutoplay: 'Reproducción automática',
     chkControls: 'Mostrar controles del reproductor',
-    noCode : 'Debes de introducir un código embed o URL',
+    noCode : 'Debes de introducir un código URL',
     invalidEmbed : 'El código embed introducido parece no ser valido',
     invalidUrl : 'La URL introducida parece no ser valida',
     or : 'o',
@@ -20,5 +20,5 @@ CKEDITOR.plugins.setLang('youtube', 'es', {
     noHeight : 'Debes dar una altura valida',
     invalidHeight : 'Da una altura valida',
     invalidTime : 'Da un tiempo de valido',
-    txtResponsive : 'Hacer responsivo (ignorar anchura y altura, ajustar a la anchura)'
+    txtResponsive : 'Hacer responsivo'
 });

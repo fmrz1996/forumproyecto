@@ -11,6 +11,7 @@
   @section('content')
   <!-- Cuerpo de Página -->
     <div id="main">
+      <div id="post">
           <article class="article-container">
             <div class="article-header">
               <div class="article-bg" style="background-image: url('../../img/{{ $post->background }}')"></div>
@@ -25,7 +26,7 @@
                         {{ $post->created_at->format('d-m-Y') }}
                       </aside>
                     </div>
-                    <h1 class="article-title">{{ $post->title }}</h1>
+                    <h1 class="@if(strlen($post->title) >= 120) article-title-extra @elseif(strlen($post->title) >= 90) article-title-long @else article-title @endif">{{ $post->title }}</h1>
                     <aside class="article-author">por {{ $post->user->first_name }} {{ $post->user->last_name }}</aside>
               </div>
             </div>
@@ -52,7 +53,9 @@
                                     <a class="share-link btn azm-social azm-inpost azm-size-48 azm-circle azm-twitter" target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etf&text={{ $post->title }}&via=revistaforum"><i class="fab fa-twitter"></i></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                                   </li>
                                   <li>
-                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-envelope" href="#"><i class="fas fa-envelope"></i></a>
+                                    <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-envelope"
+                                    href="mailto:?subject=Le%20han%20compartido:%20{{ $post->title }}&body=Estimado%20lector.%0A%0ALe%20han%20compartido%20el%20art%C3%ADculo%20%22{{ $post->title }}%22%20aqu%C3%AD:%0A%0A%20{{ Request::url() }}%0A%0ASaludos%20cordiales%20de%20Forum%20Comunicaciones.">
+                                    <i class="fas fa-envelope"></i></a>
                                   </li>
                                   <li>
                                     <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-comment" href="#comentarios"><i class="fas fa-comment"></i></a>
@@ -66,21 +69,21 @@
                         <div class="article-text col-lg-11">
                           @if($post->header != null)
                             <div class="article-text-header bg-container-gray">
-                              <blockquote>{{ $post->header }}</blockquote>
+                              <blockquote class="bq-header">{{ $post->header }}</blockquote>
                             </div>
                             <hr>
                           @endif
                           {!! $post->body !!}
 
                          {{-- Comentarios Facebook --}}
-                         <div id="fb-box">
+                         <div class="mt-4" id="fb-box">
                            <a id="comentarios" class="fb-box-reveal bg-container-gray" href="#commentsCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="commentsCollapse">
                              <h3>Comentarios<i class="far fa-comment"></i></h3>
                              <div class="fb-btn-toggle">
                                <i class="fas fa-angle-down fb-arrow text-center"></i>
                              </div>
                            </a>
-                           <div id="commentsCollapse" class="collapse">
+                           <div id="commentsCollapse" class="collapse bg-container">
                              <div class="fb-comments" data-href="{{ Request::url() }}" data-width="100%" data-numposts="3" data-colorscheme="light"></div>
                            </div>
                          </div>
@@ -112,39 +115,86 @@
                             <div class="sb-div">
                               <div class="related-posts">
                                 <h3>Artículos relacionados</h3>
+                                @foreach ($relatedposts as $rp)
                                   <article class="container-rp">
-                                        <h5>
-                                          <a href="#">
-                                            <span class="keyword-post">#comida</span>
-                                            Tecnología para hacer alimentos más saludables
-                                          </a>
-                                        </h5>
-                                        <figure class="opacity">
-                                          <a href="#">
-                                            <img class="img-rp img-fluid" src="../../img/saludable.jpg">
-                                          </a>
-                                        </figure>
+                                    <h5>
+                                      <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
+                                        @if(!$rp->tags->isEmpty())
+                                          <span class="keyword-post">#{{ mb_strtolower($rp->tags->pluck('name')->random()) }}</span>
+                                        @endif
+                                        {{ $rp->title }}
+                                      </a>
+                                    </h5>
+                                    <figure class="opacity">
+                                      <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
+                                        <img class="img-rp img-fluid" src="../../img/{{ $rp->background }}">
+                                      </a>
+                                    </figure>
                                   </article>
-                                  <article class="container-rp">
-                                        <h5>
-                                          <a href="#">
-                                            <span class="keyword-post">#ñuble</span>
-                                            La Región de Ñuble en cuenta regresiva
-                                          </a>
-                                        </h5>
-                                        <figure class="opacity">
-                                          <a href="#">
-                                            <img class="img-rp img-fluid" src="../../img/plaza-armas.jpg">
-                                          </a>
-                                        </figure>
-                                  </article>
+                                @endforeach
                               </div>
                             </div>
                         </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
+          <section class="related-category mt-5 p-4 bg-container-gray">
+            <div class="container">
+              <h2 class="mb-4">Más sobre
+                <span>{{ $post->category->name }}</span>
+              </h2>
+              @foreach ($firstcategory as $rc)
+                <article class="article-rc-highlight mb-2">
+                  <h4>
+                    <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                    @if(!$rc->tags->isEmpty())
+                      <span class="keyword-post">#{{ mb_strtolower($rc->tags->pluck('name')->random()) }}</span>
+                    @endif
+                    {{ $rc->title }}
+                    </a>
+                  </h4>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-7 pr-0">
+                      <figure class="opacity m-0">
+                        <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                          <img class="img-rc img-fluid" src="../../img/{{ $rc->background }}">
+                        </a>
+                      </figure>
+                    </div>
+                    <div class="col-sm-12 col-md-5 pl-0">
+                      <blockquote class="bq-header-rc">{{ $rc->header }}</blockquote>
+                    </div>
+                  </div>
+                </article>
+              @endforeach
+                  @if(!empty($relatedcategory))
+                  <hr>
+                  <div class="row">
+                    @foreach ($relatedcategory as $rc)
+                      <div class="col-md-4">
+                          <article class="article-rc">
+                            <h6>
+                              <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                              @if(!$rc->tags->isEmpty())
+                                <span class="keyword-post">#{{ mb_strtolower($rc->tags->pluck('name')->random()) }}</span>
+                              @endif
+                              {{ $rc->title }}
+                              </a>
+                            </h6>
+                            <figure class="opacity">
+                              <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                                <img class="img-rc img-fluid" src="../../img/{{ $rc->background }}">
+                              </a>
+                            </figure>
+                          </article>
+                      </div>
+                    @endforeach
+                  </div>
+                @endif
+                </div>
+          </section>
         </div>
       @endsection
 

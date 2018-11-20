@@ -3,57 +3,58 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/all.css">
     <link rel="stylesheet" href="../../css/slick.css">
-    <link rel="stylesheet" href="../../css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="../../css/style.css">
-    @yield('head')
+    @yield('header')
     <title>@yield('title')</title>
   </head>
   <body>
     <div class="overlay"></div>
     <div class="wrapper">
     <!-- Menú lateral -->
-    <nav id="side-menu">
-      <div id="btn-dismiss" class="text-center">
-        <i class="fas fa-arrow-left"></i>
-      </div>
-      <ul class="list-menu components">
-        <li class="active">
-          <a href="#seccions-menu" data-toggle="collapse" aria-expanded="false">Secciones</a>
-          <ul class="collapse show list-unstyled" id="seccions-menu">
-            @foreach ($categorias as $category)
-              <li>
-                <a href="../{{ str_slug($category) }}">{{ $category }}</a>
-              </li>
-            @endforeach
-          </ul>
-        </li>
-        <li>
-          <a href="#">Novedades</a>
-        </li>
-        <li>
-          <a href="#">Ediciones anteriores</a>
-        </li>
-        <li>
-          <a target="_blank" rel="noopener noreferrer" href="http://forumradio.cl/">Radio Forum</a>
-        </li>
-      </ul>
-      <form class="search-form" action="index.html" method="get">
-      <div class="search-menu">
-        <i class="fas fa-search"></i>
-          <input type="text" class="search-input" placeholder="Buscar">
-          <button id="btnSearchMenu" type="submit" class="btn-search"></button>
-      </div>
-    </form>
-      <div class="rrss-menu">
-        <a href="https://www.facebook.com/RevistaForum/" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-facebook"><i class="fab fa-facebook"></i></a>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-youtube-play"><i class="fab fa-youtube"></i></a>
-      </div>
-    </nav>
+      <nav id="side-menu">
+        <div id="btn-dismiss" class="text-center">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <ul class="list-menu components">
+          <li class="active">
+            <a href="#seccions-menu" data-toggle="collapse" aria-expanded="false">Secciones</a>
+            <ul class="collapse show list-unstyled" id="seccions-menu">
+              @foreach ($categorias as $category)
+                <li>
+                  <a href="../{{ str_slug($category) }}">{{ $category }}</a>
+                </li>
+              @endforeach
+            </ul>
+          </li>
+          <li>
+            <a href="#">Novedades</a>
+          </li>
+          <li>
+            <a href="#">Ediciones anteriores</a>
+          </li>
+          <li>
+            <a target="_blank" rel="noopener noreferrer" href="http://forumradio.cl/">Radio Forum</a>
+          </li>
+        </ul>
+        <form class="search-form" action="index.html" method="get">
+        <div class="search-menu">
+          <i class="fas fa-search"></i>
+            <input type="text" class="search-input" placeholder="Buscar">
+            <button id="btnSearchMenu" type="submit" class="btn-search"></button>
+        </div>
+      </form>
+        <div class="rrss-menu">
+          <a href="https://www.facebook.com/RevistaForum/" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-youtube-play"><i class="fab fa-youtube"></i></a>
+        </div>
+      </nav>
     <!-- Header -->
     <div class="container-fluid py-3">
       <header class="header">
@@ -113,11 +114,9 @@
         </div>
       </div>
     </header>
-    <!-- Carousel -->
     @yield('carousel')
-    <!-- Cuerpo de Página -->
     @yield('content')
-    {{-- Footer --}}
+    <!-- Footer -->
     <footer class="footer">
       <div class="container">
               <ul class="nav justify-content-center">
@@ -148,15 +147,10 @@
     <script src="../../js/jquery-3.3.1.min.js"></script>
     <script src="../../js/popper.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="../../js/slick.min.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function () {
-          $("#side-menu").mCustomScrollbar({
-              theme: "minimal",
-          });
-
           $('#btn-dismiss, .overlay').on('click', function () {
               $('#side-menu').removeClass('active');
               $('.overlay').removeClass('active');

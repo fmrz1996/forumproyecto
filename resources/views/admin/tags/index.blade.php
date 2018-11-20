@@ -80,7 +80,8 @@
             language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
             "columnDefs": [
               { "orderable": false, "targets": 2}
-            ]
+            ],
+            "order": [[0, "desc"]]
           });
         });
       </script>

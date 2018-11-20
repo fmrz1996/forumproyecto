@@ -42,7 +42,7 @@ class TagController extends Controller
         Tag::insert($data_tags);
       }
 
-      return redirect()->route('tags')->with('status', 'Tag creado correctamente.');
+      return redirect()->route('tags')->with('status', 'Tags creados correctamente.');
     }
 
     public function edit(Request $request, $id){
