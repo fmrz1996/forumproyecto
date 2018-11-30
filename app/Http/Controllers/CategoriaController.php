@@ -12,7 +12,9 @@ class CategoriaController extends Controller
 
       $categorias = Category::all();
 
-      return view('admin.categories/index', compact('categorias'));
+      $last_update = Category::orderBy('updated_at', 'desc')->pluck('updated_at')->first();
+
+      return view('admin.categories/index', compact('categorias', 'last_update'));
     }
 
     public function create(Request $request){

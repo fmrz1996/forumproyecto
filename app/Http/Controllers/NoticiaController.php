@@ -28,28 +28,34 @@ class NoticiaController extends Controller
       }
 
       //Artículos relacionados
-      $relatedposts = $this->sameTag($post);
-      $rp_remaining = 3 - count($relatedposts[0]);
-      $excluidedposts = $relatedposts[1];
-
-      if($rp_remaining > 0){
-        $rp_merge = $relatedposts[0];
-        $relatedposts = $this->sameAuthor($post, $rp_remaining, $excluidedposts);
+      if($post->tags()->count() > 0){
+        $relatedposts = $this->sameTag($post);
+        $rp_remaining = 3 - count($relatedposts[0]);
         $excluidedposts = $relatedposts[1];
       } else {
-        $relatedposts = $relatedposts[0];
+         $excluidedposts = [];
+         $relatedposts[0] = [];
+         $rp_remaining = 3;
       }
 
-      if(isset($rp_merge)){
-        $relatedposts = array_merge($rp_merge, $relatedposts[0]);
-        $rp_remaining = 3 - count($relatedposts);
         if($rp_remaining > 0){
-          $rp_merge = $relatedposts;
-          $relatedposts = $this->randomDefault($post, $rp_remaining, $excluidedposts);
+          $rp_merge = $relatedposts[0];
+          $relatedposts = $this->sameAuthor($post, $rp_remaining, $excluidedposts);
           $excluidedposts = $relatedposts[1];
-          $relatedposts = array_merge($rp_merge, $relatedposts[0]);
+        } else {
+          $relatedposts = $relatedposts[0];
         }
-      }
+
+        if(isset($rp_merge)){
+          $relatedposts = array_merge($rp_merge, $relatedposts[0]);
+          $rp_remaining = 3 - count($relatedposts);
+          if($rp_remaining > 0){
+            $rp_merge = $relatedposts;
+            $relatedposts = $this->randomDefault($post, $rp_remaining, $excluidedposts);
+            $excluidedposts = $relatedposts[1];
+            $relatedposts = array_merge($rp_merge, $relatedposts[0]);
+          }
+        }
       //Más sobre categoría
       $firstcategory = $this->firstCategory($post, $excluidedposts);
       $excluidedposts = $firstcategory[1];

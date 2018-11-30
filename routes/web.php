@@ -17,13 +17,17 @@ use Illuminate\Http\Request;
 // Index
 Route::get('/', 'HomeController@index');
 
-Route::get('/pagination', 'HomeController@pagination');
+Route::get('/busqueda', 'SearchController@index')
+-> name('busqueda');
 
 // Footer
 Route::get('/quienes-somos', 'FooterController@aboutus');
-Route::get('/publicita-con-nosotros', 'FooterController@adversting');
 Route::get('/terminos-y-condiciones', 'FooterController@termsandcond');
+
 Route::get('/contacto', 'FooterController@contact');
+Route::post('/contacto', 'FooterController@emailStore')
+-> name('email');
+
 
 // ** Panel de administración ** //
 Route::group(['middleware' => ['auth']], function() {
@@ -117,6 +121,14 @@ Route::group(['middleware' => ['auth']], function() {
     -> where('user', '[0-9]+')
     -> name('usuarios.mostrar');
 
+    Route::get('/admin/gestion/analisis', 'AdminController@analytics')
+    -> name('admin.analisis');
+
+    Route::get('/admin/gestion/sugerencias', 'AdminController@suggestions')
+    -> name('admin.sugerencias');
+
+    Route::get('/admin/gestion/estadisticas', 'AdminController@statistics')
+    -> name('admin.estadisticas');
 });
 
 // ** Autentificación ** //

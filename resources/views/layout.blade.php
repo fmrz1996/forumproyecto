@@ -9,6 +9,26 @@
     <link rel="stylesheet" href="../../css/all.css">
     <link rel="stylesheet" href="../../css/slick.css">
     <link rel="stylesheet" href="../../css/style.css">
+    
+    <!-- Servicios de Google -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7301389415014295",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130037294-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-130037294-1');
+    </script>
+
     @yield('header')
     <title>@yield('title')</title>
   </head>
@@ -32,22 +52,19 @@
             </ul>
           </li>
           <li>
-            <a href="#">Novedades</a>
-          </li>
-          <li>
-            <a href="#">Ediciones anteriores</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://issuu.com/revistaforum">Ediciones anteriores</a>
           </li>
           <li>
             <a target="_blank" rel="noopener noreferrer" href="http://forumradio.cl/">Radio Forum</a>
           </li>
         </ul>
-        <form class="search-form" action="index.html" method="get">
-        <div class="search-menu">
-          <i class="fas fa-search"></i>
-            <input type="text" class="search-input" placeholder="Buscar">
-            <button id="btnSearchMenu" type="submit" class="btn-search"></button>
-        </div>
-      </form>
+        <form class="search-form" action="/busqueda" method="get">
+          <div class="search-menu">
+            <i class="fas fa-search"></i>
+              <input type="text" name="q" class="search-input" placeholder="Buscar">
+              <button id="btnSearchMenu" type="submit" class="btn-search"></button>
+          </div>
+        </form>
         <div class="rrss-menu">
           <a href="https://www.facebook.com/RevistaForum/" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-facebook"><i class="fab fa-facebook"></i></a>
           <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-twitter"><i class="fab fa-twitter"></i></a>
@@ -116,6 +133,7 @@
     </header>
     @yield('carousel')
     @yield('content')
+    @yield('sidebar')
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
@@ -123,12 +141,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/quienes-somos/">Quiénes somos</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/publicita-con-nosotros/">Publicita con nosotros</a>
-                </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a class="nav-link" href="/terminos-y-condiciones/">Terminos</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                   <a class="nav-link" href="/contacto/">Contactanos</a>
                 </li>

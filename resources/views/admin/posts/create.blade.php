@@ -68,8 +68,23 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <label for="inputBackground">Imagen de fondo</label>
-              <input name="background" type="file" id="inputBackground" value="{{ old('background') }}" accept="image/x-png,image/gif,image/jpeg"></input>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group pr-2">
+                    <label for="selectCategory">Estilo</label>
+                    <select class="form-control" name="style" id="selectStyle">
+                      <option value="1">Clásico</option>
+                      <option value="2">Panorámico</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group pl-2">
+                    <label for="inputBackground">Imagen de fondo</label>
+                    <input name="background" type="file" id="inputBackground" value="{{ old('background') }}" accept="image/x-png,image/gif,image/jpeg"></input>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-group">

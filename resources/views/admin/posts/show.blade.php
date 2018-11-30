@@ -65,6 +65,14 @@
                   <td>{!! $post->body !!}</td>
                 </tr>
                 <tr>
+                  <th>Estilo:</th>
+                  <td>
+                    @if($post->style === 1)Clásico
+                    @elseif($post->style === 2)Panorámico
+                    @endif
+                  </td>
+                </tr>
+                <tr>
                   <th>Tags:</th>
                   <td class="article-tags">
                     @forelse ($post->tags as $tag)

@@ -62,7 +62,7 @@
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="card-footer small text-muted">Actualizado el {{ $last_update->format('d-m-Y') }} a las {{ $last_update->format('H:i') }}</div>
       </div>
     @endsection
 

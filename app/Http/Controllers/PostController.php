@@ -19,7 +19,9 @@ class PostController extends Controller
     $posts = Post::all();
     $tags = Tag::all();
 
-    return view('admin.posts/index', compact('posts', 'tags'));
+    $last_update = Post::orderBy('updated_at', 'desc')->pluck('updated_at')->first();
+
+    return view('admin.posts/index', compact('posts', 'tags', 'last_update'));
   }
 
   public function create(){
@@ -32,12 +34,16 @@ class PostController extends Controller
 
   public function store(Post $post, Request $request){
 
+    $cat_array = Category::pluck('id')->toArray();
+    $categories = implode(",", $cat_array);
+
     $data = request()->validate([
       'title' => ['required', 'max:150'],
-      'slug' => ['required', 'alpha_dash', 'max:191'],
+      'slug' => ['required', 'alpha_dash', 'max:191', 'unique:posts,slug'],
       'header' => ['nullable', 'max:300'],
       'body' => 'required',
-      'category_id' => ['required', 'not_in:0'],
+      'style' => ['required', 'in:1,2'],
+      'category_id' => ['required', 'in:'. $categories],
       'background' => 'required',
     ], [
       'title.required' => 'El campo de Título es obligatorio.',
@@ -45,10 +51,13 @@ class PostController extends Controller
       'slug.required' => 'El campo de URL es obligatorio.',
       'slug.min' => 'La URL debe tener como minímo 5 caracteres.',
       'slug.max' => 'La URL no puede tener más de 255 caracteres.',
+      'slug.unique' => 'La URL ingresada ya existe.',
       'header.max' => 'El encabezado no puede tener más de 300 caracteres.',
       'body.required' => 'El campo de Contenido es obligatorio.',
+      'style.required' => 'Debe seleccionar un estilo valido.',
+      'style.in' => 'Debe seleccionar un estilo valido.',
       'category_id.required' => 'Debe seleccionar una categoría valida.',
-      'category_id.not_in' => 'Debe seleccionar una categoría valida.',
+      'category_id.in' => 'Debe seleccionar una categoría valida.',
       'background.required' => 'El post debe contener una imágen principal.',
     ]);
 
@@ -58,7 +67,10 @@ class PostController extends Controller
       if(strlen($name) > 60){
         $name = str_limit($name, 60, '.'.$request->background->getClientOriginalExtension());
       }
-      $img = Image::make($file->getRealPath())->save(public_path(). '/img/'. $name);
+      //Creación de imagen
+      $img = Image::make($file->getRealPath())->resize(1920, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/'. $name, 80);
+      //Creación de miniatura de la imagen
+      $img = Image::make($file->getRealPath())->resize(650, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/thumb/'. $name, 80);
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
     }
 
@@ -67,6 +79,7 @@ class PostController extends Controller
       'slug' => $data['slug'],
       'header' => $data['header'],
       'body' => $data['body'],
+      'style' => $data['style'],
       'category_id' => $data['category_id'],
       'user_id' => Auth::user()->id,
       'background' => $name,
@@ -124,12 +137,17 @@ class PostController extends Controller
   }
 
   public function update(Post $post, Request $request){
+
+    $cat_array = Category::pluck('id')->toArray();
+    $categories = implode(",", $cat_array);
+
     $data = request()->validate([
       'title' => ['required', 'max:150'],
       'body' => 'required',
       'slug' => ['required', 'alpha_dash', 'max:191', 'unique:posts,slug,' .$post->id],
       'header' => ['nullable', 'max:300'],
-      'category_id' => ['required', 'not_in:0'],
+      'style' => ['required', 'in:1,2'],
+      'category_id' => ['required', 'in:'. $categories],
       'background' => 'nullable',
     ], [
       'title.required' => 'El campo de Título es obligatorio.',
@@ -140,17 +158,29 @@ class PostController extends Controller
       'slug.max' => 'La URL no puede tener más de 255 caracteres.',
       'slug.unique' => 'La URL debe ser única.',
       'header.max' => 'El encabezado no puede tener más de 300 caracteres.',
+      'style.required' => 'Debe seleccionar un estilo valido.',
+      'style.in' => 'Debe seleccionar un estilo valido.',
       'category_id.required' => 'Debe seleccionar una categoría valida.',
-      'category_id.not_in' => 'Debe seleccionar una categoría valida.',
+      'category_id.in' => 'Debe seleccionar una categoría valida.',
     ]);
 
     if($request->hasFile('background')){
       $file = $request->file('background');
       $name = time().'-'.$file->getClientOriginalName();
-      if(strlen($name) > 80){
-        $name = str_limit($name, 80, '.'.$request->background->getClientOriginalExtension());
+      if(strlen($name) > 60){
+        $name = str_limit($name, 60, '.'.$request->background->getClientOriginalExtension());
       }
-      $img = Image::make($file->getRealPath())->save(public_path(). '/img/'. $name);
+
+      if(File::exists(public_path(). '/img/'. $post->background)){
+          File::delete(public_path(). '/img/'. $post->background);
+      }
+
+      if(File::exists(public_path(). '/img/thumb/'. $post->background)){
+          File::delete(public_path(). '/img/thumb/'. $post->background);
+      }
+
+      $img = Image::make($file->getRealPath())->resize(1920, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/'. $name, 80);
+      $img = Image::make($file->getRealPath())->resize(650, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/thumb/'. $name, 80);
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
       $data['background'] = $name;
     } else {
@@ -206,9 +236,15 @@ class PostController extends Controller
 
     public function destroy(Post $post){
       $post->tags()->detach();
+
       if(File::exists(public_path(). '/img/'. $post->background)){
           File::delete(public_path(). '/img/'. $post->background);
       }
+
+      if(File::exists(public_path(). '/img/thumb/'. $post->background)){
+          File::delete(public_path(). '/img/thumb/'. $post->background);
+      }
+
       $post->delete();
 
       return redirect()->route('posts')->with('status', 'Post eliminado correctamente.');

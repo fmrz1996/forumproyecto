@@ -66,7 +66,7 @@ return [
     */
 
     /*Se utiliza zona horaria que concuerde con la actualidad chilena.*/
-    'timezone' => 'America/La_Paz',
+    'timezone' => 'America/Santiago',
 
     /*
     |--------------------------------------------------------------------------
@@ -153,6 +153,7 @@ return [
          */
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -177,6 +178,7 @@ return [
 
     'aliases' => [
 
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,

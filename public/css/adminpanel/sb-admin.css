@@ -362,3 +362,7 @@ body.sidebar-toggled footer.sticky-footer {
 .article-tags a:hover{
   background-color: #D9DEE4;
 }
+
+.list-padding{
+  padding-inline-start: 20px;
+}

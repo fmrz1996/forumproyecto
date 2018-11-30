@@ -9,16 +9,20 @@
         <h3>Contacto</h3>
           <div class="row">
             <div class="col-sm-12 col-md-6 contact-form-container">
-              <form method="post">
+              @if(Session::has('flash_message'))
+                  <div class="alert alert-success">{{ Session::get('flash_message') }}</div>
+              @endif
+              <form action="{{ route('email') }}" method="post">
+                @csrf
               <h5>¿Cómo te podemos ayudar?</h5>
               <div class="form-group">
-                <input class="form-control" type="text" name="txtName" placeholder="Nombre" value="">
+                <input class="form-control" type="text" name="name" placeholder="Nombre" required>
               </div>
               <div class="form-group">
-                <input class="form-control" type="text" name="txtEmail" placeholder="Correo electrónico" value="">
+                <input class="form-control" type="email" name="email" placeholder="Correo electrónico" required>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="txtMessage" rows="8" cols="80" placeholder="Tu mensaje..."></textarea>
+                <textarea class="form-control" name="message" rows="8" cols="80" placeholder="Tu mensaje..." required></textarea>
               </div>
               <div class="form-group">
                 <input class="contact-btn" type="submit" name="btnSubmit" value="Enviar Mensaje">
@@ -26,6 +30,12 @@
             </form>
           </div>
           <div class="col-sm-12 col-md-6">
+            <h5>Tambien puedes contactarnos por:</h5>
+            <ul>
+              <li>Email: director@revistaforum.cl</li>
+              <li>Dirección: Libertad 683 - Chillán</li>
+              <li>Teléfono: 42-2322204 / +56996151234</li>
+            </ul>
             <div class="contact-social">
               <div class="social-div">
                 <h5>Se parte de la comunidad Forum</h5>

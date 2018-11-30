@@ -17,7 +17,7 @@
               @foreach ($carousel as $post)
                 <div style="position: relative;">
                   <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
-                    <img class="img-fluid img-slider" src="../img/{{ $post->background }}">
+                    <img class="img-fluid img-slider" src="../img/thumb/{{ $post->background }}">
                     <div class="slider-post">
                       <h3>{{ $post->title }}</h3>
                     </div>
@@ -43,7 +43,7 @@
               <div class="col-sm-12 col-md-6">
                 <figure class="opacity">
                   <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
-                    <img class="img-fluid img-post" src="../img/{{ $post->background }}">
+                    <img class="img-fluid img-post" src="../img/thumb/{{ $post->background }}">
                   </a>
                 </figure>
               </div>
@@ -85,9 +85,12 @@
           @empty
           <p>No hay posts registrados.</p>
           @endforelse
+          {!! $posts->render() !!}
         </div>
+        @endsection
 
-        {{-- Sidebar --}}
+      @section('sidebar')
+      <!-- Sidebar -->
         <div id="sidebar" class="col-sm-12 col-md-3 sidebar">
             <div class="sb-div">
               <div class="sb-columnistas">
@@ -124,8 +127,8 @@
               </a>
             </div>
           </div>
+        </div>
       </div>
-    </div>
     @endsection
 
     @section('script')
@@ -137,8 +140,8 @@
           infinite: true,
           slidesToShow: 3,
           speed: 500,
-          prevArrow: '<div class="slick-nav slick-prev"><i class="fas fa-chevron-circle-left"></i></div>',
-          nextArrow: '<div class="slick-nav slick-next"><i class="fas fa-chevron-circle-right"></i></div>',
+          prevArrow: '<div class="slick-nav slick-prev"><img class="img-fluid" src="../css/arrow.png"></img></div>',
+          nextArrow: '<div class="slick-nav slick-next"><img class="img-fluid" src="../css/arrow.png" style="transform: rotate(180deg);"></img></div>',
           responsive: [
             {
               breakpoint: 768,
@@ -150,26 +153,6 @@
           ]
         });
       }, 100);
-      </script>
-
-      <script>
-        let page = 2;
-        window.onscroll = function() {
-          if((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight){
-            const section = document.getElementById('posts');
-
-            fetch('/pagination?page=' + page,{
-              method: 'get'
-            }).then(function(response){
-              return response.text();
-            }).then(function(htmlContent){
-              section.innerHTML += htmlContent;
-              page += 1;
-            }).catch(function(err){
-              console.log(err);
-            });
-          }
-        };
       </script>
 
       <script type="text/javascript">

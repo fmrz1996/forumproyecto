@@ -107,22 +107,41 @@
             </a>
           </div>
         </li>
-          <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/usuarios')) active @endif">
-            <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="/admin/usuarios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-users"></i>
-              <span>Usuarios</span></a>
+        <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/usuarios')) active @endif">
+          <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="/admin/usuarios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-users"></i>
+            <span>Usuarios</span></a>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown_user">
+          @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
+            <a class="dropdown-item" href="{{ route('usuarios.nuevo') }}">
+              <i class="fas fa-user-plus"></i> Crear usuario
             </a>
-            <div class="dropdown-menu" aria-labelledby="pagesDropdown_user">
-            @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
-              <a class="dropdown-item" href="{{ route('usuarios.nuevo') }}">
-                <i class="fas fa-user-plus"></i> Crear usuario
-              </a>
-            @endif
-              <a class="dropdown-item" href="{{ route('usuarios') }}">
-                <i class="fas fa-address-book"></i> Listar usuarios
-              </a>
-            </div>
-          </li>
+          @endif
+            <a class="dropdown-item" href="{{ route('usuarios') }}">
+              <i class="fas fa-address-book"></i> Listar usuarios
+            </a>
+          </div>
+        </li>
+        @if(Auth::user()->hasRole('Director ejecutivo'))
+        <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/gestion')) active @endif">
+          <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="/admin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-cog"></i>
+            <span>Gestión web</span></a>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown_user">
+            <a class="dropdown-item" href="{{ route('admin.analisis') }}">
+              <i class="fas fa-chart-bar"></i> Análisis
+            </a>
+            <a class="dropdown-item" href="{{ route('admin.sugerencias') }}">
+              <i class="fas fa-exclamation-circle"></i> Sugerencias
+            </a>
+            <a class="dropdown-item" href="{{ route('admin.estadisticas') }}">
+              <i class="fas fa-chart-line"></i> Estadísticas
+            </a>
+          </div>
+        </li>
+        @endif
       </ul>
 
       <div id="content-wrapper">

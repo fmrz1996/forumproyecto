@@ -8,6 +8,7 @@ use App\User;
 use App\Role;
 use Auth;
 use Image;
+use File;
 
 class UsuarioController extends Controller
 {
@@ -15,7 +16,9 @@ class UsuarioController extends Controller
 
       $usuarios = User::all();
 
-      return view('admin.users/index', compact('usuarios'));
+      $last_update = User::orderBy('updated_at', 'desc')->pluck('updated_at')->first();
+
+      return view('admin.users/index', compact('usuarios', 'last_update'));
     }
 
     public function create(Request $request){
@@ -53,7 +56,7 @@ class UsuarioController extends Controller
         if(strlen($name) > 60){
           $name = str_limit($name, 60, '.'.$request->avatar->getClientOriginalExtension());
         }
-        $img = Image::make($file->getRealPath())->fit(200)->save(public_path(). '/img/'. $name);
+        $img = Image::make($file->getRealPath())->fit(200)->save(public_path(). '/img/users/'. $name);
       } else {
         $name = null;
       }
@@ -129,7 +132,7 @@ class UsuarioController extends Controller
         if(strlen($name) > 60){
           $name = str_limit($name, 60, '.'.$request->avatar->getClientOriginalExtension());
         }
-        $img = Image::make($file->getRealPath())->fit(200)->save(public_path(). '/img/'. $name);
+        $img = Image::make($file->getRealPath())->fit(200)->save(public_path(). '/img/users/'. $name);
         $data['avatar'] = $name;
       } else {
         unset($data['avatar']);
@@ -137,6 +140,9 @@ class UsuarioController extends Controller
 
       if($request->has('deleteAvatar')){
         $data['avatar'] = null;
+        if(File::exists(public_path(). '/img/users/'. $user->avatar)){
+            File::delete(public_path(). '/img/users/'. $user->avatar);
+        }
       }
 
       $user->update($data);

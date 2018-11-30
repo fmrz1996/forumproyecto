@@ -11,8 +11,9 @@ class TagController extends Controller
     public function index(Request $request){
 
       $tags = Tag::all();
+      $last_update = Tag::orderBy('updated_at', 'desc')->pluck('updated_at')->first();
 
-      return view('admin.tags/index', compact('tags'));
+      return view('admin.tags/index', compact('tags', 'last_update'));
     }
 
     public function create(Request $request){

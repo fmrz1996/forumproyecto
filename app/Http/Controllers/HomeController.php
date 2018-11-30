@@ -48,7 +48,7 @@ class HomeController extends Controller
 
       $carousel = $this->randomDefault();
 
-      $posts = Post::where('category_id', '=', $cat_info->id)->get()->sortByDesc("id");
+      $posts = Post::where('category_id', '=', $cat_info->id)->orderBy('id', 'desc')->paginate(10);
 
       return view('home', compact('categorias', 'carousel', 'posts', 'category'));
     }
@@ -67,11 +67,5 @@ class HomeController extends Controller
       $posts = $post_array->posts;
 
       return view('home', compact('categorias', 'carousel', 'posts', 'tag'));
-    }
-
-    public function pagination()
-    {
-      $posts = Post::orderBy('id', 'desc')->paginate(10);
-      return view('home.pagination', compact('posts'));
     }
 }
