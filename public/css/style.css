@@ -1,4 +1,9 @@
 /* Estilo principal Revista Forum */
+
+body{
+  font-family: 'Cabin', sans-serif;
+}
+
 a,
 a:hover,
 a:focus {
@@ -397,6 +402,7 @@ div .img-slider{
 .article-header.style-1 .article-author
 {
   margin-bottom: 20px;
+  color: #111;
 }
 
 .article-header.style-1 .article-author span{
@@ -561,6 +567,13 @@ div .img-slider{
 
 .article-body .article-text p{
   color: #333;
+  line-height: 1.7;
+}
+
+.article-body .article-text h3{
+  color: #111;
+  font-size: 24px;
+  margin: 1em auto 1em auto;
   line-height: 1.7;
 }
 
@@ -749,35 +762,35 @@ div .img-slider{
   padding: 0 20px 0 20px;
 }
 
-.related-posts .container-rp{
+.related-category .container-rc{
   background-color: #eff1f4;
   border-radius: 10px;
 }
 
-.container-rp h5,
-.container-rp figure{
+.container-rc h5,
+.container-rc figure{
   padding: 8px;
 }
 
-.related-posts a{
+.related-category a{
   color: inherit;
   font-weight: 400;
 }
 
-.related-posts a:hover{
+.related-category a:hover{
   opacity: 0.9;
 }
 
-.related-posts a > span{
+.related-category a > span{
   font-weight: 500;
 }
 
-.related-posts a,
-.related-posts span{
+.related-category a,
+.related-category span{
   font-size: 16px;
 }
 
-.img-rp{
+.img-rc{
   object-fit: cover;
   overflow: hidden;
   transform: scale(1.2);
@@ -786,44 +799,44 @@ div .img-slider{
 }
 
 @media (max-width: 767px){
-  .img-rp{
+  .img-rc{
     max-height: none;
     transform: scale(1.1);
   }
 }
 
-/*Relacionados por categoría - Cuerpo de página*/
-.related-category{
+/*Relacionados por tags - Cuerpo de página*/
+.related-posts{
   font-size: 1.2em;
   border-top: 1px solid #eaeaea;
 }
 
 @media (max-width: 767px){
-  .related-category{
+  .related-posts{
     font-size: 1em;
     padding: 1rem 0 1rem 0!important;
   }
 }
 
-.related-category a{
+.related-posts a{
   color: inherit;
 }
 
 @media (max-width: 767px){
-  .div-rc-highlight{
+  .div-rp-highlight{
     padding-left: 15px!important;
     padding-right: 15px!important;
   }
 }
 
-.img-rc{
+.img-rp{
   width: 100%;
   height: 350px;
   object-fit: cover;
   overflow: hidden;
 }
 
-.bq-header-rc{
+.bq-header-rp{
   font-size: 1em;
   background-color: #2a2a2a;
   color: #eaeaea;
@@ -837,7 +850,7 @@ div .img-slider{
 }
 
 @media (max-width: 767px){
-  .bq-header-rc{
+  .bq-header-rp{
     font-size: 0.9em;
     padding: 1em 20px 1em 45px;
     border-top: 6px solid #1e1e1e;
@@ -847,7 +860,7 @@ div .img-slider{
   }
 }
 
-.bq-header-rc::before{
+.bq-header-rp::before{
   font-family: Arial;
   content: "\201C";
   color: #eaeaea;
@@ -857,24 +870,25 @@ div .img-slider{
   top: 10px;
 }
 
-.bq-header-rc::after{
+.bq-header-rp::after{
   content: '';
 }
 
-.related-category h2{
-  font-family: 'Tahoma';
-}
 
-.article-rc-highlight .keyword-post,
-.article-rc .keyword-post,
-.related-category h5{
+.article-rp-highlight .keyword-post,
+.article-rp .keyword-post,
+.related-posts h5{
   font-size: 1em;
 }
 
-.article-rc .img-rc{
-  height: 250px;
+.article-rp .img-rp{
+  height: 300px;
 }
 
+.row.rp{
+  overflow: hidden;
+  height: 325px;
+}
 /*Busqueda - Cuerpo de página*/
 .cse .gsc-control-cse, .gsc-control-cse{
   padding: 0!important;

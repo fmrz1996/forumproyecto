@@ -8,7 +8,7 @@ use App\Post;
 
 class TagController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
 
       $tags = Tag::all();
       $last_update = Tag::orderBy('updated_at', 'desc')->pluck('updated_at')->first();
@@ -16,7 +16,7 @@ class TagController extends Controller
       return view('admin.tags/index', compact('tags', 'last_update'));
     }
 
-    public function create(Request $request){
+    public function create(){
 
       $tags = Tag::all();
 
@@ -55,7 +55,7 @@ class TagController extends Controller
       return view ('admin.tags.edit', compact('tag'));
     }
 
-    public function update(Tag $tag, Request $request){
+    public function update(Tag $tag){
 
       $data = request()->validate([
         'name' => ['required', 'max:30'],

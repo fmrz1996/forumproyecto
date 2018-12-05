@@ -12,7 +12,7 @@ use File;
 
 class UsuarioController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
 
       $usuarios = User::all();
 
@@ -150,13 +150,7 @@ class UsuarioController extends Controller
       return redirect()->route('usuarios.mostrar', ['user' => $user])->with('status', 'Usuario actualizado correctamente.');
     }
 
-    public function destroy(User $user){
-      $user->delete();
-
-      return redirect()->route('usuarios');
-    }
-
-    public function details(User $user, Request $request){
+    public function details(User $user){
 
       return view('admin.users.show', compact('user'));
     }

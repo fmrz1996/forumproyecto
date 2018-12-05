@@ -21,7 +21,9 @@
               <thead>
                 <tr>
                   <th>#</th>
+                  @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
                   <th>Usuario</th>
+                  @endif
                   <th>Nombre</th>
                   <th>Correo electrónico</th>
                   <th>Rol</th>
@@ -31,7 +33,9 @@
               <tfoot>
                 <tr>
                   <th>#</th>
+                  @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
                   <th>Usuario</th>
+                  @endif
                   <th>Nombre</th>
                   <th>Correo electrónico</th>
                   <th>Rol</th>
@@ -42,7 +46,9 @@
                 @forelse( $usuarios as $user)
                   <tr>
                     <td> {{ $user->id }}</td>
+                    @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
                     <td><a href="{{ route('usuarios.mostrar', ['id' => $user->id]) }}">{{ $user->username }}</a></td>
+                    @endif
                     <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role->name }}</td>

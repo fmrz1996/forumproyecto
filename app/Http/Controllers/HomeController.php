@@ -56,15 +56,15 @@ class HomeController extends Controller
     public function tag($tag)
     {
       $categorias = Category::has('posts', '>', 0)->pluck('name');
-      $tags = Tag::all();
-
-      foreach ($tags as $tag_info) {
-        $post_array = Tag::where('name', '=', str_replace("-", " ", $tag))->firstOrFail();
-      }
 
       $carousel = $this->randomDefault();
 
-      $posts = $post_array->posts;
+      $tag = str_replace('-', ' ', $tag);
+      $tag_value = Tag::where('name', '=', $tag)->firstOrFail()->pluck('id')->toArray();
+
+      $posts = Post::whereHas('tags', function($query) use ($tag_value){
+        $query->where('tag_id', $tag_value);
+      })->orderBy('id', 'desc')->paginate(10);
 
       return view('home', compact('categorias', 'carousel', 'posts', 'tag'));
     }

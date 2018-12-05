@@ -8,7 +8,7 @@ use App\Post;
 
 class CategoriaController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
 
       $categorias = Category::all();
 
@@ -70,7 +70,7 @@ class CategoriaController extends Controller
       return redirect()->route('categorias.mostrar', ['category' => $category])->with('status', 'Categoría actualizada correctamente.');
     }
 
-    public function details(Category $category, Request $request){
+    public function details(Category $category){
 
       return view('admin.categories.show', compact('category'));
     }

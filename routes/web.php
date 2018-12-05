@@ -112,9 +112,6 @@ Route::group(['middleware' => ['auth']], function() {
     -> where('user', '[0-9]+')
     -> name('usuarios.editar');
 
-    Route::delete('/admin/usuarios/{user}', 'UsuarioController@destroy')
-    -> name('usuarios.eliminar');
-
     Route::put('/admin/usuarios/detalles/{user}', 'UsuarioController@update');
 
     Route::get('/admin/usuarios/detalles/{user}', 'UsuarioController@details')
@@ -142,10 +139,6 @@ Route::post('/admin/password/email', 'Auth\ForgotPasswordController@sendResetLin
 Route::get('/admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/admin/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-// Email Verification Routes...
-if ($options['verify'] ?? false) {
-    Route::emailVerification();
-}
 
 // ** Slugs ** //
 

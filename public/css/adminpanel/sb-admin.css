@@ -366,3 +366,7 @@ body.sidebar-toggled footer.sticky-footer {
 .list-padding{
   padding-inline-start: 20px;
 }
+
+table.dataTable span{
+  display: none;
+}

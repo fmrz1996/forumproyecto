@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="../../css/all.css">
     <link rel="stylesheet" href="../../css/slick.css">
     <link rel="stylesheet" href="../../css/style.css">
-    
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+
     <!-- Servicios de Google -->
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
@@ -107,7 +109,7 @@
               <a class="nav-link font-weight-bold color-link" href="/cultura">CULTURA</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link font-weight-bold color-link" href="/tecnologia">TECNOLOGIA</a>
+              <a class="nav-link font-weight-bold color-link" href="/politica">POLITICA</a>
             </li>
           </ul>
         </nav>

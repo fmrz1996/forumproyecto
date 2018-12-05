@@ -187,8 +187,6 @@ class PostController extends Controller
       unset($data['background']);
     }
 
-    $post->update($data);
-
     $tags = $request->tags;
     $id_tags = [];
 
@@ -227,9 +225,12 @@ class PostController extends Controller
     if(isset($request->tags)){
       $post->tags()->sync(array()); //Arreglado a la mala
       $post->tags()->sync($id_tags);
+      $post->updated_at = \Carbon\Carbon::now()->toDateTimeString();
     } else {
       $post->tags()->sync(array());
     }
+
+    $post->update($data);
 
     return redirect()->route('posts.mostrar', ['post' => $post])->with('status', 'Post actualizado correctamente.');
   }

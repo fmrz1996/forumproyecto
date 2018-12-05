@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <h6>Audiencia:</h6>
-          <canvas class="mb-3" id="areaChart" width="400" height="200"></canvas>
+          <canvas class="mb-3" id="areaChart" width="400" height="250"></canvas>
         </div>
         <div class="col-sm-12 col-md-6">
           <h6>Páginas más visitadas:</h6>
@@ -41,6 +41,7 @@
       </div>
     </div>
   </div>
+  @if(!$suggestions[0]->isEmpty() || !$suggestions[1]->isEmpty() || !$suggestions[2]->isEmpty() || !$suggestions[3]->isEmpty())
   <div class="card mb-3">
     <div class="card-header">
       <h4><a href="{{ route('admin.sugerencias') }}"><i class="fas fa-exclamation-circle"></i>  Sugerencias</a></h4>
@@ -50,17 +51,21 @@
         <div class="col-sm-12 col-md-6">
           <h6>Agregar encabezado a los siguientes posts:</h6>
           <ul class="list-unstyled list-padding">
-            @foreach ($suggestions[0] as $post)
+            @forelse ($suggestions[0] as $post)
               <li><a href="{{ route('posts.editar', ['id' => $post->id]) }}"><i class="far fa-edit"></i></a>  {{ str_limit($post->title, 60, '...') }}</li>
-            @endforeach
+            @empty
+              <li style="list-style-type: disc">¡Todo en orden!, revise las otras sugerencias.</li>
+            @endforelse
           </ul>
         </div>
         <div class="col-sm-12 col-md-6">
           <h6>Agregar tags a los siguientes posts:</h6>
           <ul class="list-unstyled list-padding">
-            @foreach ($suggestions[1] as $post)
+            @forelse ($suggestions[1] as $post)
               <li><a href="{{ route('posts.editar', ['id' => $post->id]) }}"><i class="far fa-edit"></i></a>  {{ str_limit($post->title, 60, '...') }}</li>
-            @endforeach
+            @empty
+              <li style="list-style-type: disc">¡Todo en orden!, revise las otras sugerencias.</li>
+            @endforelse
           </ul>
         </div>
       </div>
@@ -69,22 +74,27 @@
         <div class="col-sm-12 col-md-6">
           <h6>Agregar descripción a los siguientes usuarios:</h6>
           <ul class="list-unstyled list-padding">
-            @foreach ($suggestions[2] as $user)
+            @forelse ($suggestions[2] as $user)
               <li><a href="{{ route('usuarios.editar', ['id' => $user->id]) }}"><i class="far fa-edit"></i></a>  {{ $user->first_name }} {{ $user->last_name }}</li>
-            @endforeach
+            @empty
+              <li style="list-style-type: disc">¡Todo en orden!, revise las otras sugerencias.</li>
+            @endforelse
           </ul>
         </div>
         <div class="col-sm-12 col-md-6">
           <h6>Agregar avatar a los siguientes usuarios:</h6>
           <ul class="list-unstyled list-padding">
-            @foreach ($suggestions[3] as $user)
+            @forelse ($suggestions[3] as $user)
               <li><a href="{{ route('usuarios.editar', ['id' => $user->id]) }}"><i class="far fa-edit"></i></a>  {{ $user->first_name }} {{ $user->last_name }}</li>
-            @endforeach
+            @empty
+              <li style="list-style-type: disc">¡Todo en orden!, revise las otras sugerencias.</li>
+            @endforelse
           </ul>
         </div>
       </div>
       </div>
     </div>
+  @endif
   <div class="card mb-3">
     <div class="card-header">
       <h4><a href="{{ route('admin.estadisticas') }}"><i class="fas fa-chart-line"></i>  Estadísticas (30 días)</a></h4>

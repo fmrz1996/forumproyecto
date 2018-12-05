@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="es" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>No tienes autorización</title>
-  </head>
-  <body>
-    <h1>No tienes autorización</h1>
-  </body>
-</html>
+@extends('errors::layout')
+
+@section('title', 'Error - Panel de Administración')
+
+@section('message', 'Lo sentimos. Usted no tiene autorización para ingresar a esta página.')

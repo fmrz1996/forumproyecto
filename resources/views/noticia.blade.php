@@ -78,7 +78,7 @@
 
                          {{-- Comentarios Facebook --}}
                          <div class="mt-4" id="fb-box">
-                           <a id="comentarios" class="fb-box-reveal bg-container-gray" href="#commentsCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="commentsCollapse">
+                           <a id="comentarios" class="fb-box-reveal bg-container-gray active" href="#commentsCollapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="commentsCollapse">
                              <h3>Comentarios<i class="far fa-comment"></i></h3>
                              <div class="fb-btn-toggle">
                                <i class="fas fa-angle-down fb-arrow text-center"></i>
@@ -113,23 +113,23 @@
                                 @endforelse
                               </div>
                             </div>
-                            @if(!empty($relatedposts))
+                            @if(!empty($relatedcategory))
                             <div class="sb-div">
-                              <div class="related-posts">
-                                <h3>Artículos relacionados</h3>
-                                @foreach ($relatedposts as $rp)
-                                  <article class="container-rp">
+                              <div class="related-category">
+                                <h3>Más de {{ $post->category->name }} </h3>
+                                @foreach ($relatedcategory as $rc)
+                                  <article class="container-rc">
                                     <h5>
-                                      <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
-                                        @if(!$rp->tags->isEmpty())
-                                          <span class="keyword-post">#{{ mb_strtolower($rp->tags->pluck('name')->random()) }}</span>
+                                      <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                                        @if(!$rc->tags->isEmpty())
+                                          <span class="keyword-post">#{{ mb_strtolower($rc->tags->pluck('name')->random()) }}</span>
                                         @endif
-                                        {{ $rp->title }}
+                                        {{ $rc->title }}
                                       </a>
                                     </h5>
                                     <figure class="opacity">
-                                      <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
-                                        <img class="img-rp img-fluid" src="../../img/thumb/{{ $rp->background }}">
+                                      <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                                        <img class="img-rc img-fluid" src="../../img/thumb/{{ $rc->background }}">
                                       </a>
                                     </figure>
                                   </article>
@@ -243,23 +243,23 @@
                                         @endforelse
                                       </div>
                                     </div>
-                                    @if(!empty($relatedposts))
+                                    @if(!empty($relatedcategory))
                                     <div class="sb-div">
-                                      <div class="related-posts">
-                                        <h3>Artículos relacionados</h3>
-                                        @foreach ($relatedposts as $rp)
-                                          <article class="container-rp">
+                                      <div class="related-category">
+                                        <h3>Más de {{ $post->category->name }}</h3>
+                                        @foreach ($relatedcategory as $rc)
+                                          <article class="container-rc">
                                             <h5>
-                                              <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
-                                                @if(!$rp->tags->isEmpty())
-                                                  <span class="keyword-post">#{{ mb_strtolower($rp->tags->pluck('name')->random()) }}</span>
+                                              <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                                                @if(!$rc->tags->isEmpty())
+                                                  <span class="keyword-post">#{{ mb_strtolower($rc->tags->pluck('name')->random()) }}</span>
                                                 @endif
-                                                {{ $rp->title }}
+                                                {{ $rc->title }}
                                               </a>
                                             </h5>
                                             <figure class="opacity">
-                                              <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
-                                                <img class="img-rp img-fluid" src="../../img/thumb/{{ $rp->background }}">
+                                              <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
+                                                <img class="img-rc img-fluid" src="../../img/thumb/{{ $rc->background }}">
                                               </a>
                                             </figure>
                                           </article>
@@ -274,53 +274,51 @@
             @endif
             </article>
           </div>
-          @if(!empty($firstcategory))
-          <section class="related-category mt-5 p-4 bg-container-gray">
+          @if(!empty($firstpost))
+          <section class="related-posts mt-5 p-4 bg-container-gray">
             <div class="container">
-              <h3 class="mb-4">Más sobre
-                <span>{{ $post->category->name }}</span>
-              </h3>
-              @foreach ($firstcategory as $rc)
-                <article class="article-rc-highlight mb-2">
+              <h3 class="mb-4">Te puede interesar:</h3>
+              @foreach ($firstpost as $rp)
+                <article class="article-rp-highlight mb-2">
                   <h5>
-                    <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
-                    @if(!$rc->tags->isEmpty())
-                      <span class="keyword-post">#{{ mb_strtolower($rc->tags->pluck('name')->random()) }}</span>
+                    <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
+                    @if(!$rp->tags->isEmpty())
+                      <span class="keyword-post">#{{ mb_strtolower($rp->tags->pluck('name')->random()) }}</span>
                     @endif
-                    {{ $rc->title }}
+                    {{ $rp->title }}
                     </a>
                   </h5>
                   <div class="row">
-                    <div class="div-rc-highlight col-sm-12 col-md-7 pr-0">
+                    <div class="div-rp-highlight col-sm-12 col-md-7 pr-0">
                       <figure class="opacity m-0">
-                        <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
-                          <img class="img-rc img-fluid" src="../../img/thumb/{{ $rc->background }}">
+                        <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
+                          <img class="img-rp img-fluid" src="../../img/thumb/{{ $rp->background }}">
                         </a>
                       </figure>
                     </div>
-                    <div class="div-rc-highlight col-sm-12 col-md-5 pl-0 ">
-                      <blockquote class="bq-header-rc">{{ $rc->header == null ? strip_tags(html_entity_decode(str_limit($rc->body, 250, '...'))) : $rc->header }}</blockquote>
+                    <div class="div-rp-highlight col-sm-12 col-md-5 pl-0 ">
+                      <blockquote class="bq-header-rp">{{ $rp->header == null ? strip_tags(html_entity_decode(str_limit($rp->body, 250, '...'))) : $rp->header }}</blockquote>
                     </div>
                   </div>
                 </article>
               @endforeach
-                  @if(!empty($relatedcategory))
+                  @if(!empty($relatedposts))
                   <hr>
-                  <div class="row">
-                    @foreach ($relatedcategory as $rc)
+                  <div class="row rp">
+                    @foreach ($relatedposts as $rp)
                       <div class="col-md-4">
-                          <article class="article-rc">
+                          <article class="article-rp">
                             <h6>
-                              <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
-                              @if(!$rc->tags->isEmpty())
-                                <span class="keyword-post">#{{ mb_strtolower($rc->tags->pluck('name')->random()) }}</span>
+                              <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
+                              @if(!$rp->tags->isEmpty())
+                                <span class="keyword-post">#{{ mb_strtolower($rp->tags->pluck('name')->random()) }}</span>
                               @endif
-                              {{ $rc->title }}
+                              {{ $rp->title }}
                               </a>
                             </h6>
                             <figure class="opacity">
-                              <a href="{{ route('noticia', [str_slug($rc->category->name), $rc->slug, $rc->id]) }}">
-                                <img class="img-rc img-fluid" src="../../img/thumb/{{ $rc->background }}">
+                              <a href="{{ route('noticia', [str_slug($rp->category->name), $rp->slug, $rp->id]) }}">
+                                <img class="img-rp img-fluid" src="../../img/thumb/{{ $rp->background }}">
                               </a>
                             </figure>
                           </article>

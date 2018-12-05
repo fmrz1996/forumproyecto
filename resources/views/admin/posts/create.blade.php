@@ -2,7 +2,6 @@
 
     @section('stylesheet')
     <link rel="stylesheet" href="../../../css/adminpanel/select2.min.css">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     @endsection
 
     @section('content')
@@ -134,7 +133,7 @@
         language: "es",
         placeholder: "Escribe los tags aquí...",
         maximumInputLength: 30,
-        maximumSelectionLength: 7
+        maximumSelectionLength: 15
       });
     </script>
 

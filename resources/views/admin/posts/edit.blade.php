@@ -138,7 +138,7 @@
         language: "es",
         placeholder: "Escribe los tags aquí...",
         maximumInputLength: 30,
-        maximumSelectionLength: 7
+        maximumSelectionLength: 15
       });
     </script>
 
