@@ -12,29 +12,27 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbarGroups = [
 		{ name: 'styles' },
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'justify' },
 		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 		{ name: 'editing',     groups: [ 'find', 'selection' ] },
 		{ name: 'links' },
-		{ name: 'insert',      groups: ['table'] },
+		{ name: 'insert',      groups: [ 'table' ] },
 		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] }
 	];
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript,Strike,SpecialChar,Cut,Copy,Paste,PasteText,PasteFromWord,Styles,Anchor';
+	config.removeButtons = 'Underline,Subscript,Superscript,Strike,SpecialChar,Cut,Copy,Paste,PasteText,PasteFromWord,Styles,Anchor,Table';
 
 	// Set the most common block elements.
-	config.format_tags = 'p;h1;h2;h3;pre';
+	config.format_tags = 'p;h1;h2;h3';
 
 	config.forcePasteAsPlainText = true;
-
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.extraPlugins = 'autogrow,justify,youtube';
+	config.extraPlugins = 'autogrow,justify,pastecode,youtube';
 
 	config.autoGrow_onStartup = true;
 	config.autoGrow_minHeight = 200;

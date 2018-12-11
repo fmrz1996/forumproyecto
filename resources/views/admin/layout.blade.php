@@ -10,7 +10,7 @@
 
     <title>Panel de administración - Forum</title>
 
-    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/all.css">
     <link rel="stylesheet" href="../../../css/adminpanel/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="../../../css/adminpanel/sb-admin.css">
@@ -121,7 +121,7 @@
             </a>
           </div>
         </li>
-        @if(Auth::user()->hasRole('Director ejecutivo'))
+        @if(Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador']))
         <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/gestion')) active @endif">
           <a id="pagesDropdown_user" class="nav-link dropdown-toggle" href="/admin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-cog"></i>
@@ -187,9 +187,9 @@
       </div>
     </div>
 
-    <script src="../../../js/jquery-3.3.1.min.js"></script>
-    <script src="../../../js/popper.min.js"></script>
-    <script src="../../../js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="../../../js/adminpanel/jquery.easing.min.js"></script>
     <script src="../../../js/adminpanel/sb-admin.min.js"></script>
     @yield('script')

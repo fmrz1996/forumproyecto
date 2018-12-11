@@ -18,6 +18,7 @@
             <tr>
               <th>#</th>
               <th>Nombre</th>
+              <th>Rol</th>
               <th class="text-center">Posts</th>
             </tr>
           </thead>
@@ -26,6 +27,7 @@
             <tr>
               <td>{{ $loop->iteration }}.</td>
               <td><a href="{{ route('usuarios.mostrar', ['id' => $user->id]) }}">{{ $user->first_name }} {{ $user->last_name }}</a></td>
+              <td>{{ $user->role->name }}</td>
               <td class="text-center">{{ $user->posts_count }}</td>
             </tr>
             @endforeach

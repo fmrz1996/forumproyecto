@@ -79,30 +79,30 @@
           datasets: [
             {
               label: "Visitas",
-              lineTension: 0.3,
+              lineTension: 0.2,
               backgroundColor: "rgb(33,150,243,0.2)",
               borderColor: "rgb(33,150,243,1)",
-              pointRadius: 4,
+              pointRadius: 3.5,
               pointBackgroundColor: "rgb(33,150,243,1)",
               pointBorderColor: "rgb(33,150,243,0.8)",
               pointHoverRadius: 4,
               pointHoverBackgroundColor: "rgb(33,150,243,0.8)",
-              pointHitRadius: 50,
-              pointBorderWidth: 2,
+              pointHitRadius: 10,
+              pointBorderWidth: 1,
               data: {!! json_encode($pageViews) !!}
             },
             {
               label: "Lectores",
-              lineTension: 0.3,
+              lineTension: 0.2,
               backgroundColor: "rgb(33,150,243,0.8)",
               borderColor: "rgb(33,150,243,1)",
-              pointRadius: 4,
+              pointRadius: 3.5,
               pointBackgroundColor: "rgb(33,150,243,1)",
               pointBorderColor: "rgba(255,255,255,0.8)",
               pointHoverRadius: 4,
               pointHoverBackgroundColor: "rgb(33,150,243,1)",
-              pointHitRadius: 50,
-              pointBorderWidth: 2,
+              pointHitRadius: 10,
+              pointBorderWidth: 1,
               data: {!! json_encode($visitors) !!}
             }
           ]

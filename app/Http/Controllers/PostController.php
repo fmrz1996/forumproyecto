@@ -68,9 +68,9 @@ class PostController extends Controller
         $name = str_limit($name, 60, '.'.$request->background->getClientOriginalExtension());
       }
       //Creación de imagen
-      $img = Image::make($file->getRealPath())->resize(1920, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/'. $name, 80);
+      $img = Image::make($file->getRealPath())->resize(1920, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/'. $name);
       //Creación de miniatura de la imagen
-      $img = Image::make($file->getRealPath())->resize(650, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/thumb/'. $name, 80);
+      $img = Image::make($file->getRealPath())->resize(768, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/thumb/'. $name);
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
     }
 
@@ -179,8 +179,8 @@ class PostController extends Controller
           File::delete(public_path(). '/img/thumb/'. $post->background);
       }
 
-      $img = Image::make($file->getRealPath())->resize(1920, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/'. $name, 80);
-      $img = Image::make($file->getRealPath())->resize(650, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/thumb/'. $name, 80);
+      $img = Image::make($file->getRealPath())->resize(1920, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/'. $name);
+      $img = Image::make($file->getRealPath())->resize(768, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/thumb/'. $name);
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
       $data['background'] = $name;
     } else {

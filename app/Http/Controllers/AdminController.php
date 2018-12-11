@@ -9,6 +9,7 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use Analytics;
+use Auth;
 use Spatie\Analytics\Period;
 
 class AdminController extends Controller
@@ -24,10 +25,21 @@ class AdminController extends Controller
     $mostViewedPages = Analytics::fetchMostVisitedPages(Period::days(7), 5);
 
     //Sugerencias
-    $noHeaderPost = Post::where('header', '=', null)->orderBy('id', 'desc')->get()->take(3);
-    $noTagsPost = Post::withCount('tags')->has('tags', '=', 0)->orderBy('id', 'desc')->get()->take(3);
-    $noDescriptionUser = User::withCount('posts')->has('posts', '>', 0)->where('description', '=', null)->orderBy('posts_count', 'desc')->get()->take(3);
-    $noAvatarUser = User::withCount('posts')->has('posts', '>', 0)->where('avatar', '=', null)->orderBy('posts_count', 'desc')->get()->take(3);
+    if(Auth::user()->role->name == "Periodista"){
+      $noHeaderPost = Post::where('user_id', '=', Auth::user()->id)->where('header', '=', null)->orderBy('id', 'desc')->get()->take(3);
+      $noTagsPost = Post::where('user_id', '=', Auth::user()->id)->withCount('tags')->has('tags', '=', 0)->orderBy('id', 'desc')->get()->take(3);
+    } else {
+      $noHeaderPost = Post::where('header', '=', null)->orderBy('id', 'desc')->get()->take(3);
+      $noTagsPost = Post::withCount('tags')->has('tags', '=', 0)->orderBy('id', 'desc')->get()->take(3);
+    }
+
+    if(Auth::user()->role->name == "Periodista"){
+      $noDescriptionUser = User::where('id', '=', Auth::user()->id)->where('description', '=', null)->get();
+      $noAvatarUser = User::where('id', '=', Auth::user()->id)->where('avatar', '=', null)->get();
+    } else {
+      $noDescriptionUser = User::withCount('posts')->has('posts', '>', 0)->where('description', '=', null)->orderBy('posts_count', 'desc')->get()->take(3);
+      $noAvatarUser = User::withCount('posts')->has('posts', '>', 0)->where('avatar', '=', null)->orderBy('posts_count', 'desc')->get()->take(3);
+    }
 
     $suggestions = [$noHeaderPost, $noTagsPost, $noDescriptionUser, $noAvatarUser];
 
@@ -42,6 +54,9 @@ class AdminController extends Controller
   }
 
   public function analytics(){
+    if(Auth::user()->role->name == "Periodista"){
+      request()->user()->authorizeRoles(['Director ejecutivo', 'Administrador']);
+    }
 
     $analyticsData = Analytics::fetchTotalVisitorsAndPageViews(Period::days(30));
     $this->data['dates'] = $analyticsData->pluck('date');
@@ -62,6 +77,9 @@ class AdminController extends Controller
   }
 
   public function suggestions(){
+    if(Auth::user()->role->name == "Periodista"){
+      request()->user()->authorizeRoles(['Director ejecutivo', 'Administrador']);
+    }
 
     $noHeaderPost = Post::where('header', '=', null)->orderBy('id', 'desc')->get();
     $noTagsPost = Post::withCount('tags')->has('tags', '=', 0)->orderBy('id', 'desc')->get();
@@ -74,6 +92,10 @@ class AdminController extends Controller
   }
 
   public function statistics(){
+    if(Auth::user()->role->name == "Periodista"){
+      request()->user()->authorizeRoles(['Director ejecutivo', 'Administrador']);
+    }
+
     $topUsers = User::withCount('posts')->whereHas('posts', function($query){ $query->where('created_at', '>=', \Carbon\Carbon::now()->subMonth());})->orderBy('posts_count', 'desc')->get()->take(5);
     $topCategory = Category::withCount('posts')->whereHas('posts', function($query){ $query->where('created_at', '>=', \Carbon\Carbon::now()->subMonth());})->orderBy('posts_count', 'desc')->get()->take(10);
     $topTags = Tag::withCount('posts')->whereHas('posts', function($query){ $query->where('created_at', '>=', \Carbon\Carbon::now()->subMonth());})->orderBy('posts_count', 'desc')->get()->take(10);

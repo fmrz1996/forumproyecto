@@ -67,8 +67,8 @@
                 <tr>
                   <th>Estilo:</th>
                   <td>
-                    @if($post->style === 1)Clásico
-                    @elseif($post->style === 2)Panorámico
+                    @if($post->style == 1)Clásico
+                    @elseif($post->style == 2)Panorámico
                     @endif
                   </td>
                 </tr>

@@ -60,10 +60,9 @@ class HomeController extends Controller
       $carousel = $this->randomDefault();
 
       $tag = str_replace('-', ' ', $tag);
-      $tag_value = Tag::where('name', '=', $tag)->firstOrFail()->pluck('id')->toArray();
-
+      $tag_value = Tag::where('name', '=', $tag)->firstOrFail()->toArray();
       $posts = Post::whereHas('tags', function($query) use ($tag_value){
-        $query->where('tag_id', $tag_value);
+        $query->where('tag_id', $tag_value['id']);
       })->orderBy('id', 'desc')->paginate(10);
 
       return view('home', compact('categorias', 'carousel', 'posts', 'tag'));
