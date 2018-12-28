@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -22,12 +11,9 @@ Route::get('/busqueda', 'SearchController@index')
 
 // Footer
 Route::get('/quienes-somos', 'FooterController@aboutus');
-Route::get('/terminos-y-condiciones', 'FooterController@termsandcond');
-
 Route::get('/contacto', 'FooterController@contact');
 Route::post('/contacto', 'FooterController@emailStore')
 -> name('email');
-
 
 // ** Panel de administración ** //
 Route::group(['middleware' => ['auth']], function() {
@@ -57,6 +43,47 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/posts/detalles/{post}', 'PostController@details')
     -> where('post', '[0-9]+')
     -> name('posts.mostrar');
+
+    //Columnas
+    Route::get('/admin/columnas', 'ColumnaController@index')
+     -> name('columnas');
+
+    Route::get('/admin/columnas/nuevo', 'ColumnaController@create')
+     -> name('columnas.nuevo');
+
+    Route::post('/admin/columnas/crear', 'ColumnaController@store');
+
+    Route::get('/admin/columnas/editar/{column}', 'ColumnaController@edit')
+    -> where('column', '[0-9]+')
+    -> name('columnas.editar');
+
+    Route::delete('/admin/columnas/{column}', 'ColumnaController@destroy')
+    -> name('columnas.eliminar');
+
+    Route::put('/admin/columnas/detalles/{column}', 'ColumnaController@update');
+
+    Route::get('/admin/columnas/detalles/{column}', 'ColumnaController@details')
+    -> where('column', '[0-9]+')
+    -> name('columnas.mostrar');
+
+    //Columnistas
+    Route::get('/admin/columnistas', 'ColumnistaController@index')
+     -> name('columnistas');
+
+    Route::get('/admin/columnistas/nuevo', 'ColumnistaController@create')
+     -> name('columnistas.nuevo');
+
+    Route::post('/admin/columnistas/crear', 'ColumnistaController@store');
+
+    Route::get('/admin/columnistas/editar/{columnist}', 'ColumnistaController@edit')
+    -> where('columnist', '[0-9]+')
+    -> name('columnistas.editar');
+
+    Route::put('/admin/columnistas/detalles/{columnist}', 'ColumnistaController@update');
+
+    Route::get('/admin/columnistas/detalles/{columnist}', 'ColumnistaController@details')
+    -> where('columnist', '[0-9]+')
+    -> name('columnistas.mostrar');
 
     //Categorías
     Route::get('/admin/categorias', 'CategoriaController@index')
@@ -139,13 +166,21 @@ Route::post('/admin/password/email', 'Auth\ForgotPasswordController@sendResetLin
 Route::get('/admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/admin/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-
 // ** Slugs ** //
 
 // Tags
 Route::get('/tag/{tag}', 'HomeController@tag')
 -> where('tag', '[\w\d\-\_]+')
 -> name('tag');
+
+// Columnas
+Route::get('/columna/{slug}/{id}', 'NoticiaController@column')
+-> where('slug', '[\w\d\-\_]+')
+-> where('id', '[0-9]+')
+-> name('columna');
+
+Route::get('/columna', 'HomeController@column')
+-> name('columnaHome');
 
 // Noticias
 Route::get('/{category}/{slug}/{id}', 'NoticiaController@index')

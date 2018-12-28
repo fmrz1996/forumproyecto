@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Traits\RelatedPostsAlgorithms;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Column;
 use App\Category;
 
 class NoticiaController extends Controller
@@ -81,5 +82,21 @@ class NoticiaController extends Controller
       return view('noticia', compact('post', 'categorias', 'relatedposts', 'firstpost', 'relatedcategory'));
     }
 
+    public function column($slug, $id){
 
+      $categorias = Category::has('posts', '>', 0)->pluck('name');
+
+      $column = Column::where('id', '=', $id)->firstOrFail();
+
+      $lastposts = Post::orderBy('id', 'desc')->get()->take(3);
+
+      $relatedcolumns = Column::where('id', '!=', $column->id)->orderBy('id', 'desc')->get()->take(3);
+
+      if($slug != $column->slug)
+      {
+        return redirect()->route('columna', ['slug' => $column->slug, 'id' => $column->id]);
+      }
+
+      return view('column.columna', compact('column', 'categorias', 'lastposts', 'relatedcolumns'));
+    }
 }

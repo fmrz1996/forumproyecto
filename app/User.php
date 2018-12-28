@@ -21,7 +21,7 @@ class User extends Authenticatable
       }
       abort(401, 'This action is unathorized');
     }
-    
+
     public function hasAnyRole($roles){
       if(is_array($roles)){
         foreach ($roles as $role) {
@@ -68,6 +68,10 @@ class User extends Authenticatable
 
     public function posts(){
       return $this->hasMany(Post::class);
+    }
+
+    public function columns(){
+      return $this->hasMany(Column::class);
     }
 
     /**

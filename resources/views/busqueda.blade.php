@@ -4,26 +4,22 @@
 
 @section('carousel')
   <!-- Carousel -->
-  <div class="container-fluid text-center">
-    <div class="row">
-      <div class="full-width-row">
-        <div id="carousel" class="slick-frame">
-          @foreach ($carousel as $post)
-            <div style="position: relative;">
-              <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
-                <img class="img-fluid img-slider" src="../img/{{ $post->background }}">
-                <div class="slider-post">
-                  <h3>{{ $post->title }}</h3>
-                </div>
-              </a>
+  <div class="carousel-container">
+    <div id="carousel" class="slick-frame">
+      @foreach ($carousel as $post)
+        <div style="position: relative;">
+          <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
+            <img class="img-fluid img-slider" src="../img/{{ $post->background }}">
+            <div class="slider-post">
+              <h3>{{ $post->title }}</h3>
             </div>
-          @endforeach
+          </a>
         </div>
-          <aside class="gap">
-          </aside>
-      </div>
+      @endforeach
     </div>
   </div>
+  <aside class="gap">
+  </aside>
 @endsection
 
 @section('content')
@@ -50,33 +46,33 @@
 
 @section('sidebar')
     <!-- Sidebar -->
-    <div id="sidebar" class="col-sm-12 col-md-3 sidebar">
-        <div class="sb-div">
-          <div class="sb-columnistas">
-            <h3>Columnistas</h3>
-            <ul class="text-center bg-container-gray">
-              <li>
-                <h5>Benito Pérez</h5>
-                <p>Quien más agita la denuncia del peligro de invasión que representan los desvalidos del sur, son los ricos del norte, que claman por más fronteras y más identidad...</p>
-              </li>
-              <li>
-                <h5>Enzo Monje</h5>
-                <p>No es el momento de hacerlo, porque andamos discutiendo cuestiones de género, pero es tan bueno que sería procedente incorporar al castellano...</p>
-              </li>
-              <li>
-                <h5>Sergio Romero</h5>
-                <p>Su afán está en consonancia con la urgencia del nombre: es tan movilizador que exige la ausencia de otros eslóganes...</p>
-              </li>
-            </ul>
+      <div id="sidebar" class="col-sm-12 col-md-3 sidebar">
+        @if(!$columnists->isEmpty())
+          <div class="sb-div">
+            <div class="sb-columnistas">
+              <h3>Columnistas</h3>
+              <ul class="text-center bg-container-gray">
+                @foreach ($columnists as $columnist)
+                  <li>
+                    <h5>{{$columnist->name}}</h5>
+                    @if($columnist->avatar != null)
+                    <img src="../../img/columnists/{{ $columnist->avatar }}" class="author-avatar">
+                    @endif
+                    <h6><a class="titulo-columna" href="{{ route('columna', [$columnist->columns()->pluck('slug')->last(), $columnist->columns()->pluck('id')->last()]) }}">{{ $columnist->columns()->pluck('title')->last() }}</a></h6>
+                    <p>{!!str_limit($columnist->columns()->pluck('body')->last(), 180)!!}</p>
+                  </li>
+                @endforeach
+              </ul>
+            </div>
           </div>
-        </div>
+        @endif
         <div class="sb-div">
           <h3>Siguenos</h3>
           <div class="sb-rrss bg-container-gray text-center">
               <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-facebook" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/RevistaForum/"><i class="fab fa-facebook"></i></a>
-              <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-twitter" target="_blank" rel="noopener noreferrer" href="#"><i class="fab fa-twitter"></i></a>
-              <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-instagram" target="_blank" rel="noopener noreferrer" href="#"><i class="fab fa-instagram"></i></a>
-              <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-youtube-play" target="_blank" rel="noopener noreferrer" href="#"><i class="fab fa-youtube"></i></a>
+              <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-twitter" target="_blank" rel="noopener noreferrer" href="https://twitter.com/forumchile"><i class="fab fa-twitter"></i></a>
+              <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/revistaforumchile/"><i class="fab fa-instagram"></i></a>
+              <a class="btn azm-social azm-size-36 azm-circle azm-long-shadow azm-youtube-play" href="#"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
         <div class="sb-div">
@@ -111,6 +107,6 @@
         }
       ]
     });
-  }, 100);
+  }, 800);
   </script>
 @endsection

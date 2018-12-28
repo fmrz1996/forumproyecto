@@ -6,7 +6,7 @@
         <a href="/admin">Inicio</a>
       </li>
       <li class="breadcrumb-item">
-        <a href="/admin/categorias">Categorías</a>
+        <a href="/admin/columnistas">Columnistas</a>
       </li>
       <li class="breadcrumb-item active">Detalles</li>
     </ol>
@@ -15,15 +15,15 @@
 
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">
-        Categoría #{{ $category->id }}
+        Columnista #{{ $columnist->id }}
         <div class="float-right">
-          <a href="{{ route('categorias.editar', $category->id) }}">
+          <a href="{{ route('columnistas.editar', $columnist->id) }}">
             <i class="far fa-edit"></i> Editar
           </a>
-          @if(!$category->posts->isEmpty())
-          <a class="pl-2" href="#posts">
-            <i class="far fa-eye"></i> Ver Posts
-          </a>
+          @if(!$columnist->columns->isEmpty())
+            <a class="pl-2" href="#columns">
+              <i class="far fa-eye"></i> Ver Columnas
+            </a>
           @endif
         </div>
       </div>
@@ -33,27 +33,23 @@
               <tbody>
                 <tr>
                   <th>Nombre:</th>
-                  <td>{{ $category->name }}</td>
+                  <td>{{ $columnist->name }}</td>
                 </tr>
                 <tr>
-                  <th>URL:</th>
-                  <td><a href="{{ route('categoria', str_slug($category->name)) }}">{{ route('categoria', str_slug($category->name)) }}</a></td>
-                </tr>
-                <tr>
-                  <th>Estado:</th>
-                  @if($category->is_active == 1)
-                    <td>Activo</td>
+                  <th>Ocupación:</th>
+                  @if($columnist->occupation != null)
+                  <td>{{ $columnist->occupation }}</td>
                   @else
-                    <td>Inactivo</td>
+                  <td><span class="font-italic">No registrado</span></td>
                   @endif
                 </tr>
                 <tr>
-                  <th>Fecha de creación:</th>
-                  <td>{{ $category->created_at->format('d-m-Y H:i') }}</td>
-                </tr>
-                <tr>
-                  <th>Ultima modificación:</th>
-                  <td>{{ $category->updated_at->format('d-m-Y H:i') }}</td>
+                  <th>Avatar:</th>
+                  @if($columnist->avatar != null)
+                  <td><img class="show-img" src="../../../img/columnists/{{ $columnist->avatar }}"></td>
+                  @else
+                  <td><span class="font-italic">No registrado</span></td>
+                  @endif
                 </tr>
               </tbody>
             </table>
@@ -61,11 +57,11 @@
         </div>
       </div>
 
-      @if(!$category->posts->isEmpty())
-      <div id="posts" class="card mx-auto mt-5 mb-5">
+      @if(!$columnist->columns->isEmpty())
+      <div id="columns" class="card mx-auto mt-5 mb-5">
         <div class="card-header">
           <i class="fas fa-table"></i>
-          Posts de {{ $category->name }}
+          Columnas creadas por {{ $columnist->name }}
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -74,7 +70,6 @@
                 <tr>
                   <th>#</th>
                   <th>Título</th>
-                  <th>Autor</th>
                   <th>Ultima modificación</th>
                   <th class="text-center">Acciones</th>
                 </tr>
@@ -83,51 +78,40 @@
                 <tr>
                   <th>#</th>
                   <th>Título</th>
-                  <th>Autor</th>
                   <th>Ultima modificación</th>
                   <th class="text-center">Acciones</th>
                 </tr>
               </tfoot>
               <tbody>
-                @forelse($category->posts as $post)
+                @forelse($columnist->columns as $column)
                   <tr>
-                    <td>{{ $post->id }}</td>
-                    <td>{{ str_limit($post->title, 80, '...') }}</td>
-                    <td>{{ $post->user->first_name }} {{ $post->user->last_name }}</td>
-                    <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
+                    <td>{{ $column->id }}</td>
+                    <td>{{ str_limit($column->title, 80, '...') }}</td>
+                    <td>{{ $column->updated_at->format('d-m-Y H:i') }}</td>
                     <td class="text-center">
-                      <form class="delete" action="{{ route('posts.eliminar', $post->id ) }}" method="post">
-                        @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Director ejecutivo')))
-                        <a class="btn btn-link" href="{{ route('posts.editar', ['id' => $post->id]) }}" title="Editar">
+                      <form class="delete" action="{{ route('columnas.eliminar', $column->id ) }}" method="post">
+                        <a class="btn btn-link" href="{{ route('columnas.editar', ['id' => $column->id]) }}" title="Editar">
                           <i class="far fa-edit"></i>
                         </a>
-                        @elseif($post->user->role->name == ('Periodista') && (Auth::user()->hasAnyRole(['Director ejecutivo', 'Administrador'])))
-                          <a class="btn btn-link" href="{{ route('posts.editar', ['id' => $post->id]) }}" title="Editar">
-                            <i class="far fa-edit"></i>
-                          </a>
-                        @endif
-                        @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Director ejecutivo')))
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
-                        <a class="btn btn-link" href="#" data-toggle="modal" data-target="#deleteModal">
+                        <button class="btn btn-link" type="submit" name="button" title="Eliminar">
                           <i class="far fa-trash-alt"></i>
-                        </a>
-                      @endif
-                        <a class="btn btn-link" href="{{ route('posts.mostrar', ['id' => $post->id]) }}" title="Ver detalles">
+                        </button>
+                        <a class="btn btn-link" href="{{ route('columnas.mostrar', ['id' => $column->id]) }}" title="Ver detalles">
                           <i class="fas fa-info-circle"></i>
                         </a>
                       </form>
                     </td>
                   </tr>
                 @empty
-                  <tr>No hay posts registrados.</tr>
+                  <tr>No hay columnas registradas.</tr>
                 @endforelse
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      @include('admin.common.deleteModal', ['object' => 'post'])
       @endif
   @endsection
 
@@ -139,9 +123,9 @@
         $('#dataTable').DataTable({
           language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
           "columnDefs": [
-            { "orderable": false, "targets": 4}
+            { "orderable": false, "targets": 3}
           ],
-          "order": [[3, "desc"]]
+          "order": [[2, "desc"]]
         });
       });
     </script>
@@ -151,7 +135,7 @@
         });
     </script>
     <script type="text/javascript">
-      $('a[href*=\\#posts]').on('click', function(event){
+      $('a[href*=\\#columns]').on('click', function(event){
           event.preventDefault();
           $('html,body').animate({scrollTop:$(this.hash).offset().top - 10}, 700);
       });

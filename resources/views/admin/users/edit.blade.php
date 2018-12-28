@@ -149,7 +149,7 @@
                   </div>
                 </div>
                 @if($user->avatar != null)
-                <div class="col-md-6">
+                <div class="col-md-6 form-checkbox">
                   <div class="form-label-group">
                     <input name="deleteAvatar" type="checkbox" id="inputDeleteAvatar" placeholder="Avatar" value="{{ old('deleteAvatar') }}"></input>
                     <span>Eliminar avatar actual</span>

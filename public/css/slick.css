@@ -46,7 +46,6 @@
         -ms-transform: translate3d(0, 0, 0);
          -o-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
-            transition-delay: 10ms;
 }
 
 .slick-track
@@ -71,10 +70,10 @@
     clear: both;
 }
 
-.slick-loading .slick-track
+/* .slick-loading .slick-track
 {
     background:#eee url('../css/loader.svg') no-repeat center;
-}
+} */
 
 .slick-slide
 {

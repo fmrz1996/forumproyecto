@@ -16,9 +16,16 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">
         Tag #{{ $tag->id }}
-        <a class="float-right" href="{{ route('tags.editar', $tag->id) }}">
-          <i class="far fa-edit"></i> Editar
-        </a>
+        <div class="float-right">
+          <a href="{{ route('tags.editar', $tag->id) }}">
+            <i class="far fa-edit"></i> Editar
+          </a>
+          @if(!$tag->posts->isEmpty())
+          <a class="pl-2" href="#posts">
+            <i class="far fa-eye"></i> Ver Posts
+          </a>
+          @endif
+        </div>
       </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -43,7 +50,7 @@
       </div>
 
       @if(!$tag->posts->isEmpty())
-      <div class="card card-register mx-auto mt-5 mb-5">
+      <div id="posts" class="card mx-auto mt-5 mb-5">
         <div class="card-header">
           <i class="fas fa-table"></i>
           Posts que contienen el tag {{ $tag->name }}
@@ -53,6 +60,7 @@
             <table class="table table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Título</th>
                   <th>Autor</th>
                   <th>Ultima modificación</th>
@@ -61,6 +69,7 @@
               </thead>
               <tfoot>
                 <tr>
+                  <th>#</th>
                   <th>Título</th>
                   <th>Autor</th>
                   <th>Ultima modificación</th>
@@ -70,7 +79,8 @@
               <tbody>
                 @forelse($tag->posts as $post)
                   <tr>
-                    <td>{{ str_limit($post->title, 60, '...') }}</td>
+                    <td>{{ $post->id }}</td>
+                    <td>{{ str_limit($post->title, 80, '...') }}</td>
                     <td>{{ $post->user->first_name }} {{ $post->user->last_name }}</td>
                     <td>{{ $post->updated_at->format('d-m-Y H:i') }}</td>
                     <td class="text-center">
@@ -87,9 +97,9 @@
                         @if($post->user->id == auth()->user()->id || (Auth::user()->hasRole('Director ejecutivo')))
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
-                        <button class="btn btn-link" type="submit" name="button" title="Eliminar">
+                        <a class="btn btn-link" href="#" data-toggle="modal" data-target="#deleteModal">
                           <i class="far fa-trash-alt"></i>
-                        </button>
+                        </a>
                       @endif
                         <a class="btn btn-link" href="{{ route('posts.mostrar', ['id' => $post->id]) }}" title="Ver detalles">
                           <i class="fas fa-info-circle"></i>
@@ -105,6 +115,7 @@
           </div>
         </div>
       </div>
+      @include('admin.common.deleteModal', ['object' => 'post'])
       @endif
   @endsection
 
@@ -116,9 +127,9 @@
         $('#dataTable').DataTable({
           language: {url: '../../../js/adminpanel/datatables/Spanish.json'},
           "columnDefs": [
-            { "orderable": false, "targets": 3}
+            { "orderable": false, "targets": 4}
           ],
-          "order": [[2, "desc"]]
+          "order": [[3, "desc"]]
         });
       });
     </script>
@@ -126,5 +137,11 @@
         $(".delete").on("submit", function(){
             return confirm("¿Realmente deseas eliminar el post?");
         });
+    </script>
+    <script type="text/javascript">
+      $('a[href*=\\#posts]').on('click', function(event){
+          event.preventDefault();
+          $('html,body').animate({scrollTop:$(this.hash).offset().top - 10}, 700);
+      });
     </script>
   @endsection

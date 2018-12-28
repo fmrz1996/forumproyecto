@@ -49,9 +49,9 @@
                           </a>
                           {{ csrf_field() }}
                           {{ method_field('delete') }}
-                          <button class="btn btn-link" type="submit" name="button" title="Eliminar">
+                          <a class="btn btn-link" href="#" data-toggle="modal" data-target="#deleteModal">
                             <i class="far fa-trash-alt"></i>
-                          </button>
+                          </a>
                         @endif
                         <a class="btn btn-link" href="{{ route('tags.mostrar', ['id' => $tag->id]) }}" title="Ver detalles">
                           <i class="fas fa-info-circle"></i>
@@ -68,6 +68,7 @@
         </div>
         <div class="card-footer small text-muted">Actualizado el {{ $last_update->format('d-m-Y') }} a las {{ $last_update->format('H:i') }}</div>
       </div>
+    @include('admin.common.deleteModal', ['object' => 'tag'])
     @endsection
 
     @section('script')

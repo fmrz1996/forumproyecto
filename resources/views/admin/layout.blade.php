@@ -75,6 +75,27 @@
             </a>
           </div>
         </li>
+        <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/columnas') || str_contains(request()->url(), '/admin/columnistas')) active @endif">
+          <a id="pagesDropdown_post" class="nav-link dropdown-toggle" href="/admin/columnas"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-columns"></i>
+            <span>Columnas</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown_post">
+            <a class="dropdown-item" href="{{ route('columnas.nuevo') }}">
+              <i class="fas fa-plus"></i> Crear columna
+            </a>
+            <a class="dropdown-item" href="{{ route('columnas') }}">
+              <i class="fas fa-list"></i> Listar columnas
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ route('columnistas.nuevo') }}">
+              <i class="fas fa-user-plus"></i> Crear columnista
+            </a>
+            <a class="dropdown-item" href="{{ route('columnistas') }}">
+              <i class="fas fa-address-book"></i> Listar columnistas
+            </a>
+          </div>
+        </li>
         <li class="nav-item dropdown @if(str_contains(request()->url(), '/admin/categorias')) active @endif">
           <a id="pagesDropdown_cat"class="nav-link dropdown-toggle" href="/admin/categorias" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-archive"></i>

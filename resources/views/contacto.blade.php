@@ -40,9 +40,9 @@
               <div class="social-div">
                 <h5>Se parte de la comunidad Forum</h5>
                 <div class="sb-rrss">
-                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-facebook" href="#"><i class="fab fa-facebook"></i></a>
-                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-twitter" href="#"><i class="fab fa-twitter"></i></a>
-                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-instagram" href="#"><i class="fab fa-instagram"></i></a>
+                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-facebook" href="https://www.facebook.com/RevistaForum/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-twitter" href="https://twitter.com/forumchile" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                  <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-instagram" href="https://www.instagram.com/revistaforumchile/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                   <a class="btn azm-social azm-size-48 azm-circle azm-long-shadow azm-youtube-play" href="#"><i class="fab fa-youtube"></i></a>
                 </div>
               </div>

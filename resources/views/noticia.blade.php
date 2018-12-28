@@ -43,7 +43,9 @@
                       </figure>
                     </div>
                     <div class="div-rp-highlight col-sm-12 col-md-5 pl-0 ">
-                      <blockquote class="bq-header-rp">{{ $rp->header == null ? strip_tags(html_entity_decode(str_limit($rp->body, 250, '...'))) : $rp->header }}</blockquote>
+                      <blockquote class="bq-header-rp">
+                          {{ $rp->header == null ? strip_tags(html_entity_decode(str_limit($rp->body, 250, '...'))) : $rp->header }}
+                      </blockquote>
                     </div>
                   </div>
                 </article>

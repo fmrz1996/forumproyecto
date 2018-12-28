@@ -15,13 +15,6 @@ class FooterController extends Controller
     return view('nosotros', compact('categorias'));
   }
 
-  public function termsandcond(){
-
-    $categorias = Category::has('posts', '>', 0)->pluck('name');
-
-    return view('terminos', compact('categorias'));
-  }
-
   public function contact(){
 
     $categorias = Category::has('posts', '>', 0)->pluck('name');

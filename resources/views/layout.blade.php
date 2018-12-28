@@ -35,6 +35,7 @@
     <title>@yield('title')</title>
   </head>
   <body>
+    @yield('preloader')
     <div class="overlay"></div>
     <div class="wrapper">
     <!-- Menú lateral -->
@@ -54,6 +55,9 @@
             </ul>
           </li>
           <li>
+            <a href="{{ route('columnaHome')}}">Columnas</a>
+          </li>
+          <li>
             <a target="_blank" rel="noopener noreferrer" href="https://issuu.com/revistaforum">Ediciones anteriores</a>
           </li>
           <li>
@@ -69,9 +73,9 @@
         </form>
         <div class="rrss-menu">
           <a href="https://www.facebook.com/RevistaForum/" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-facebook"><i class="fab fa-facebook"></i></a>
-          <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-youtube-play"><i class="fab fa-youtube"></i></a>
+          <a href="https://twitter.com/forumchile" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/revistaforumchile/" target="_blank" rel="noopener noreferrer" class="btn azm-social azm-size-36 azm-r-square azm-instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="btn azm-social azm-size-36 azm-r-square azm-youtube-play"><i class="fab fa-youtube"></i></a>
         </div>
       </nav>
     <!-- Header -->
@@ -164,7 +168,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="../../js/slick.min.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function () {

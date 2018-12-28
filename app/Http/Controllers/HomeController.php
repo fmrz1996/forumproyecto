@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Traits\CarouselAlgorithms;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Column;
+use App\Columnist;
 use App\Post;
 use App\Tag;
 
@@ -30,12 +32,12 @@ class HomeController extends Controller
 
     public function index()
     {
+      $categorias = Category::has('posts', '>', 0)->pluck('name');
+      $carousel = $this->randomDefault();
+      $posts = Post::orderBy('id', 'desc')->paginate(10);
+      $columnists = Columnist::whereHas('columns', function($query){ $query->orderBy('created_at', 'desc');})->get()->take(3);
 
-        $categorias = Category::has('posts', '>', 0)->pluck('name');
-        $carousel = $this->randomDefault();
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
-
-        return view('home', compact('categorias', 'carousel', 'posts'));
+      return view('home', compact('categorias', 'carousel', 'columnists', 'posts'));
     }
 
     public function category($category)
@@ -47,10 +49,10 @@ class HomeController extends Controller
       }
 
       $carousel = $this->randomDefault();
-
       $posts = Post::where('category_id', '=', $cat_info->id)->orderBy('id', 'desc')->paginate(10);
+      $columnists = Columnist::whereHas('columns', function($query){ $query->orderBy('created_at', 'desc');})->get()->take(3);
 
-      return view('home', compact('categorias', 'carousel', 'posts', 'category'));
+      return view('home', compact('categorias', 'carousel', 'posts', 'category', 'columnists'));
     }
 
     public function tag($tag)
@@ -61,10 +63,23 @@ class HomeController extends Controller
 
       $tag = str_replace('-', ' ', $tag);
       $tag_value = Tag::where('name', '=', $tag)->firstOrFail()->toArray();
+      $columnists = Columnist::whereHas('columns', function($query){ $query->orderBy('created_at', 'desc');})->get()->take(3);
+
       $posts = Post::whereHas('tags', function($query) use ($tag_value){
         $query->where('tag_id', $tag_value['id']);
       })->orderBy('id', 'desc')->paginate(10);
 
-      return view('home', compact('categorias', 'carousel', 'posts', 'tag'));
+      return view('home', compact('categorias', 'carousel', 'posts', 'tag', 'columnists'));
+    }
+
+    public function column()
+    {
+      $categorias = Category::has('posts', '>', 0)->pluck('name');
+
+      $carousel = $this->randomDefault();
+
+      $columns = Column::orderBy('id', 'desc')->paginate(10);
+
+      return view('column.home', compact('categorias', 'carousel', 'columns'));
     }
 }

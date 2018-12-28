@@ -370,3 +370,11 @@ body.sidebar-toggled footer.sticky-footer {
 table.dataTable span{
   display: none;
 }
+
+.form-checkbox{
+  display: flex;
+}
+
+.form-checkbox .form-label-group{
+  align-self: flex-end;
+}

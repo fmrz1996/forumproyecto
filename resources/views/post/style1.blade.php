@@ -1,4 +1,4 @@
-<div class="container pt-4">
+<div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-9">
         <div class="article-header style-1">
@@ -21,13 +21,13 @@
         <div class="article-body">
           <div class="container">
                 <div class="row">
+                  {{-- Interacción social escritorio --}}
                   <div class="col-lg-1 d-none d-lg-block">
                     <div class="wrap-azm-cp">
                       <div id="azm-container" class="azm-container-post">
                         <nav>
                           <ul>
                             <li>
-                              {{-- Compartir en Facebook --}}
                               <div class="fb-share-button" data-href="{{ Request::url() }}" data-mobile-iframe="false">
                                 <a class="share-link btn azm-social azm-inpost azm-size-48 azm-circle azm-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&amp;src=sdkpreparse">
                                   <i class="fab fa-facebook"></i>
@@ -59,6 +59,33 @@
                       <hr>
                     @endif
                     {!! $post->body !!}
+                    {{-- Interacción social móvil --}}
+                    <div class="d-lg-none">
+                      <div class="azm-container-post">
+                        <nav>
+                          <ul class="nav justify-content-center">
+                            <li>
+                              <div class="fb-share-button" data-href="{{ Request::url() }}" data-mobile-iframe="false">
+                                <a class="share-link btn azm-social azm-inpost azm-size-48 azm-circle azm-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&amp;src=sdkpreparse">
+                                  <i class="fab fa-facebook"></i>
+                                </a>
+                              </div>
+                            </li>
+                            <li>
+                              <a class="share-link btn azm-social azm-inpost azm-size-48 azm-circle azm-twitter" target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etf&text={{ $post->title }}&via=revistaforum"><i class="fab fa-twitter"></i></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            </li>
+                            <li>
+                              <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-envelope"
+                              href="mailto:?subject=Le%20han%20compartido:%20{{ $post->title }}&body=Estimado%20lector.%0A%0ALe%20han%20compartido%20el%20art%C3%ADculo%20%22{{ $post->title }}%22%20aqu%C3%AD:%0A%0A%20{{ Request::url() }}%0A%0ASaludos%20cordiales%20de%20Forum%20Comunicaciones.">
+                              <i class="fas fa-envelope"></i></a>
+                            </li>
+                            <li>
+                              <a class="btn azm-social azm-inpost azm-size-48 azm-circle azm-comment" href="#comentarios"><i class="fas fa-comment"></i></a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
                         <div class="author-box mt-4">
                           <div class="author-information bg-container-gray">
                             <div class="row">
