@@ -315,7 +315,8 @@ div .img-slider{
 
 .titulo-post:hover,
 .titulo-columna:hover,
-.footer .nav-link:hover{
+.footer .nav-link:hover,
+.column-link:hover{
   color: inherit;
   opacity: 0.9;
 }
@@ -655,6 +656,19 @@ div .img-slider{
   color: #111;
   font-size: 24px;
   line-height: 1.7;
+}
+
+.article-body .article-text p a,
+.column-link a{
+  color: inherit;
+  text-decoration: underline;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.article-body .article-text p a:hover{
+  color: #a2bd30;
 }
 
 .article-body .article-text .youtube-embed-wrapper{

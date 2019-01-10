@@ -134,7 +134,7 @@
                   <ul>
                   @foreach ($relatedcolumns as $col)
                     <li>
-                      <h6>
+                      <h6 class="column-link">
                         <a href="{{ route('columna', [$col->slug, $col->id]) }}">
                           {{ $col->title }}
                         </a>

@@ -10,26 +10,22 @@
 
     @section('carousel')
       <!-- Carousel -->
-      <div class="container-fluid text-center">
-        <div class="row">
-          <div class="full-width-row">
-            <div id="carousel" class="slick-frame">
-              @foreach ($carousel as $post)
-                <div style="position: relative;">
-                  <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
-                    <img class="img-fluid img-slider" src="../img/{{ $post->background }}">
-                    <div class="slider-post">
-                      <h3>{{ $post->title }}</h3>
-                    </div>
-                  </a>
+      <div class="carousel-container">
+        <div id="carousel" class="slick-frame">
+          @foreach ($carousel as $post)
+            <div style="position: relative;">
+              <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
+                <img class="img-fluid img-slider" src="../img/{{ $post->background }}">
+                <div class="slider-post">
+                  <h3>{{ $post->title }}</h3>
                 </div>
-              @endforeach
+              </a>
             </div>
-              <aside class="gap">
-              </aside>
-          </div>
+          @endforeach
         </div>
       </div>
+      <aside class="gap">
+      </aside>
     @endsection
 
     @section('content')
@@ -112,7 +108,7 @@
             }
           ]
         });
-      }, 100);
+      }, 800);
       </script>
 
       <script type="text/javascript">
