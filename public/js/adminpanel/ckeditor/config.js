@@ -32,9 +32,9 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.extraPlugins = 'autogrow,justify,pastecode,youtube';
+	config.extraPlugins = 'autogrow,image2,justify,pastecode,youtube';
 
 	config.autoGrow_onStartup = true;
 	config.autoGrow_minHeight = 200;
-	config.autoGrow_maxHeight = 1000;
+	config.autoGrow_maxHeight = 500;
 };

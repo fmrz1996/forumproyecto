@@ -135,16 +135,18 @@
         <div class="col-sm-12 col-md-6">
           <h6>Actividad:</h6>
               <ul>
-                <li>Usuario más activo: @if(!empty($statistics[0])) {{ $statistics[0]->first_name .' ' .$statistics[0]->last_name .' (' .$statistics[0]->posts_count .' posts)' }} @endif</li>
-                <li>Categoría más usada: @if(!empty($statistics[1])) {{ $statistics[1]->name .' (' .$statistics[1]->posts_count .' posts)' }} @endif</li>
+                <li>Usuario más activo: @if(!empty($statistics[0])) {{ $statistics[0]->first_name .' ' .$statistics[0]->last_name .' (' .$statistics[0]->posts_count .' posts)' }} @else <span class="font-italic">No registrado</span> @endif</li>
+                <li>Categoría más usada: @if(!empty($statistics[1])) {{ $statistics[1]->name .' (' .$statistics[1]->posts_count .' posts)' }} @else <span class="font-italic">No registrado</span> @endif</li>
               </ul>
             </div>
             <div class="col-sm-12 col-md-6">
               <h6>Palabras claves más usadas:</h6>
               <ul>
-              @foreach ($statistics[2] as $tag)
+              @forelse ($statistics[2] as $tag)
                 <li>{{ $tag->name .': ' .$tag->posts_count .' veces' }}</li>
-              @endforeach
+              @empty
+                <li><span class="font-italic">No registrado</span></li>
+              @endforelse
             </ul>
           </div>
         </div>

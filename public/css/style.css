@@ -753,6 +753,14 @@ div .img-slider{
   content: '';
 }
 
+.figure-caption{
+  padding: 6px;
+  text-align: center;
+  background-color: #d9dee4;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 @media (max-width: 767px){
     .article-text{
       padding: 0;
