@@ -23,14 +23,21 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($statistics[0] as $user)
+            @forelse ($statistics[0] as $user)
             <tr>
               <td>{{ $loop->iteration }}.</td>
               <td><a href="{{ route('usuarios.mostrar', ['id' => $user->id]) }}">{{ $user->first_name }} {{ $user->last_name }}</a></td>
               <td>{{ $user->role->name }}</td>
               <td class="text-center">{{ $user->posts_count }}</td>
             </tr>
-            @endforeach
+            @empty
+              <tr>
+                <td>-</td>
+                <td><span class="font-italic">No registrado</span></td>
+                <td><span class="font-italic">No registrado</span></td>
+                <td class="text-center">0</td>
+              </tr>
+            @endforelse
           </tbody>
         </table>
         <div class="row">
@@ -45,13 +52,17 @@
                </tr>
              </thead>
              <tbody>
-               @foreach ($statistics[1] as $category)
+               @forelse ($statistics[1] as $category)
                <tr>
                  <td>{{ $loop->iteration }}.</td>
                  <td><a href="{{ route('categorias.mostrar', ['id' => $category->id]) }}">{{ $category->name }}</a></td>
                  <td class="text-center">{{ $category->posts_count }}</td>
                </tr>
-               @endforeach
+               @empty
+                 <td>-</td>
+                 <td><span class="font-italic">No registrado</span></td>
+                 <td class="text-center">0</td>
+               @endforelse
              </tbody>
            </table>
           </div>
@@ -66,13 +77,17 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($statistics[2] as $tag)
+                @forelse ($statistics[2] as $tag)
                 <tr>
                   <td>{{ $loop->iteration }}.</td>
                   <td><a href="{{ route('tags.mostrar', ['id' => $tag->id]) }}">{{ $tag->name }}</a></td>
                   <td class="text-center">{{ $tag->posts_count }}</td>
                 </tr>
-                @endforeach
+                @empty
+                  <td>-</td>
+                  <td><span class="font-italic">No registrado</span></td>
+                  <td class="text-center">0</td>
+                @endforelse
               </tbody>
             </table>
           </div>
