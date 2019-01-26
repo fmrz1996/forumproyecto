@@ -44,12 +44,13 @@ class HomeController extends Controller
     {
       $categorias = Category::has('posts', '>', 0)->pluck('name');
 
-      foreach ($categorias as $cat) {
-        $cat_info = Category::where('name', '=', $category)->firstOrFail();
-      }
-
       $carousel = $this->randomDefault();
-      $posts = Post::where('category_id', '=', $cat_info->id)->orderBy('id', 'desc')->paginate(10);
+
+      $cat_value = Category::where('name', '=', $category)->firstOrFail()->toArray();
+      $posts = Post::whereHas('category', function($query) use ($cat_value){
+        $query->where('category_id', $cat_value['id']);
+      })->orderBy('id', 'desc')->paginate(10);
+
       $columnists = Columnist::whereHas('columns', function($query){ $query->orderBy('created_at', 'desc');})->get()->take(3);
 
       return view('home', compact('categorias', 'carousel', 'posts', 'category', 'columnists'));

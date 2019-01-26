@@ -49,7 +49,7 @@
             <ul class="collapse show list-unstyled" id="seccions-menu">
               @foreach ($categorias as $category)
                 <li>
-                  <a href="../{{ str_slug($category) }}">{{ $category }}</a>
+                  <a href="../../{{ str_slug($category) }}">{{ $category }}</a>
                 </li>
               @endforeach
             </ul>

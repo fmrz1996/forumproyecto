@@ -14,10 +14,13 @@ trait CarouselAlgorithms
           $posts[] = $data;
         }
       }
-
-      shuffle($posts);
-      foreach (array_slice($posts,0,5) as $post) {
-        $carousel[] = $post;
+      if(!empty($posts)){
+        shuffle($posts);
+        foreach (array_slice($posts,0,5) as $post) {
+          $carousel[] = $post;
+        }
+      } else {
+        $carousel = [];
       }
 
       return $carousel;

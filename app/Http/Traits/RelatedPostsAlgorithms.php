@@ -137,9 +137,13 @@ trait RelatedPostsAlgorithms
         } else {
           $excluidedposts;
         }
-        if($fp_exists == false){
-          $firsttag[] = $relatedposts['0'];
-          $relatedposts = array_diff($relatedposts, $firsttag);
+        if(!empty($relatedposts)){
+          if($fp_exists == false){
+            $firsttag[] = $relatedposts['0'];
+            $relatedposts = array_diff($relatedposts, $firsttag);
+          } else {
+            $firsttag = [];
+          }
         } else {
           $firsttag = [];
         }

@@ -35,7 +35,7 @@ class FooterController extends Controller
 
     Mail::send('vendor.notifications.contact', $data, function($mail) use($request){
         $mail->from('pepe.pera.tester@gmail.com', $request->name);
-        $mail->to('fmrz1996@gmail.com')->subject('Correo de contacto');
+        $mail->to('director@revistaforum.cl')->subject('Correo de contacto');
     });
 
     return redirect()->back()->with('flash_message', '¡Gracias por tu mensaje, pronto nos contactaremos contigo!');
