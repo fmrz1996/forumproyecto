@@ -15,7 +15,11 @@
           @foreach ($carousel as $post)
             <div style="position: relative;">
               <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
-                <img class="img-fluid img-slider" src="../img/{{ $post->background }}">
+                @if(is_file(public_path('img/' . $post->background)))
+                  <img class="img-fluid img-slider" src="{{ asset('img/' . $post->background) }}">
+                @else
+                  <img class="img-fluid img-slider" src="{{ $post->background }}">
+                @endif
                 <div class="slider-post">
                   <h3>{{ $post->title }}</h3>
                 </div>
@@ -39,7 +43,11 @@
               <div class="col-sm-12 col-md-6">
                 <figure class="opacity">
                   <a href="{{ route('noticia', [str_slug($post->category->name), $post->slug, $post->id]) }}">
-                    <img class="img-fluid img-post" src="../img/thumb/{{ $post->background }}">
+                    @if(is_file(public_path('img/thumb/' . $post->background)))
+                      <img class="img-fluid img-post" src="{{ asset('img/thumb/' . $post->background) }}">
+                    @else
+                      <img class="img-fluid img-post" src="{{ $post->background }}">
+                    @endif
                   </a>
                 </figure>
               </div>

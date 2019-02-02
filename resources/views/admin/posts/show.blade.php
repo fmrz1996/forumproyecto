@@ -43,7 +43,11 @@
                 <tr>
                   <th>Imágen principal:</th>
                   @if($post->background != null)
-                    <td><img class="show-img text-center" src="../../../img/{{ $post->background }}"></td>
+                    @if(is_file(public_path('img/' . $post->background)))
+                      <td><img class="show-img text-center" src="{{ asset('img/' . $post->background) }}"></td>
+                    @else
+                      <td><img class="show-img text-center" src="{{ $post->background }}"></td>
+                    @endif
                   @else
                     <span class="font-italic">No registrado</span>
                   @endif

@@ -1,5 +1,5 @@
 <div class="article-header style-2">
-  <div class="article-bg" style="background-image: url('../../img/{{ $post->background }}')"></div>
+  <div class="article-bg" style="background-image: @if(is_file(public_path('img/' . $post->background))) url('{{ asset('img/' . $post->background) }}') @else url('{{ $post->background }}') @endif"></div>
   <div class="article-entry-header container-fluid">
         <div class="article-label">
           <aside class="article-category">

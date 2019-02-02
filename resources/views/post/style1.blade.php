@@ -13,7 +13,11 @@
                     {{ $post->created_at->format('d-m-Y') }}
                   </aside>
                 </div>
-                <img class="img-fluid" src="../../img/{{ $post->background }}">
+                @if(is_file(public_path('img/' . $post->background)))
+                  <img class="img-fluid" src="{{ asset('img/' . $post->background) }}">
+                @else
+                  <img class="img-fluid" src="{{ $post->background }}">
+                @endif
               <h1 class="article-title">{{ $post->title }}</h1>
               <aside class="article-author">por <span>{{ $post->user->first_name }} {{ $post->user->last_name }}</span></aside>
           </div>

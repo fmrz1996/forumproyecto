@@ -80,7 +80,17 @@
                 <div class="col-md-6">
                   <div class="form-label-group pl-2">
                     <label for="inputBackground">Imagen de fondo</label>
-                    <input name="background" type="file" id="inputBackground" value="{{ old('background') }}" accept="image/x-png,image/gif,image/jpeg"></input>
+                    <div class="row">
+                      <div class="col-md-10">
+                        <input name="background" type="file" id="inputBackground" placeholder="Escribe la URL de la imagen..." value="{{ old('background') }}" accept="image/x-png,image/gif,image/jpeg"></input>
+                      </div>
+                      <div class="col-md-2">
+                        <input class="form-check-input" type="checkbox" id="checkLink" onclick="checkLinkFunction()"></input>
+                        <label class="form-check-label" for="checkLink">
+                          Link
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -108,7 +118,7 @@
           <div class="form-group">
             <div class="form-label-group">
               <label for="selectTags">Tags</label>
-              <select class="form-control select2-multi" name="tags[]" id="selectTags" multiple="multiple">
+              <select class="form-control select2-multi" name="tags[]" id="selectTags" multiple="multiple"style="width:100%">
                 @foreach ($tags as $tag)
                   <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                 @endforeach
@@ -265,5 +275,20 @@
           return true;
         });
       });
+    </script>
+
+    <script>
+      function checkLinkFunction() {
+        var checkBox = document.getElementById("checkLink");
+        var divCheckLink = document.getElementById("inputBackground");
+
+        if (checkBox.checked == true){
+          divCheckLink.type = 'text';
+          divCheckLink.classList.add('form-control');
+        } else {
+          divCheckLink.type = 'file';
+          divCheckLink.classList.remove('form-control');
+        }
+      }
     </script>
   @endsection

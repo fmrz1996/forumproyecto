@@ -71,6 +71,8 @@ class PostController extends Controller
       //Creación de miniatura de la imagen
       $img = Image::make($file->getRealPath())->resize(768, null, function ($constraint) {$constraint->aspectRatio(); $constraint->upsize();})->save(public_path(). '/img/thumb/'. $name);
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
+    } else {
+      $name = $data['background'];
     }
 
     $post = Post::create([
@@ -183,7 +185,11 @@ class PostController extends Controller
       $data = array_merge($data, ['background' => 'mimes:jpg,jpeg,png']);
       $data['background'] = $name;
     } else {
-      unset($data['background']);
+      if(isset($data['background'])){
+        $name = $data['background'];
+      } else {
+        unset($data['background']);
+      }
     }
 
     $tags = $request->tags;
