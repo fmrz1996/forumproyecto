@@ -164,7 +164,10 @@
   var myChart = new Chart(areaChartCanvas, {
     type: 'line',
     data: {
-      labels: {!! json_encode($dates->map(function($date) { return $date->format('d/m'); })) !!},
+
+          /* En caso que se utilize Google Analytics:
+          labels: {json_encode($dates->map(function($date) { return $date->format('d/m'); })) !!} */
+          labels: {!! json_encode($dates) !!},
 
           datasets: [
             {

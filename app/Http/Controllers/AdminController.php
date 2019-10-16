@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 use App\User;
 use App\Category;
 use App\Post;
@@ -16,13 +17,34 @@ class AdminController extends Controller
 {
   public function index(){
 
-    //Analytics
-    $analyticsData = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+    // ** Google Analytics ** //
+
+    // En caso de que Analytics se esté utilizando:
+    // $mostViewedPages = Analytics::fetchMostVisitedPages(Period::days(7), 5);
+    // $analyticsData = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+
+    // En caso de que NO se use:
+    $anyPage = Post::all()->random(5);
+    $mostViewedPages = collect([
+      ['url' => route('noticia', [str_slug($anyPage[0]->category->name), $anyPage[0]->slug, $anyPage[0]->id]) , 'pageViews' => 250],
+      ['url' => route('noticia', [str_slug($anyPage[1]->category->name), $anyPage[1]->slug, $anyPage[1]->id]) , 'pageViews' => 200],
+      ['url' => route('noticia', [str_slug($anyPage[2]->category->name), $anyPage[2]->slug, $anyPage[2]->id]) , 'pageViews' => 150],
+      ['url' => route('noticia', [str_slug($anyPage[3]->category->name), $anyPage[3]->slug, $anyPage[3]->id]) , 'pageViews' => 100],
+      ['url' => route('noticia', [str_slug($anyPage[4]->category->name), $anyPage[4]->slug, $anyPage[4]->id]) , 'pageViews' => 50]
+    ]);
+
+    $analyticsData = collect([
+      ['date' => '01/01', 'visitors' => 13, 'pageViews' => 16],
+      ['date' => '02/01', 'visitors' => 21, 'pageViews' => 29],
+      ['date' => '03/01', 'visitors' => 6, 'pageViews' => 6],
+      ['date' => '04/01', 'visitors' => 10, 'pageViews' => 12],
+      ['date' => '05/01', 'visitors' => 29, 'pageViews' => 42],
+      ['date' => '06/01', 'visitors' => 34, 'pageViews' => 48],
+      ['date' => '07/01', 'visitors' => 15, 'pageViews' => 36]
+    ]);
     $this->data['dates'] = $analyticsData->pluck('date');
     $this->data['visitors'] = $analyticsData->pluck('visitors');
     $this->data['pageViews'] = $analyticsData->pluck('pageViews');
-
-    $mostViewedPages = Analytics::fetchMostVisitedPages(Period::days(7), 5);
 
     //Sugerencias
     if(Auth::user()->role->name == "Periodista"){
